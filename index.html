@@ -2,7 +2,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
+@keyframes flash{
 
+0%{opacity:1;}
+50%{opacity:.3;}
+100%{opacity:1;}
+
+}
 <style>
 
 body{
@@ -131,6 +137,25 @@ src="https://raw.githubusercontent.com/ellstream/overlay-cacahuete/main/cacahuet
 🎰 Mega Spin : 0 / 10
 </div>
 
+<div id="megaRemaining" style="
+margin-top:8px;
+font-size:18px;
+color:#53fc18;
+font-weight:bold;">
+⭐ 10 subs restants
+</div>
+
+<div id="megaReady" style="
+display:none;
+margin-top:10px;
+font-size:26px;
+font-weight:bold;
+color:#53fc18;
+text-align:center;
+animation:flash 1s infinite;">
+🔥 MEGA SPIN DISPONIBLE 🔥
+</div>
+
 <div class="stat" id="golden">
 🎟 Golden Tickets : 0
 </div>
@@ -188,29 +213,52 @@ async function loadData(){
 
 console.log(data);
 console.log(Object.keys(data));
-        document.getElementById("mega").innerText =
-            "🎰 Mega Spin : " + (data["Mega Spin"] || "0");
+       document.getElementById("mega").innerText =
+    "🎰 Mega Spin : " + megaText;
 
-        document.getElementById("golden").innerText =
-            "🎟 Golden Tickets : " + (data["Golden Tickets"] || "0");
+const megaCurrent =
+    parseFloat(megaText.split("/")[0]) || 0;
 
-        document.getElementById("roi").innerText =
-            "👑 Roi : " + (data["Roi"] || "Aucun");
+const restant =
+    Math.max(0, 10 - megaCurrent);
 
-        const verif = data["Vérification"] || data["Viewers"] ||  "0/50";
-        document.getElementById("viewersText").innerText = verif + " viewers";
+document.getElementById("megaRemaining").innerText =
+    "⭐ " + restant + " subs restants avant le Mega Spin";
 
-        const current =
-            parseFloat(verif.split("/")[0].replace(",", "."));
+if(megaCurrent >= 10){
 
-        const percent =
-            Math.min((current / 50) * 100, 100);
+    document.getElementById("megaReady").style.display =
+        "block";
 
-        console.log("Current =", current);
-        console.log("Percent =", percent);
+}else{
 
-        document.getElementById("bar").style.width =
-   percent + "%";
+    document.getElementById("megaReady").style.display =
+        "none";
+
+}
+
+document.getElementById("golden").innerText =
+    "🎟 Golden Tickets : " + (data["Golden Tickets"] || "0");
+
+document.getElementById("roi").innerText =
+    "👑 Roi : " + (data["Roi"] || "Aucun");
+
+const verif =
+    data["Vérification"] ||
+    data["Viewers"] ||
+    "0/50";
+
+document.getElementById("viewersText").innerText =
+    "🚀 " + verif + " viewers";
+
+const current =
+    parseFloat(verif.split("/")[0].replace(",", "."));
+
+const percent =
+    Math.min((current / 50) * 100, 100);
+
+document.getElementById("bar").style.width =
+    percent + "%";
 
     } catch(err){
 
