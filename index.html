@@ -194,13 +194,13 @@ async function loadData(){
         document.getElementById("roi").innerText =
             "👑 Roi : " + (data["Roi"] || "Aucun");
 
-       const viewers = parseFloat(data["Viewers"]) || 0;
-        document.getElementById("viewersText").innerText =
-            verif + " viewers";
+      const viewersText = data["Viewers"] || "0/50";
 
-       const current = parseFloat(verif.split("/")[0].replace(",", "."));
-        document.getElementById("bar").style.width =
-        Math.min((current / 50) * 100, 100) + "%";
+document.getElementById("viewersText").innerText =
+    viewersText + " viewers";
+
+const current =
+    parseFloat(viewersText.split("/")[0].replace(",", "."));
 
 const percent =
     Math.min((current / 50) * 100, 100);
@@ -209,11 +209,7 @@ console.log("Current =", current);
 console.log("Percent =", percent);
 
 document.getElementById("bar").style.width =
-    percent + "%";        
-    }
-    catch(err){
-
-        console.error("Erreur :", err);
+    percent + "%";
     }
 
 }
