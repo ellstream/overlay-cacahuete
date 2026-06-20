@@ -68,6 +68,8 @@ async function loadData(){
 
     const csv = await response.text();
 
+    console.log(csv);
+    
     const rows = csv.trim().split('\n');
 
     const data = {};
@@ -81,16 +83,16 @@ async function loadData(){
     });
 
     document.getElementById("mega").innerText =
-        "🎰 Mega Spin : " + data.megaSpin + " / 10";
+    "🎰 Mega Spin : " + (data["MegaSpin"] || 0) + " / 10";
 
-    document.getElementById("golden").innerText =
-        "🎟 Golden Tickets : " + data.goldenTickets + " / 5";
+document.getElementById("golden").innerText =
+    "🎟 Golden Tickets : " + (data["Golden Tickets"] || 0) + " / 5";
 
-    document.getElementById("roi").innerText =
-        "👑 Roi : " + data.roi;
+document.getElementById("roi").innerText =
+    "👑 Roi : " + (data["Roi"] || "Aucun");
 
-    document.getElementById("viewers").innerText =
-        "🚀 Vérification : " + data.viewers + " / 50";
+document.getElementById("viewers").innerText =
+    "🚀 Vérification : " + (data["Viewers"] || 0) + " / 50";
 }
 
 loadData();
