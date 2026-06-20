@@ -151,58 +151,54 @@ src="https://github.com/ellstream/overlay-cacahuete/blob/d08373984c753b9e00a26da
 
 <script>
 
-const SHEET_URL = "TON_CSV";
+const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSScVihkW4AxYZ2yvxfcKHDaYDkJTq6BRVuGscjPq1HLVL8YaiT5DGpLRnzI3T-hcjwIYmtCnUsSPG1/pub?gid=0&single=true&output=csv";
 
 async function loadData(){
 
-const response = await fetch(SHEET_URL);
+    const response = await fetch(SHEET_URL+"?t="+Date.now());
 
-const csv = await response.text();
+    const csv = await response.text();
 
-const rows = csv.trim().split('\n');
+    const rows = csv.trim().split('\n');
 
-const data = {};
+    const data = {};
 
-rows.forEach(row=>{
+    rows.forEach(row => {
 
-const firstComma=row.indexOf(',');
+        const parts = row.split(',');
 
-const key=row.substring(0,firstComma).trim();
+        if(parts.length >= 2){
+            data[parts[0].trim()] = parts[1].trim();
+        }
 
-const value=row.substring(firstComma+1)
-.replace(/"/g,'')
-.trim();
+    });
 
-data[key]=value;
+    const mega = parseFloat(data["Mega Spin"] || 0);
+    const golden = parseFloat(data["Golden Tickets"] || 0);
+    const viewers = parseFloat(data["Viewers"] || 0);
+    const roi = data["Roi"] || "Aucun";
 
-});
+    document.getElementById("mega").innerText =
+        "🎰 Mega Spin : " + mega + " / 10";
 
-const mega=parseFloat(data["Mega Spin"])||0;
-const golden=parseFloat(data["Golden Tickets"])||0;
-const viewers=parseFloat(data["Viewers"])||0;
+    document.getElementById("golden").innerText =
+        "🎟 Golden Tickets : " + golden;
 
-document.getElementById("mega").innerText=
-"🎰 Mega Spin : "+mega+" / 10";
+    document.getElementById("roi").innerText =
+        "👑 Roi : " + roi;
 
-document.getElementById("golden").innerText=
-"🎟 Golden Tickets : "+golden;
+    document.getElementById("viewersText").innerText =
+        viewers + " / 50 viewers";
 
-document.getElementById("roi").innerText=
-"👑 Roi : "+(data["Roi"]||"Aucun");
+    const percent = Math.min((viewers / 50) * 100, 100);
 
-document.getElementById("viewersText").innerText=
-viewers+" / 50 viewers";
-
-const percent=Math.min((viewers/50)*100,100);
-
-document.getElementById("bar").style.width=
-percent+"%";
-
+    document.getElementById("bar").style.width =
+        percent + "%";
 }
 
 loadData();
 
-setInterval(loadData,10000);
+setInterval(loadData, 10000);
 
 </script>
 </body>
