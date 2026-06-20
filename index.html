@@ -163,12 +163,15 @@ async function loadData(){
         );
 
         const csv = await response.text();
-
+        console.log(csv);
+       
         const rows = csv.trim().split("\n");
 
         const data = {};
 
-        rows.forEach(row => {
+        rows.forEach console.log(data);
+console.log(Object.keys(data)); 
+        (row => {
 
             const firstComma = row.indexOf(",");
 
@@ -194,10 +197,8 @@ async function loadData(){
         document.getElementById("roi").innerText =
             "👑 Roi : " + (data["Roi"] || "Aucun");
 
-        const verif = data["Vérification"] || "0/50";
-
-        document.getElementById("viewersText").innerText =
-            verif + " viewers";
+        const verif = data["Vérification"] || data["Viewers"] ||  "0/50";
+        document.getElementById("viewersText").innerText = verif + " viewers";
 
         const current =
             parseFloat(verif.split("/")[0].replace(",", "."));
