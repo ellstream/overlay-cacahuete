@@ -2,13 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-@keyframes flash{
 
-0%{opacity:1;}
-50%{opacity:.3;}
-100%{opacity:1;}
-
-}
 <style>
 
 body{
@@ -103,7 +97,7 @@ background:#53fc18;
 
 transition:1s;
 }
-
+    
 #viewersText{
 
 text-align:center;
@@ -112,7 +106,12 @@ margin-top:10px;
 
 font-size:22px;
 }
-
+    
+@keyframes flash{
+ 0%{opacity:1;}
+ 50%{opacity:.3;}
+ 100%{opacity:1;}
+}
 </style>
 </head>
 
@@ -211,10 +210,13 @@ async function loadData(){
 
 });
 
-console.log(data);
-console.log(Object.keys(data));
-       document.getElementById("mega").innerText =
+const megaText = data["Mega Spin"] || "0/10";
+
+document.getElementById("mega").innerText =
     "🎰 Mega Spin : " + megaText;
+
+const megaCurrent =
+    parseFloat(megaText.split("/")[0]) || 0;
 
 const megaCurrent =
     parseFloat(megaText.split("/")[0]) || 0;
