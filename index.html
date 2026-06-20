@@ -97,6 +97,17 @@ document.getElementById("viewers").innerText =
 
 loadData();
 
+async function loadData(){
+
+    const response = await fetch(SHEET_URL);
+
+    const csv = await response.text();
+
+    console.log("CSV reçu :");
+    console.log(csv);
+
+}
+
 setInterval(loadData,10000);
 
 </script>
