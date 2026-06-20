@@ -65,48 +65,39 @@ const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSScVihkW4AxY
 async function loadData(){
 
     const response = await fetch(SHEET_URL);
-
     const csv = await response.text();
 
-    console.log(csv);
-    
     const rows = csv.trim().split('\n');
 
     const data = {};
 
     rows.forEach(row => {
 
-        const parts = row.split(',');
+        const firstComma = row.indexOf(',');
 
-        data[parts[0]] = parts[1];
+        const key = row.substring(0, firstComma).trim();
+
+        const value = row.substring(firstComma + 1).replace(/"/g,'').trim();
+
+        data[key] = value;
 
     });
 
-   document.getElementById("mega").innerText =
-    "🎰 Mega Spin : " + (data["Mega Spin"] || "0/10");
+    document.getElementById("mega").innerText =
+        "🎰 Mega Spin : " + (data["Mega Spin"] || "0/10");
 
-document.getElementById("golden").innerText =
-    "🎟 Golden Tickets : " + (data["Golden Tickets"] || "0/10");
+    document.getElementById("golden").innerText =
+        "🎟 Golden Tickets : " + (data["Golden Tickets"] || "0/10");
 
-document.getElementById("roi").innerText =
-    "👑 Roi : " + (data["Roi"] || "Aucun");
+    document.getElementById("roi").innerText =
+        "👑 Roi : " + (data["Roi"] || "Aucun");
 
-document.getElementById("viewers").innerText =
-    "🚀 Vérification : " + (data["Vérification"] || "0/50");
-    
+    document.getElementById("viewers").innerText =
+        "🚀 Vérification : " + (data["Vérification"] || "0/50");
 }
 
 loadData();
-
-async function loadData(){
-
-    const response = await fetch(SHEET_URL);
-
-    const csv = await response.text();
-    
-}
-
-setInterval(loadData,10000);
+setInterval(loadData, 10000);
 
 </script>
 
