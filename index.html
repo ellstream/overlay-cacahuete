@@ -198,8 +198,9 @@ async function loadData(){
         document.getElementById("viewersText").innerText =
             verif + " viewers";
 
-        const current =
-    parseFloat(verif.split("/")[0].replace(",", "."));
+       const current = parseFloat(verif.split("/")[0].replace(",", "."));
+        document.getElementById("bar").style.width =
+        Math.min((current / 50) * 100, 100) + "%";
 
 const percent =
     Math.min((current / 50) * 100, 100);
