@@ -199,19 +199,20 @@ async function loadData(){
             verif + " viewers";
 
         const current =
-            parseFloat(verif.split("/")[0].replace(",", "."));
+    parseFloat(verif.split("/")[0].replace(",", "."));
 
-       const percent = Math.min((viewers / 50) * 100, 100);
+const percent =
+    Math.min((current / 50) * 100, 100);
 
-console.log("Viewers =", viewers);
-console.log("Percent =", percent);       
-document.getElementById("bar").style.width = percent + "%";
-        
+console.log("Current =", current);
+console.log("Percent =", percent);
+
+document.getElementById("bar").style.width =
+    percent + "%";        
     }
     catch(err){
 
         console.error("Erreur :", err);
-
     }
 
 }
