@@ -199,7 +199,9 @@ async function loadData(){
 
        if(firstComma !== -1){
 
-       const key = row.substring(0, firstComma).trim();
+       const key = row.substring(0, firstComma)
+             .replace(/"/g,"")
+             .trim();
 
        const value = row.substring(firstComma + 1)
             .replace(/"/g,"")
@@ -247,19 +249,21 @@ document.getElementById("golden").innerText =
 document.getElementById("roi").innerText =
     "👑 Roi : " + (data["Roi"] || "Aucun");
 
-const verif =
+let verif =
     data["Vérification"] ||
     data["Viewers"] ||
     "0/50";
 
+verif = verif.replace(/\s/g, "");
+
 document.getElementById("viewersText").innerText =
     "🚀 " + verif + " viewers";
 
-const current =
-    parseFloat(verif.split("/")[0].replace(",", "."));
+const current = Number(verif.split("/")[0]) || 0;
 
-const percent =
-    Math.min((current / 50) * 100, 100);
+const max = Number(verif.split("/")[1]) || 50;
+
+const percent = Math.min((current / max) * 100, 100);
 
 document.getElementById("bar").style.width =
     percent + "%";
