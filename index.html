@@ -192,7 +192,18 @@ async function loadData(){
             "🎟 Golden Tickets : " + (data["Golden Tickets"] || "0");
 
         document.getElementById("roi").innerText =
-            "👑 Roi : " + (data["Roi"] || "Aucun");
+           "👑 Roi : " + (data["Roi"] || "Aucun");
+
+const viewersText = data["Viewers"] || "0/50";
+
+document.getElementById("viewersText").innerText =
+    viewersText + " viewers";
+
+const current =
+    parseFloat(viewersText.split("/")[0].replace(",", "."));
+
+document.getElementById("bar").style.width =
+    Math.min((current / 50) * 100, 100) + "%";
 
       const viewersText = data["Viewers"] || "0/50";
 
