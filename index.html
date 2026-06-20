@@ -158,11 +158,11 @@ async function loadData(){
 
     try{
 
-        const response = await fetch(SHEET_URL);
+        const response = await fetch(
+            SHEET_URL + "&t=" + Date.now()
+        );
 
         const csv = await response.text();
-
-        console.log(csv);
 
         const rows = csv.trim().split("\n");
 
@@ -186,37 +186,42 @@ async function loadData(){
         });
 
         document.getElementById("mega").innerText =
-    "🎰 Mega Spin : " + (data["Mega Spin"] || "0");
+            "🎰 Mega Spin : " + (data["Mega Spin"] || "0");
 
-document.getElementById("golden").innerText =
-    "🎟 Golden Tickets : " + (data["Golden Tickets"] || "0");
+        document.getElementById("golden").innerText =
+            "🎟 Golden Tickets : " + (data["Golden Tickets"] || "0");
 
-document.getElementById("roi").innerText =
-    "👑 Roi : " + (data["Roi"] || "Aucun");
+        document.getElementById("roi").innerText =
+            "👑 Roi : " + (data["Roi"] || "Aucun");
 
-const verif = data["Vérification"] || "0/50";
+        const verif = data["Vérification"] || "0/50";
 
-document.getElementById("viewersText").innerText =
-    verif + " viewers";
+        document.getElementById("viewersText").innerText =
+            verif + " viewers";
 
-const current =
-    parseFloat(verif.split("/")[0].replace(",", "."));
+        const current =
+            parseFloat(verif.split("/")[0].replace(",", "."));
 
-const percent =
-    Math.min((current / 50) * 100, 100);
+        const percent =
+            Math.min((current / 50) * 100, 100);
 
-console.log("Current =", current);
-console.log("Percent =", percent);
+        console.log("Current =", current);
+        console.log("Percent =", percent);
 
-document.getElementById("bar").style.width =
-    percent + "%";
+        document.getElementById("bar").style.width =
+            percent + "%";
+
+    } catch(err){
+
+        console.error(err);
+
     }
 
 }
 
 loadData();
 
-setInterval(loadData,10000);
+setInterval(loadData, 10000);
 
 </script>
 </body>
