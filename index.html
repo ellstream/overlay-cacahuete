@@ -219,16 +219,16 @@ const megaText = data["Mega Spin"] || "0/10";
 document.getElementById("mega").innerText =
     "🎰 Mega Spin : " + megaText;
 
-const megaCurrent =
+const megaValue =
     parseFloat(megaText.split("/")[0]) || 0;
 
 const restant =
-    Math.max(0, 10 - megaCurrent);
+    Math.max(0, 10 - megaValue);
 
 document.getElementById("megaRemaining").innerText =
     "⭐ " + restant + " subs restants avant le Mega Spin";
 
-if(megaCurrent >= 10){
+if(megaValue >= 10){
 
     document.getElementById("megaReady").style.display =
         "block";
