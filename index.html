@@ -56,6 +56,12 @@ animation:float 3s ease-in-out infinite;
 100%{transform:translateY(0px);}
 }
 
+@keyframes flash{
+ 0%{opacity:1;}
+ 50%{opacity:.3;}
+ 100%{opacity:1;}
+}    
+
 .title{
 
 font-size:30px;
@@ -105,12 +111,6 @@ text-align:center;
 margin-top:10px;
 
 font-size:22px;
-}
-    
-@keyframes flash{
- 0%{opacity:1;}
- 50%{opacity:.3;}
- 100%{opacity:1;}
 }
 </style>
 </head>
@@ -209,6 +209,9 @@ async function loadData(){
     }
 
 });
+        
+console.log(data);
+console.log(Object.keys(data));
 
 const megaText = data["Mega Spin"] || "0/10";
 
