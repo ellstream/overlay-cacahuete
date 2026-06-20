@@ -4,11 +4,9 @@
 <meta charset="UTF-8">
 
 <style>
-
 body{
     margin:0;
     background:transparent;
-    overflow:hidden;
     font-family:Arial,sans-serif;
 }
 
@@ -17,27 +15,21 @@ body{
     top:20px;
     left:20px;
 
-    background:rgba(0,0,0,0.6);
-
-    border-radius:20px;
+    background:rgba(0,0,0,0.7);
 
     padding:20px;
 
+    border-radius:20px;
+
     color:white;
 
-    width:300px;
-}
-
-.title{
-    font-size:30px;
-    font-weight:bold;
+    width:350px;
 }
 
 .line{
     margin-top:12px;
     font-size:24px;
 }
-
 </style>
 
 </head>
@@ -46,25 +38,66 @@ body{
 
 <div id="panel">
 
-<div class="title">🥜 CACAHUÈTE</div>
+<h2>🥜 CASINO DE LA CACAHUÈTE</h2>
 
-<div class="line">
+<div class="line" id="mega">
 🎰 Mega Spin : 0 / 10
 </div>
 
-<div class="line">
+<div class="line" id="golden">
 🎟 Golden Tickets : 0 / 5
 </div>
 
-<div class="line">
+<div class="line" id="roi">
 👑 Roi : Aucun
 </div>
 
-<div class="line">
-🚀 Vérif : 22.38 / 50
+<div class="line" id="viewers">
+🚀 Vérification : 0 / 50
 </div>
 
 </div>
+
+<script>
+
+const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSScVihkW4AxYZ2yvxfcKHDaYDkJTq6BRVuGscjPq1HLVL8YaiT5DGpLRnzI3T-hcjwIYmtCnUsSPG1/pub?gid=0&single=true&output=csv";
+
+async function loadData(){
+
+    const response = await fetch(SHEET_URL);
+
+    const csv = await response.text();
+
+    const rows = csv.trim().split('\n');
+
+    const data = {};
+
+    rows.forEach(row => {
+
+        const parts = row.split(',');
+
+        data[parts[0]] = parts[1];
+
+    });
+
+    document.getElementById("mega").innerText =
+        "🎰 Mega Spin : " + data.megaSpin + " / 10";
+
+    document.getElementById("golden").innerText =
+        "🎟 Golden Tickets : " + data.goldenTickets + " / 5";
+
+    document.getElementById("roi").innerText =
+        "👑 Roi : " + data.roi;
+
+    document.getElementById("viewers").innerText =
+        "🚀 Vérification : " + data.viewers + " / 50";
+}
+
+loadData();
+
+setInterval(loadData,10000);
+
+</script>
 
 </body>
 </html>
