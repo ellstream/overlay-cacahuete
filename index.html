@@ -4,104 +4,206 @@
 <meta charset="UTF-8">
 
 <style>
+
 body{
-    margin:0;
-    background:transparent;
-    font-family:Arial,sans-serif;
+margin:0;
+background:transparent;
+font-family:Arial,sans-serif;
+overflow:hidden;
 }
 
-#panel{
-    position:absolute;
-    top:20px;
-    left:20px;
+#overlay{
 
-    background:rgba(0,0,0,0.7);
+position:absolute;
+left:20px;
+top:20px;
 
-    padding:20px;
+width:420px;
 
-    border-radius:20px;
+background:rgba(15,15,15,.85);
 
-    color:white;
+border:3px solid #53fc18;
 
-    width:350px;
+border-radius:25px;
+
+padding:20px;
+
+color:white;
+
+box-shadow:0 0 30px #53fc18;
 }
 
-.line{
-    margin-top:12px;
-    font-size:24px;
+#header{
+
+display:flex;
+
+align-items:center;
+
+gap:15px;
 }
+
+#cacahuete{
+
+width:120px;
+
+animation:float 3s ease-in-out infinite;
+}
+
+@keyframes float{
+
+0%{transform:translateY(0px);}
+50%{transform:translateY(-10px);}
+100%{transform:translateY(0px);}
+}
+
+.title{
+
+font-size:30px;
+
+font-weight:bold;
+
+color:#53fc18;
+}
+
+.stat{
+
+margin-top:18px;
+
+font-size:24px;
+}
+
+#progress{
+
+width:100%;
+
+height:35px;
+
+background:#222;
+
+border-radius:30px;
+
+overflow:hidden;
+
+margin-top:20px;
+}
+
+#bar{
+
+height:100%;
+
+width:0%;
+
+background:#53fc18;
+
+transition:1s;
+}
+
+#viewersText{
+
+text-align:center;
+
+margin-top:10px;
+
+font-size:22px;
+}
+
 </style>
-
 </head>
 
 <body>
 
-<div id="panel">
+<div id="overlay">
 
-<h2>🥜 CASINO DE LA CACAHUÈTE</h2>
+<div id="header">
 
-<div class="line" id="mega">
+<img
+id="cacahuete"
+src="TON_IMAGE_PNG"
+/>
+
+<div class="title">
+🥜 CACAHUÈTE CASINO
+</div>
+
+</div>
+
+<div class="stat" id="mega">
 🎰 Mega Spin : 0 / 10
 </div>
 
-<div class="line" id="golden">
-🎟 Golden Tickets : 0 / 5
+<div class="stat" id="golden">
+🎟 Golden Tickets : 0
 </div>
 
-<div class="line" id="roi">
+<div class="stat" id="roi">
 👑 Roi : Aucun
 </div>
 
-<div class="line" id="viewers">
-🚀 Vérification : 0 / 50
+<div id="progress">
+<div id="bar"></div>
+</div>
+
+<div id="viewersText">
+0 / 50 viewers
 </div>
 
 </div>
 
 <script>
 
-const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSScVihkW4AxYZ2yvxfcKHDaYDkJTq6BRVuGscjPq1HLVL8YaiT5DGpLRnzI3T-hcjwIYmtCnUsSPG1/pub?gid=0&single=true&output=csv";
+const SHEET_URL = "TON_CSV";
 
-async function loadData() {
+async function loadData(){
 
-    const response = await fetch(SHEET_URL);
-    const csv = await response.text();
+const response = await fetch(SHEET_URL);
 
-    const rows = csv.trim().split('\n');
-    const data = {};
+const csv = await response.text();
 
-    rows.forEach(row => {
+const rows = csv.trim().split('\n');
 
-        const firstComma = row.indexOf(',');
+const data = {};
 
-        const key = row.substring(0, firstComma).trim();
+rows.forEach(row=>{
 
-        const value = row
-            .substring(firstComma + 1)
-            .replace(/"/g, '')
-            .trim();
+const firstComma=row.indexOf(',');
 
-        data[key] = value;
+const key=row.substring(0,firstComma).trim();
 
-    });
+const value=row.substring(firstComma+1)
+.replace(/"/g,'')
+.trim();
 
-    document.getElementById("mega").innerText =
-        "🎰 Mega Spin : " + (data["Mega Spin"] || "0/10");
+data[key]=value;
 
-    document.getElementById("golden").innerText =
-        "🎟 Golden Tickets : " + (data["Golden Tickets"] || "0/10");
+});
 
-    document.getElementById("roi").innerText =
-        "👑 Roi : " + (data["Roi"] || "Aucun");
+const mega=parseFloat(data["Mega Spin"])||0;
+const golden=parseFloat(data["Golden Tickets"])||0;
+const viewers=parseFloat(data["Viewers"])||0;
 
-    document.getElementById("viewers").innerText =
-        "🚀 Vérification : " + (data["Vérification"] || "0/50");
+document.getElementById("mega").innerText=
+"🎰 Mega Spin : "+mega+" / 10";
+
+document.getElementById("golden").innerText=
+"🎟 Golden Tickets : "+golden;
+
+document.getElementById("roi").innerText=
+"👑 Roi : "+(data["Roi"]||"Aucun");
+
+document.getElementById("viewersText").innerText=
+viewers+" / 50 viewers";
+
+const percent=Math.min((viewers/50)*100,100);
+
+document.getElementById("bar").style.width=
+percent+"%";
+
 }
 
 loadData();
-setInterval(loadData, 10000);
+
+setInterval(loadData,10000);
 
 </script>
-
 </body>
 </html>
