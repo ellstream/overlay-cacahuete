@@ -82,17 +82,18 @@ async function loadData(){
 
     });
 
-    document.getElementById("mega").innerText =
-    "🎰 Mega Spin : " + (data["MegaSpin"] || 0) + " / 10";
+   document.getElementById("mega").innerText =
+    "🎰 Mega Spin : " + (data["Mega Spin"] || "0/10");
 
 document.getElementById("golden").innerText =
-    "🎟 Golden Tickets : " + (data["Golden Tickets"] || 0) + " / 5";
+    "🎟 Golden Tickets : " + (data["Golden Tickets"] || "0/10");
 
 document.getElementById("roi").innerText =
     "👑 Roi : " + (data["Roi"] || "Aucun");
 
 document.getElementById("viewers").innerText =
-    "🚀 Vérification : " + (data["Viewers"] || 0) + " / 50";
+    "🚀 Vérification : " + (data["Vérification"] || "0/50");
+    
 }
 
 loadData();
@@ -102,9 +103,7 @@ async function loadData(){
     const response = await fetch(SHEET_URL);
 
     const csv = await response.text();
-
-    document.body.innerHTML += "<pre>" + csv + "</pre>";
-
+    
 }
 
 setInterval(loadData,10000);
