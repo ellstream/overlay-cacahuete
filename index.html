@@ -175,7 +175,7 @@ async function loadData(){
 
     const mega = parseFloat(data["Mega Spin"] || 0);
     const golden = parseFloat(data["Golden Tickets"] || 0);
-    const viewers = parseFloat(data["Viewers"] || 0);
+    const viewers = parseFloat((data["Vérification"] || "0").split("/")[0].replace(",", ".")) || 0;
     const roi = data["Roi"] || "Aucun";
 
     document.getElementById("mega").innerText =
