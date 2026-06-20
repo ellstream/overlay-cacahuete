@@ -151,54 +151,74 @@ src="https://raw.githubusercontent.com/ellstream/overlay-cacahuete/main/cacahuet
 
 <script>
 
-const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSScVihkW4AxYZ2yvxfcKHDaYDkJTq6BRVuGscjPq1HLVL8YaiT5DGpLRnzI3T-hcjwIYmtCnUsSPG1/pub?gid=0&single=true&output=csv";
+const SHEET_URL =
+"https://docs.google.com/spreadsheets/d/e/2PACX-1vSScVihkW4AxYZ2yvxfcKHDaYDkJTq6BRVuGscjPq1HLVL8YaiT5DGpLRnzI3T-hcjwIYmtCnUsSPG1/pub?gid=0&single=true&output=csv";
 
 async function loadData(){
 
-    const response = await fetch(SHEET_URL+"?t="+Date.now());
+    try{
 
-    const csv = await response.text();
+        const response = await fetch(SHEET_URL);
 
-    const rows = csv.trim().split('\n');
+        const csv = await response.text();
 
-    const data = {};
+        console.log(csv);
 
-    rows.forEach(row => {
+        const rows = csv.trim().split("\n");
 
-        const parts = row.split(',');
+        const data = {};
 
-        if(parts.length >= 2){
-            data[parts[0].trim()] = parts[1].trim();
-        }
+        rows.forEach(row => {
 
-    });
+            const firstComma = row.indexOf(",");
 
-    const mega = parseFloat(data["Mega Spin"] || 0);
-    const golden = parseFloat(data["Golden Tickets"] || 0);
-    const viewers = parseFloat((data["Vérification"] || "0").split("/")[0].replace(",", ".")) || 0;
-    const roi = data["Roi"] || "Aucun";
+            if(firstComma !== -1){
 
-    document.getElementById("mega").innerText =
-        "🎰 Mega Spin : " + mega + " / 10";
+                const key = row.substring(0, firstComma).trim();
 
-    document.getElementById("golden").innerText =
-        "🎟 Golden Tickets : " + golden;
+                const value = row.substring(firstComma + 1)
+                    .replace(/"/g,"")
+                    .trim();
 
-    document.getElementById("roi").innerText =
-        "👑 Roi : " + roi;
+                data[key] = value;
+            }
 
-    document.getElementById("viewersText").innerText =
-        viewers + " / 50 viewers";
+        });
 
-    const percent = Math.min((viewers / 50) * 100, 100);
+        document.getElementById("mega").innerText =
+            "🎰 Mega Spin : " + (data["Mega Spin"] || "0/10");
 
-    document.getElementById("bar").style.width =
-        percent + "%";
+        document.getElementById("golden").innerText =
+            "🎟 Golden Tickets : " + (data["Golden Tickets"] || "0");
+
+        document.getElementById("roi").innerText =
+            "👑 Roi : " + (data["Roi"] || "Aucun");
+
+        const verif = data["Vérification"] || "0/50";
+
+        document.getElementById("viewersText").innerText =
+            verif + " viewers";
+
+        const current =
+            parseFloat(verif.split("/")[0].replace(",", "."));
+
+        const percent = Math.min((current / 50) * 100, 100);
+
+        document.getElementById("bar").style.width =
+            percent + "%";
+
+    }
+    catch(err){
+
+        console.error("Erreur :", err);
+
+    }
+
 }
 
 loadData();
 
-setInterval(loadData, 10000);
+setInterval(loadData,10000);
 
 </script>
 </body>
