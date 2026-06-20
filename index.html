@@ -103,8 +103,7 @@ async function loadData(){
 
     const csv = await response.text();
 
-    console.log("CSV reçu :");
-    console.log(csv);
+    document.body.innerHTML += "<pre>" + csv + "</pre>";
 
 }
 
