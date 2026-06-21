@@ -3,17 +3,17 @@ const SHEET_URL =
 
 const prizes = [
 "Golden Ticket x1",
-"Manger un piment",
-"Aller chez Nestor",
-"Monter le Terril",
+"Piment Infernal",
+"Seau Glacé",
+"Défi Supérette",
 "24h dans la Twingo",
-"Relance",
-"Défi du Chat",
-"Handicap de jeu",
-"Chanter en live",
 "Golden Ticket x2",
-"Voix Cacahuète",
-"Re-Spin Bonus"
+"Handicap Extrême",
+"Karaoké de la Honte",
+"Le Chat Choisit Ton Repas",
+"Relance",
+"Roi du Casino",
+"Jackpot Cacahuète"
 ];
 
 const colors = [
