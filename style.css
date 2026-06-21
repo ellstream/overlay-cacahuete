@@ -64,6 +64,11 @@ filter:
 drop-shadow(0 0 20px #53fc18)
 drop-shadow(0 0 40px #53fc18);
 
+transition:
+transform 8s cubic-bezier(.12,.88,.17,1);
+
+transform-origin:center center;
+
 }
 
 #wheelGroup{
