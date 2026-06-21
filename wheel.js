@@ -197,11 +197,9 @@ function launchSpin(forcedResult){
         "megaSpinContainer"
     ).style.display = "flex";
 
-   const wheel =
-    document.getElementById(
-        "wheel"
-    );
-
+  const wheel =
+    document.getElementById("wheel");
+    
     let prizeIndex;
 
     if(forcedResult !== "Random"){
@@ -245,7 +243,7 @@ function launchSpin(forcedResult){
             (angleSize / 2)
         );
 
-   wheel.style.transform =
+wheel.style.transform =
     `rotate(${finalAngle}deg)`;
     
     setTimeout(()=>{
