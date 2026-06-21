@@ -271,6 +271,15 @@ wheel.style.transform =
 
         },5000);
 
-    },8000);
+     },8000);
 
 }
+
+createWheel();
+
+loadData();
+
+setInterval(
+    loadData,
+    3000
+);
