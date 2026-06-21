@@ -307,7 +307,9 @@ wheel.style.transform =
         resultBox.classList.add(
             "win"
         );
-
+        
+        launchConfetti();
+        
         spinning = false;
 
         setTimeout(()=>{
