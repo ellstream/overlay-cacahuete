@@ -13,6 +13,7 @@ const SHEET_URL =
 "🔄 Relance",
 "👑 Roi du Casino",
 "💎 Jackpot Cacahuète"
+];
 
 const colors = [
 "#d4af37",
