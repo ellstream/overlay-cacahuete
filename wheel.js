@@ -96,7 +96,7 @@ function createWheel(){
             polarToCartesian(
                 centerX,
                 centerY,
-                250,
+                290,
                 middleAngle
             );
 
