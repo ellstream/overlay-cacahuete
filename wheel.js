@@ -140,37 +140,40 @@ async function loadData(){
             console.log(csv);
             console.log(data);
 
-        const rows =
-            csv.trim().split("\n");
+    const rows =
+    csv.trim().split("\n");
 
-        const data = {};
+const data = {};
 
-        rows.forEach(row=>{
+rows.forEach(row => {
 
-            const firstComma =
-                row.indexOf(",");
+    const firstComma =
+        row.indexOf(",");
 
-            if(firstComma !== -1){
+    if(firstComma !== -1){
 
-                const key =
-                    row.substring(
-                        0,
-                        firstComma
-                    )
-                    .replace(/"/g,"")
-                    .trim();
+        const key =
+            row.substring(
+                0,
+                firstComma
+            )
+            .replace(/"/g,"")
+            .trim();
 
-                const value =
-                    row.substring(
-                        firstComma + 1
-                    )
-                    .replace(/"/g,"")
-                    .trim();
+        const value =
+            row.substring(
+                firstComma + 1
+            )
+            .replace(/"/g,"")
+            .trim();
 
-                data[key] = value;
-            }
+        data[key] = value;
+    }
 
-        });
+    });
+
+     console.log("Objet data :");
+     console.log(data);
 
         const trigger =
             data["Spin Trigger"] ||
