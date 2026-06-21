@@ -136,7 +136,9 @@ async function loadData(){
             );
 
         const csv =
-            await response.text();
+            await response.text(); 
+            console.log(csv);
+            console.log(data);
 
         const rows =
             csv.trim().split("\n");
