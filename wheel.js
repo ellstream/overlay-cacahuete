@@ -32,6 +32,7 @@ const colors = [
 ];
 
 let spinning = false;
+let lastTrigger = "OFF";
 
 function polarToCartesian(cx, cy, r, angle){
     const rad = (angle - 90) * Math.PI / 180;
@@ -173,6 +174,7 @@ rows.forEach(row => {
 });
 
 console.log("Objet data :");
+console.log(JSON.stringify(data,null,2));
 
         const trigger =
             data["Spin Trigger"] ||
@@ -182,15 +184,15 @@ console.log("Objet data :");
             data["Spin Result"] ||
             "Random";
 
-        if(
-            trigger === "GO" &&
-            spinning === false
-        ){
+       if(trigger === "GO" &&
+    lastTrigger !== "GO" &&
+    spinning === false){
 
-            launchSpin(
-                forcedResult
-            );
+    launchSpin(forcedResult);
 
+}
+
+lastTrigger = trigger;
         }
 
     }catch(err){
