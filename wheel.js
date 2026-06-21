@@ -117,7 +117,7 @@ function createWheel(){
 
         txt.setAttribute(
             "transform",
-            `rotate(${middleAngle + 90 + +15} ${textPos.x} ${textPos.y})`
+            `rotate(${middleAngle + 90 + +10} ${textPos.x} ${textPos.y})`
         );
 
         txt.textContent =
