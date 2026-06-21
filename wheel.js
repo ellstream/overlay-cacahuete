@@ -136,71 +136,71 @@ async function loadData(){
                 Date.now()
             );
 
-     const csv =
-    await response.text();
+        const csv =
+            await response.text();
 
-console.log(csv);
+        console.log(csv);
 
-const rows =
-    csv.trim().split("\n");
+        const rows =
+            csv.trim().split("\n");
 
-const data = {};
+        const data = {};
 
-rows.forEach(row => {
+        rows.forEach(row => {
 
-    const firstComma =
-        row.indexOf(",");
+            const firstComma =
+                row.indexOf(",");
 
-    if(firstComma !== -1){
+            if(firstComma !== -1){
 
-        const key =
-            row.substring(
-                0,
-                firstComma
-            )
-            .replace(/"/g,"")
-            .trim();
+                const key =
+                    row.substring(
+                        0,
+                        firstComma
+                    )
+                    .replace(/"/g,"")
+                    .trim();
 
-        const value =
-            row.substring(
-                firstComma + 1
-            )
-            .replace(/"/g,"")
-            .trim();
+                const value =
+                    row.substring(
+                        firstComma + 1
+                    )
+                    .replace(/"/g,"")
+                    .trim();
 
-        data[key] = value;
+                data[key] = value;
+            }
+
+        });
+
+        console.log("Objet data :");
+        console.log(JSON.stringify(data, null, 2));
+
+        const trigger =
+            data["Spin Trigger"] ||
+            "OFF";
+
+        const forcedResult =
+            data["Spin Result"] ||
+            "Random";
+
+        if(
+            trigger === "GO" &&
+            lastTrigger !== "GO" &&
+            spinning === false
+        ){
+
+            launchSpin(forcedResult);
+
+        }
+
+        lastTrigger = trigger;
+
+    }catch(err){
+
+        console.error(err);
+
     }
-
-});
-
-console.log("Objet data :");
-console.log(JSON.stringify(data,null,2));
-
-const trigger =
-    data["Spin Trigger"] ||
-    "OFF";
-
-const forcedResult =
-    data["Spin Result"] ||
-    "Random";
-
-if(
-    trigger === "GO" &&
-    lastTrigger !== "GO" &&
-    spinning === false
-){
-
-    launchSpin(forcedResult);
-
-}
-
-lastTrigger = trigger;
-
-} catch(err) {
-
-    console.error(err);
-
-}
 
 }
 
