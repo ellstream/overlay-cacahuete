@@ -129,42 +129,29 @@ async function loadData(){
 
     try{
 
-        const response =
-            await fetch(
-                SHEET_URL +
-                "&t=" +
-                Date.now()
-            );
+        const response = await fetch(
+            SHEET_URL + "&t=" + Date.now()
+        );
 
-        const csv =
-            await response.text();
+        const csv = await response.text();
 
         console.log(csv);
 
-        const rows =
-            csv.trim().split("\n");
+        const rows = csv.trim().split("\n");
 
         const data = {};
 
         rows.forEach(row => {
 
-            const firstComma =
-                row.indexOf(",");
+            const firstComma = row.indexOf(",");
 
             if(firstComma !== -1){
 
-                const key =
-                    row.substring(
-                        0,
-                        firstComma
-                    )
+                const key = row.substring(0, firstComma)
                     .replace(/"/g,"")
                     .trim();
 
-                const value =
-                    row.substring(
-                        firstComma + 1
-                    )
+                const value = row.substring(firstComma + 1)
                     .replace(/"/g,"")
                     .trim();
 
@@ -177,12 +164,10 @@ async function loadData(){
         console.log(JSON.stringify(data, null, 2));
 
         const trigger =
-            data["Spin Trigger"] ||
-            "OFF";
+            data["Spin Trigger"] || "OFF";
 
         const forcedResult =
-            data["Spin Result"] ||
-            "Random";
+            data["Spin Result"] || "Random";
 
         if(
             trigger === "GO" &&
@@ -196,7 +181,7 @@ async function loadData(){
 
         lastTrigger = trigger;
 
-    }catch(err){
+    } catch(err){
 
         console.error(err);
 
