@@ -46,7 +46,7 @@ function createWheel(){
 
     const centerX = 400;
     const centerY = 400;
-    const radius = 380;
+    const radius = 390;
 
     const angleSize = 360 / prizes.length;
 
