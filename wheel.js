@@ -16,7 +16,113 @@ const prizes = [
 "Re-Spin Bonus"
 ];
 
+const colors = [
+"#d4af37",
+"#2d2d2d",
+"#53fc18",
+"#121212",
+"#d4af37",
+"#2d2d2d",
+"#53fc18",
+"#121212",
+"#d4af37",
+"#2d2d2d",
+"#53fc18",
+"#121212"
+];
+
 let spinning = false;
+
+function polarToCartesian(cx, cy, r, angle){
+    const rad = (angle - 90) * Math.PI / 180;
+    return {
+        x: cx + r * Math.cos(rad),
+        y: cy + r * Math.sin(rad)
+    };
+}
+
+function createWheel(){
+
+    const centerX = 400;
+    const centerY = 400;
+    const radius = 380;
+
+    const angleSize = 360 / prizes.length;
+
+    for(let i=0;i<prizes.length;i++){
+
+        const startAngle = i * angleSize;
+        const endAngle = startAngle + angleSize;
+
+        const start =
+            polarToCartesian(
+                centerX,
+                centerY,
+                radius,
+                endAngle
+            );
+
+        const end =
+            polarToCartesian(
+                centerX,
+                centerY,
+                radius,
+                startAngle
+            );
+
+        const pathData = [
+            "M", centerX, centerY,
+            "L", start.x, start.y,
+            "A", radius, radius, 0, 0, 0,
+            end.x, end.y,
+            "Z"
+        ].join(" ");
+
+        const seg =
+            document.getElementById(
+                "seg" + i
+            );
+
+        seg.setAttribute("d", pathData);
+        seg.setAttribute("fill", colors[i]);
+        seg.setAttribute("stroke", "#53fc18");
+        seg.setAttribute("stroke-width", "3");
+
+        const middleAngle =
+            startAngle + angleSize / 2;
+
+        const textPos =
+            polarToCartesian(
+                centerX,
+                centerY,
+                250,
+                middleAngle
+            );
+
+        const txt =
+            document.getElementById(
+                "txt" + i
+            );
+
+        txt.setAttribute(
+            "x",
+            textPos.x
+        );
+
+        txt.setAttribute(
+            "y",
+            textPos.y
+        );
+
+        txt.setAttribute(
+            "transform",
+            `rotate(${middleAngle} ${textPos.x} ${textPos.y})`
+        );
+
+        txt.textContent =
+            prizes[i];
+    }
+}
 
 async function loadData(){
 
@@ -24,16 +130,20 @@ async function loadData(){
 
         const response =
             await fetch(
-                SHEET_URL + "&t=" + Date.now()
+                SHEET_URL +
+                "&t=" +
+                Date.now()
             );
 
-        const csv = await response.text();
+        const csv =
+            await response.text();
 
-        const rows = csv.trim().split("\n");
+        const rows =
+            csv.trim().split("\n");
 
         const data = {};
 
-        rows.forEach(row => {
+        rows.forEach(row=>{
 
             const firstComma =
                 row.indexOf(",");
@@ -44,7 +154,9 @@ async function loadData(){
                     row.substring(
                         0,
                         firstComma
-                    ).trim();
+                    )
+                    .replace(/"/g,"")
+                    .trim();
 
                 const value =
                     row.substring(
@@ -59,17 +171,21 @@ async function loadData(){
         });
 
         const trigger =
-            data["Spin Trigger"] || "OFF";
+            data["Spin Trigger"] ||
+            "OFF";
 
-        const result =
-            data["Spin Result"] || "Random";
+        const forcedResult =
+            data["Spin Result"] ||
+            "Random";
 
         if(
             trigger === "GO" &&
             spinning === false
         ){
 
-            launchSpin(result);
+            launchSpin(
+                forcedResult
+            );
 
         }
 
@@ -85,18 +201,21 @@ function launchSpin(forcedResult){
 
     spinning = true;
 
-    const wheel =
-        document.getElementById("wheel");
+    const wheelGroup =
+        document.getElementById(
+            "wheelGroup"
+        );
 
     let prizeIndex;
 
     if(
-        forcedResult &&
         forcedResult !== "Random"
     ){
 
         prizeIndex =
-            prizes.indexOf(forcedResult);
+            prizes.indexOf(
+                forcedResult
+            );
 
         if(prizeIndex === -1){
 
@@ -118,25 +237,37 @@ function launchSpin(forcedResult){
 
     }
 
-    const segmentAngle =
+    const angleSize =
         360 / prizes.length;
 
-    const rotation =
-        (360 * 8) +
-        (360 -
-        (prizeIndex * segmentAngle) -
-        (segmentAngle / 2));
+    const finalAngle =
+        (360 * 8)
+        +
+        (
+            360
+            -
+            (prizeIndex * angleSize)
+            -
+            (angleSize / 2)
+        );
 
-    wheel.style.transform =
-        `rotate(${rotation}deg)`;
+    wheelGroup.style.transform =
+        `rotate(${finalAngle}deg)`;
 
-    setTimeout(() => {
+    setTimeout(()=>{
 
-        document
-        .getElementById("result")
-        .innerText =
+        const resultBox =
+            document.getElementById(
+                "resultBox"
+            );
+
+        resultBox.innerHTML =
             "🏆 " +
             prizes[prizeIndex];
+
+        resultBox.classList.add(
+            "win"
+        );
 
         spinning = false;
 
@@ -144,6 +275,11 @@ function launchSpin(forcedResult){
 
 }
 
+createWheel();
+
 loadData();
 
-setInterval(loadData,3000);
+setInterval(
+    loadData,
+    3000
+);
