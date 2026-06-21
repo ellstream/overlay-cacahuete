@@ -192,10 +192,11 @@ if(
 
     launchSpin(forcedResult);
 
+}
 
 lastTrigger = trigger;
 
-}catch(err){
+} catch(err) {
 
     console.error(err);
 
