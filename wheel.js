@@ -1,6 +1,7 @@
 const SHEET_URL =
 "https://docs.google.com/spreadsheets/d/e/2PACX-1vSScVihkW4AxYZ2yvxfcKHDaYDkJTq6BRVuGscjPq1HLVL8YaiT5DGpLRnzI3T-hcjwIYmtCnUsSPG1/pub?gid=0&single=true&output=csv";
 
+const prizes = [
 "🎟️ Golden Ticket x1",
 "🌶️ Piment Infernal",
 "🧊 Seau Glacé",
