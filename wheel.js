@@ -135,12 +135,12 @@ async function loadData(){
                 Date.now()
             );
 
-        const csv =
-            await response.text(); 
-            console.log(csv);
-            console.log(data);
+     const csv =
+    await response.text();
 
-    const rows =
+console.log(csv);
+
+const rows =
     csv.trim().split("\n");
 
 const data = {};
@@ -170,10 +170,9 @@ rows.forEach(row => {
         data[key] = value;
     }
 
-    });
+});
 
-     console.log("Objet data :");
-     console.log(data);
+console.log("Objet data :");
 
         const trigger =
             data["Spin Trigger"] ||
