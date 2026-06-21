@@ -42,6 +42,53 @@ function polarToCartesian(cx, cy, r, angle){
     };
 }
 
+function launchConfetti(){
+
+    const container =
+        document.getElementById("confetti");
+
+    const emojis = [
+        "✨",
+        "🎉",
+        "💎",
+        "🎟️",
+        "👑",
+        "🥜"
+    ];
+
+    for(let i=0;i<80;i++){
+
+        const el =
+            document.createElement("div");
+
+        el.className = "sparkle";
+
+        el.innerHTML =
+            emojis[
+                Math.floor(
+                    Math.random() *
+                    emojis.length
+                )
+            ];
+
+        el.style.left =
+            Math.random()*100 + "%";
+
+        el.style.animationDelay =
+            Math.random()*1 + "s";
+
+        container.appendChild(el);
+
+        setTimeout(()=>{
+
+            el.remove();
+
+        },3000);
+
+    }
+
+}
+
 function createWheel(){
 
     const centerX = 400;
