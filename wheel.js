@@ -176,29 +176,30 @@ rows.forEach(row => {
 console.log("Objet data :");
 console.log(JSON.stringify(data,null,2));
 
-        const trigger =
-            data["Spin Trigger"] ||
-            "OFF";
+const trigger =
+    data["Spin Trigger"] ||
+    "OFF";
 
-        const forcedResult =
-            data["Spin Result"] ||
-            "Random";
+const forcedResult =
+    data["Spin Result"] ||
+    "Random";
 
-       if(trigger === "GO" &&
+if(
+    trigger === "GO" &&
     lastTrigger !== "GO" &&
-    spinning === false){
+    spinning === false
+){
 
     launchSpin(forcedResult);
 
-}
 
 lastTrigger = trigger;
-        
-    }catch(err){
 
-        console.error(err);
+}catch(err){
 
-    }
+    console.error(err);
+
+}
 
 }
 
