@@ -46,8 +46,8 @@ margin-bottom:-10px;
 
 position:relative;
 
-width:700px;
-height:700px;
+width:720px;
+height:720px;
 
 display:flex;
 justify-content:center;
@@ -56,9 +56,9 @@ align-items:center;
 }
 
 #wheel{
+width:720px;
+height:720px;
 
-width:700px;
-height:700px;
 
 filter:
 drop-shadow(0 0 20px #53fc18)
