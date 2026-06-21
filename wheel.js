@@ -9,7 +9,7 @@ const prizes = [
 "🚗 24h dans la Twingo",
 "🎟️ Golden Ticket x2",
 "☠️ Handicap Extrême",
-"🎤 Karaoké de la Honte",
+"🎤 Karaoké",
 "🍕 Le Chat Choisit",
 "🔄 Relance",
 "👑 Roi du Casino",
