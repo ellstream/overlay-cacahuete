@@ -206,6 +206,10 @@ lastTrigger = trigger;
 function launchSpin(forcedResult){
 
     spinning = true;
+   
+    document.getElementById(
+    "megaSpinContainer"
+).style.display = "flex";
 
     const wheelGroup =
         document.getElementById(
@@ -260,27 +264,33 @@ function launchSpin(forcedResult){
     wheelGroup.style.transform =
         `rotate(${finalAngle}deg)`;
 
-    setTimeout(()=>{
+  setTimeout(()=>{
 
-        const resultBox =
-            document.getElementById(
-                "resultBox"
-            );
-
-        resultBox.innerHTML =
-            "🏆 " +
-            prizes[prizeIndex];
-
-        resultBox.classList.add(
-            "win"
+    const resultBox =
+        document.getElementById(
+            "resultBox"
         );
 
-        spinning = false;
+    resultBox.innerHTML =
+        "🏆 " +
+        prizes[prizeIndex];
 
-    },8000);
+    resultBox.classList.add(
+        "win"
+    );
 
-}
+    spinning = false;
 
+    setTimeout(()=>{
+
+        document.getElementById(
+            "megaSpinContainer"
+        ).style.display = "none";
+
+    },5000);
+
+},8000);
+}    
 createWheel();
 
 loadData();
