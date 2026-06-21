@@ -1,11 +1,15 @@
+/* =========================
+   CACAHUÈTE CASINO
+========================= */
+
 body{
 margin:0;
-background:transparent;
 overflow:hidden;
+background:transparent;
 font-family:Arial,sans-serif;
 }
 
-#overlay{
+#megaSpinContainer{
 width:100vw;
 height:100vh;
 display:flex;
@@ -14,61 +18,239 @@ justify-content:center;
 align-items:center;
 }
 
-#title{
-font-size:60px;
-font-weight:bold;
-color:#53fc18;
-text-shadow:0 0 20px #53fc18;
-margin-bottom:30px;
+/* =========================
+   FLÈCHE
+========================= */
+
+#pointer{
+width:0;
+height:0;
+
+border-left:30px solid transparent;
+border-right:30px solid transparent;
+border-top:60px solid #53fc18;
+
+filter:
+drop-shadow(0 0 10px #53fc18)
+drop-shadow(0 0 20px #53fc18);
+
+z-index:100;
+margin-bottom:-10px;
 }
 
-#wheelContainer{
+/* =========================
+   ROUE
+========================= */
+
+#wheelWrapper{
+
 position:relative;
+
 width:700px;
 height:700px;
+
+display:flex;
+justify-content:center;
+align-items:center;
+
 }
 
 #wheel{
+
 width:700px;
 height:700px;
-border-radius:50%;
-border:8px solid #53fc18;
-box-shadow:0 0 40px #53fc18;
-background:
-conic-gradient(
-#d4af37 0deg 30deg,
-#222 30deg 60deg,
-#53fc18 60deg 90deg,
-#6a00ff 90deg 120deg,
-#d4af37 120deg 150deg,
-#222 150deg 180deg,
-#53fc18 180deg 210deg,
-#6a00ff 210deg 240deg,
-#d4af37 240deg 270deg,
-#222 270deg 300deg,
-#53fc18 300deg 330deg,
-#6a00ff 330deg 360deg
-);
-transition:transform 8s cubic-bezier(.17,.67,.15,1);
+
+filter:
+drop-shadow(0 0 20px #53fc18)
+drop-shadow(0 0 40px #53fc18);
+
 }
 
-#pointer{
-position:absolute;
-top:-35px;
-left:50%;
-transform:translateX(-50%);
-width:0;
-height:0;
-border-left:25px solid transparent;
-border-right:25px solid transparent;
-border-top:60px solid #53fc18;
-z-index:100;
+#wheelGroup{
+
+transform-origin:400px 400px;
+
+transition:
+transform 8s cubic-bezier(.12,.88,.17,1);
+
 }
 
-#result{
-margin-top:40px;
-font-size:42px;
+/* =========================
+   TEXTES DES CASES
+========================= */
+
+.wheelText{
+
+fill:white;
+
+font-size:18px;
+
 font-weight:bold;
+
+text-anchor:middle;
+
+dominant-baseline:middle;
+
+pointer-events:none;
+
+text-shadow:
+0 0 8px #53fc18;
+
+}
+
+/* =========================
+   LOGO CENTRE
+========================= */
+
+#centerLogo{
+
+position:absolute;
+
+width:170px;
+height:170px;
+
+border-radius:50%;
+
+background:#111;
+
+border:5px solid #53fc18;
+
+box-shadow:
+0 0 20px #53fc18,
+0 0 40px #53fc18;
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+z-index:50;
+
+}
+
+#centerLogo img{
+
+width:120px;
+height:auto;
+
+animation:
+floatLogo 3s ease-in-out infinite;
+
+}
+
+@keyframes floatLogo{
+
+0%{
+transform:translateY(0px);
+}
+
+50%{
+transform:translateY(-8px);
+}
+
+100%{
+transform:translateY(0px);
+}
+
+}
+
+/* =========================
+   RÉSULTAT
+========================= */
+
+#resultBox{
+
+margin-top:30px;
+
+padding:20px 40px;
+
+background:
+rgba(15,15,15,.85);
+
+border:3px solid #53fc18;
+
+border-radius:25px;
+
 color:white;
-text-shadow:0 0 15px #53fc18;
+
+font-size:38px;
+
+font-weight:bold;
+
+text-align:center;
+
+box-shadow:
+0 0 20px #53fc18,
+0 0 40px #53fc18;
+
+min-width:500px;
+
+}
+
+/* =========================
+   ANIMATION GAGNANT
+========================= */
+
+.win{
+
+animation:
+winnerFlash .7s infinite;
+
+}
+
+@keyframes winnerFlash{
+
+0%{
+transform:scale(1);
+}
+
+50%{
+transform:scale(1.05);
+}
+
+100%{
+transform:scale(1);
+}
+
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:900px){
+
+#wheelWrapper{
+
+width:500px;
+height:500px;
+
+}
+
+#wheel{
+
+width:500px;
+height:500px;
+
+}
+
+#resultBox{
+
+font-size:24px;
+min-width:300px;
+
+}
+
+#centerLogo{
+
+width:130px;
+height:130px;
+
+}
+
+#centerLogo img{
+
+width:90px;
+
+}
+
 }
