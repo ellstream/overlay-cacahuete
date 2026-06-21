@@ -1,20 +1,18 @@
 const SHEET_URL =
 "https://docs.google.com/spreadsheets/d/e/2PACX-1vSScVihkW4AxYZ2yvxfcKHDaYDkJTq6BRVuGscjPq1HLVL8YaiT5DGpLRnzI3T-hcjwIYmtCnUsSPG1/pub?gid=0&single=true&output=csv";
 
-const prizes = [
-"Golden Ticket x1",
-"Piment Infernal",
-"Seau Glacé",
-"Défi Supérette",
-"24h dans la Twingo",
-"Golden Ticket x2",
-"Handicap Extrême",
-"Karaoké de la Honte",
-"Le Chat Choisit Ton Repas",
-"Relance",
-"Roi du Casino",
-"Jackpot Cacahuète"
-];
+"🎟️ Golden Ticket x1",
+"🌶️ Piment Infernal",
+"🧊 Seau Glacé",
+"🛒 Défi Supérette",
+"🚗 24h dans la Twingo",
+"🎟️ Golden Ticket x2",
+"☠️ Handicap Extrême",
+"🎤 Karaoké de la Honte",
+"🍕 Le Chat Choisit",
+"🔄 Relance",
+"👑 Roi du Casino",
+"💎 Jackpot Cacahuète"
 
 const colors = [
 "#d4af37",
