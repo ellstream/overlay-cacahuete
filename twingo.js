@@ -13,7 +13,9 @@ async function loadData(){
             );
 
         const csv =
+            console.log("TWINGO JS CHARGÉ");
             await response.text();
+        
 
         const rows =
             csv.trim().split("\n");
