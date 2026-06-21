@@ -187,15 +187,15 @@ async function loadData(){
 
     }
 
-}
+    }
 
 function launchSpin(forcedResult){
 
     spinning = true;
-   
+
     document.getElementById(
-    "megaSpinContainer"
-).style.display = "flex";
+        "megaSpinContainer"
+    ).style.display = "flex";
 
     const wheelGroup =
         document.getElementById(
@@ -204,9 +204,7 @@ function launchSpin(forcedResult){
 
     let prizeIndex;
 
-    if(
-        forcedResult !== "Random"
-    ){
+    if(forcedResult !== "Random"){
 
         prizeIndex =
             prizes.indexOf(
@@ -250,38 +248,31 @@ function launchSpin(forcedResult){
     wheelGroup.style.transform =
         `rotate(${finalAngle}deg)`;
 
-  setTimeout(()=>{
-
-    const resultBox =
-        document.getElementById(
-            "resultBox"
-        );
-
-    resultBox.innerHTML =
-        "🏆 " +
-        prizes[prizeIndex];
-
-    resultBox.classList.add(
-        "win"
-    );
-
-    spinning = false;
-
     setTimeout(()=>{
 
-        document.getElementById(
-            "megaSpinContainer"
-        ).style.display = "none";
+        const resultBox =
+            document.getElementById(
+                "resultBox"
+            );
 
-    },5000);
+        resultBox.innerHTML =
+            "🏆 " +
+            prizes[prizeIndex];
 
-},8000);
-}    
-createWheel();
+        resultBox.classList.add(
+            "win"
+        );
 
-loadData();
+        spinning = false;
 
-setInterval(
-    loadData,
-    3000
-);
+        setTimeout(()=>{
+
+            document.getElementById(
+                "megaSpinContainer"
+            ).style.display = "none";
+
+        },5000);
+
+    },8000);
+
+}
