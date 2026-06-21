@@ -197,10 +197,10 @@ function launchSpin(forcedResult){
         "megaSpinContainer"
     ).style.display = "flex";
 
-    const wheelGroup =
-        document.getElementById(
-            "wheelGroup"
-        );
+   const wheel =
+    document.getElementById(
+        "wheel"
+    );
 
     let prizeIndex;
 
@@ -245,9 +245,9 @@ function launchSpin(forcedResult){
             (angleSize / 2)
         );
 
-    wheelGroup.style.transform =
-        `rotate(${finalAngle}deg)`;
-
+   wheel.style.transform =
+    `rotate(${finalAngle}deg)`;
+    
     setTimeout(()=>{
 
         const resultBox =
