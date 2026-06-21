@@ -73,10 +73,8 @@ transform-origin:center center;
 
 #wheelGroup{
 
-transform-origin:400px 400px;
-
-transition:
-transform 8s cubic-bezier(.12,.88,.17,1);
+transform-origin:center;
+transform-box:fill-box;
 
 }
 
