@@ -84,6 +84,11 @@ async function loadData(){
             progress + "%";
 
         document.getElementById(
+            "progressText"
+        ).innerHTML =
+            progress + "%";
+
+        document.getElementById(
             "twingoOverlay"
         ).style.display =
             visible === "ON"
@@ -145,12 +150,13 @@ function formatTime(ms){
     return (
         String(hours)
             .padStart(2,"0")
-        + ":" +
+        + "H" +
         String(minutes)
             .padStart(2,"0")
-        + ":" +
+        + "M" +
         String(seconds)
             .padStart(2,"0")
+        + "S"
     );
 
 }
@@ -178,7 +184,7 @@ function updateCountdown(){
             startDate - now;
 
         timer.innerHTML =
-            "🚀 COMMENCE DANS<br>" +
+            "🚀 " +
             formatTime(diff);
 
         return;
