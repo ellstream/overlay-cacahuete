@@ -2,10 +2,7 @@ body{
 margin:0;
 overflow:hidden;
 
-background:url("background-roue.png");
-background-size:cover;
-background-position:center;
-background-repeat:no-repeat;
+background:none;
 
 font-family:Arial,sans-serif;
 }
