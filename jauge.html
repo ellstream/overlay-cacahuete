@@ -1,322 +1,265 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <title>Mega Spin Overlay</title>
-    <link href="https://fonts.googleapis.com/css2?family=Impact&family=Montserrat:wght@700;900&display=swap" rel="stylesheet">
-    <style>
-        /* ==========================================
-           STYLE CSS (Optimisé pour Canvas 480p)
-           ========================================== */
-        body {
-            background: transparent; /* Transparent pour OBS */
-            font-family: 'Montserrat', sans-serif;
-            color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            box-sizing: border-box;
-            background-color: rgba(0, 0, 0, 0.1); /* Ligne à supprimer si fond trop sombre sur OBS */
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Barre Mega Spin Cacahuète</title>
+<style>
+    /* Reset et fond sombre pour faire ressortir le fluo */
+    body {
+        background-color: #050505;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
 
-        /* Conteneur Principal - Ajusté pour max 854px de large */
-        .overlay-container {
-            display: flex;
-            background: rgba(7, 13, 4, 0.96);
-            border: 3px solid #5cd600;
-            border-radius: 20px;
-            padding: 15px;
-            width: 95%;          
-            max-width: 820px;    
-            box-shadow: 0 0 30px rgba(92, 214, 0, 0.3);
-            box-sizing: border-box;
-        }
+    /* --- LE CONTENEUR PRINCIPAL DE LA BARRE --- */
+    .mega-spin-container {
+        position: relative;
+        display: flex;
+        align-items: center;
+        background: linear-gradient(180deg, #2a2a2a 0%, #111111 100%);
+        border: 2px solid #555;
+        border-radius: 30px;
+        padding: 8px 12px 8px 8px;
+        min-width: 550px;
+        box-shadow: inset 0 2px 5px rgba(255,255,255,0.1), 0 0 15px rgba(118, 255, 3, 0.3);
+        gap: 15px;
+    }
 
-        .main-panel { 
-            flex: 1; 
-            padding-right: 15px; 
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            overflow: hidden;
-        }
+    /* --- 1. ICÔNE ÉCLAIR (GAUCHE) --- */
+    .icon-container {
+        position: relative;
+        width: 55px;
+        height: 55px;
+        background: radial-gradient(circle, #222 40%, #111 100%);
+        border-radius: 50%;
+        border: 3px solid #76FF03; /* Vert fluo */
+        box-shadow: 0 0 15px #76FF03; /* Lueur verte */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-shrink: 0;
+        z-index: 2;
+    }
+    .icon-container svg {
+        width: 30px;
+        height: 30px;
+        fill: #FFE600; /* Éclair jaune vif */
+    }
 
-        .header { 
-            display: flex; 
-            align-items: center; 
-            gap: 10px; 
-            margin-bottom: 12px; 
-        }
+    /* --- 2. LA JAUGE DE PROGRESSION --- */
+    .progress-wrapper {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+    }
 
-        .header h2 { 
-            font-family: 'Impact', sans-serif; 
-            font-size: 26px; 
-            margin: 0; 
-            font-style: italic; 
-            letter-spacing: 1px; 
-            text-shadow: 2px 2px 0px #000;
-        }
+    /* Titre "MEGA SPIN CHARGE" */
+    .progress-title {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        margin-bottom: -5px;
+        margin-left: 10px;
+        font-weight: 900;
+        font-size: 18px;
+        color: white;
+        text-shadow: 0 2px 0 #000;
+        z-index: 2;
+    }
+    .progress-title span {
+        color: #76FF03; /* Vert fluo */
+        font-style: italic;
+    }
 
-        .icon-bolt { color: #ffcc00; font-size: 24px; }
-        .icon-peanut { font-size: 22px; }
+    /* La barre en elle-même */
+    .bar-container {
+        position: relative;
+        height: 30px;
+        background: #1A3F1A; /* Vert très sombre (fond de la barre) */
+        border-radius: 20px;
+        border: 2px solid #444;
+        overflow: hidden;
+        box-shadow: inset 0 2px 5px rgba(0,0,0,0.8);
+    }
 
-        .progress-section { 
-            display: flex; 
-            align-items: center; 
-            gap: 12px; 
-            margin-bottom: 20px; 
-        }
+    /* Le remplissage vert fluo */
+    .bar-fill {
+        height: 100%;
+        width: 72%; /* Pourcentage actuel */
+        background: linear-gradient(90deg, #3A8C06 0%, #76FF03 100%);
+        border-radius: 20px;
+        box-shadow: inset 0 2px 5px rgba(255,255,255,0.3), 0 0 10px #76FF03;
+        transition: width 0.5s ease;
+        position: relative;
+    }
+    
+    /* Effet de bandes sombres en diagonale (style jeux vidéo) sur le remplissage */
+    .bar-fill::after {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: repeating-linear-gradient(
+            45deg,
+            transparent,
+            transparent 5px,
+            rgba(0,0,0,0.2) 5px,
+            rgba(0,0,0,0.2) 10px
+        );
+        border-radius: 20px;
+    }
 
-        .bar-container { 
-            flex: 1; 
-            background: #000; 
-            border: 2px solid #5cd600; 
-            border-radius: 10px; 
-            height: 36px; 
-            overflow: hidden; 
-        }
+    /* Le pourcentage "72%" à l'intérieur de la barre */
+    .percent-text {
+        position: absolute;
+        right: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: white;
+        font-weight: 900;
+        font-size: 18px;
+        text-shadow: 0 2px 4px black;
+        z-index: 3;
+    }
 
-        .bar-fill { 
-            background: linear-gradient(90deg, #3d8c00, #5cd600); 
-            height: 100%; 
-            display: flex; 
-            align-items: center; 
-            padding-left: 12px; 
-            transition: width 1s ease-in-out; 
-            box-shadow: 0 0 12px #5cd600; 
-            box-sizing: border-box;
-            width: 0%; /* Initialisé à 0 avant le chargement JS */
-        }
+    /* --- 3. COMPTEUR "36 / 50 SUBS" --- */
+    .sub-counter {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        margin-top: 5px;
+        margin-right: 10px;
+        font-weight: 800;
+        font-size: 16px;
+        color: white;
+        text-shadow: 0 2px 0 #000;
+        align-self: flex-end;
+    }
+    .sub-counter svg {
+        width: 16px;
+        height: 16px;
+        fill: #76FF03; /* Étoile verte fluo */
+    }
+    .sub-counter span {
+        color: #FFE600; /* Chiffre en jaune pour contraster */
+    }
 
-        .bar-fill span { 
-            font-family: 'Impact', sans-serif; 
-            font-size: 20px; 
-            text-shadow: 1px 1px 2px #000;
-        }
+    /* --- 4. ROUE / BOUTON "PRÊT" (DROITE) --- */
+    .spin-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        margin-left: 10px;
+        flex-shrink: 0;
+    }
 
-        .subs-counter { 
-            font-family: 'Impact', sans-serif; 
-            font-size: 20px; 
-            white-space: nowrap; 
-            text-shadow: 1px 1px 2px #000;
-        }
+    /* La roue */
+    .wheel-icon {
+        width: 45px;
+        height: 45px;
+        background: conic-gradient(
+            #FF3366 0deg 60deg, 
+            #FFD700 60deg 120deg, 
+            #00E5FF 120deg 180deg, 
+            #76FF03 180deg 240deg, 
+            #FF6600 240deg 300deg, 
+            #9D4EDD 300deg 360deg
+        );
+        border-radius: 50%;
+        border: 4px solid #fff;
+        box-shadow: 0 0 10px rgba(255,255,255,0.5);
+        position: relative;
+    }
+    /* Le triangle en haut de la roue */
+    .wheel-pointer {
+        position: absolute;
+        top: -12px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0; 
+        height: 0; 
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+        border-bottom: 15px solid #FFD700;
+        filter: drop-shadow(0 2px 3px black);
+    }
 
-        .neon-green { color: #5cd600; }
+    /* Texte "MEGA SPIN" */
+    .spin-text {
+        font-weight: 900;
+        font-size: 14px;
+        color: white;
+        margin-top: 2px;
+        text-shadow: 0 2px 0 #000;
+        letter-spacing: -0.5px;
+    }
 
-        .milestones { 
-            display: flex; 
-            align-items: center; 
-            justify-content: space-between; 
-            margin-bottom: 15px; 
-            padding: 0 5px;
-        }
+    /* Texte "PRÊT !" fluo */
+    .ready-text {
+        font-weight: 900;
+        font-size: 18px;
+        color: #76FF03; /* Vert fluo Cacahuète */
+        text-shadow: 0 0 10px #76FF03, 0 0 20px #76FF03, 0 2px 0 #0a0a0a;
+        background: #111;
+        padding: 0 10px;
+        border-radius: 10px;
+        margin-top: -5px;
+        border: 1px solid #76FF03;
+        z-index: 2;
+    }
 
-        .step { 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-            width: 85px; 
-        }
-
-        .num { 
-            font-family: 'Impact', sans-serif; 
-            font-size: 18px; 
-        }
-
-        .dot { 
-            width: 14px; 
-            height: 14px; 
-            background: #142601; 
-            border-radius: 50%; 
-            margin: 6px 0; 
-            border: 2px solid #5cd600; 
-            box-shadow: 0 0 6px #5cd600;
-        }
-
-        .line { 
-            flex: 1; 
-            height: 3px; 
-            background: #5cd600; 
-            margin-top: -14px; 
-        }
-
-        .label { 
-            font-size: 9px; 
-            font-weight: 900; 
-            text-align: center; 
-            white-space: nowrap;
-        }
-
-        .gold { 
-            color: #ffcc00; 
-            text-shadow: 0 0 5px rgba(255, 204, 0, 0.5);
-        }
-
-        .footer-stats { 
-            display: flex; 
-            justify-content: space-between; 
-            border-top: 1px solid rgba(92, 214, 0, 0.3); 
-            padding-top: 12px; 
-        }
-
-        .stat { 
-            display: flex; 
-            align-items: center; 
-            gap: 8px; 
-        }
-
-        .stat .label { 
-            color: #5cd600; 
-            text-align: left; 
-            font-size: 8px; 
-            font-weight: 900;
-        }
-
-        .stat .val { 
-            font-size: 15px; 
-            font-weight: 700; 
-        }
-
-        .green { color: #5cd600; }
-        .divider { width: 1px; height: 30px; background: rgba(255,255,255,0.1); }
-
-        .avatar-side { 
-            width: 140px; 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-            justify-content: center; 
-            position: relative; 
-        }
-
-        .avatar-glow { 
-            width: 120px; 
-            height: 120px; 
-            border-radius: 50%; 
-            border: 3px solid #5cd600; 
-            overflow: hidden; 
-            box-shadow: 0 0 20px #5cd600, inset 0 0 15px rgba(92, 214, 0, 0.6); 
-            background: #111;
-        }
-
-        .avatar-glow img { 
-            width: 100%; 
-            height: 100%; 
-            object-fit: cover; 
-        }
-
-        .badge { 
-            position: absolute; 
-            bottom: -5px; 
-            background: #000; 
-            border: 2px solid #5cd600; 
-            padding: 4px 15px; 
-            border-radius: 8px; 
-            font-family: 'Impact', sans-serif; 
-            font-size: 14px; 
-            font-style: italic; 
-            letter-spacing: 1px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.8);
-            white-space: nowrap;
-        }
-    </style>
+</style>
 </head>
 <body>
 
-    <div class="overlay-container">
-        <div class="main-panel">
-            <div class="header">
-                <span class="icon-bolt">⚡</span>
-                <h2>CHARGE DU MEGA SPIN</h2>
-                <span class="icon-peanut">🥜</span>
+    <!-- BARRE COMPLÈTE -->
+    <div class="mega-spin-container">
+        
+        <!-- Icône Éclair Gauche -->
+        <div class="icon-container">
+            <svg viewBox="0 0 24 24">
+                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+            </svg>
+        </div>
+
+        <!-- Section Progression -->
+        <div class="progress-wrapper">
+            <div class="progress-title">
+                MEGA SPIN <span>CHARGE</span>
+            </div>
+            
+            <div class="bar-container">
+                <div class="bar-fill"></div>
+                <div class="percent-text">72%</div>
             </div>
 
-            <div class="progress-section">
-                <div class="bar-container">
-                    <div id="progressBar" class="bar-fill">
-                        <span id="percentText">0%</span>
-                    </div>
-                </div>
-                <div class="subs-counter">
-                    <span id="currentSubs">0</span> / <span id="maxSubs">100</span> <span class="neon-green">SUBS</span>
-                </div>
-            </div>
-
-            <div class="milestones">
-                <div class="step"><div class="num">25</div><div class="dot"></div><div class="label">ROUE BOOSTÉE</div></div>
-                <div class="line"></div>
-                <div class="step"><div class="num">50</div><div class="dot"></div><div class="label">CASE SPÉCIALE</div></div>
-                <div class="line"></div>
-                <div class="step"><div class="num">75</div><div class="dot"></div><div class="label">CHALLENGE</div></div>
-                <div class="line"></div>
-                <div class="step goal"><div class="num">100</div><div class="dot gold">★</div><div class="label gold">MEGA SPIN !</div></div>
-            </div>
-
-            <div class="footer-stats">
-                <div class="stat"><span class="green">★</span><div><div class="label">DERNIER SUB</div><div id="lastSub" class="val">---</div></div></div>
-                <div class="divider"></div>
-                <div class="stat"><span>🕒</span><div><div class="label">PROCHAIN ÉVÉNEMENT</div><div id="nextEvent" class="val">--:--</div></div></div>
-                <div class="divider"></div>
-                <div class="stat"><span>🎫</span><div><div class="label">TES TICKETS</div><div id="tickets" class="val green">0</div></div></div>
+            <div class="sub-counter">
+                <!-- Étoile fluo -->
+                <svg viewBox="0 0 24 24">
+                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                </svg>
+                <span>36</span> / 50 SUBS
             </div>
         </div>
 
-        <div class="avatar-side">
-            <div class="avatar-glow">
-                <img src="peanut.png" alt="Peanut" onerror="this.src='https://via.placeholder.com/150'">
+        <!-- Section Roue Droite -->
+        <div class="spin-container">
+            <div class="wheel-icon">
+                <div class="wheel-pointer"></div>
             </div>
-            <div class="badge">MEGA SPIN</div>
+            <div class="spin-text">MEGA SPIN</div>
+            <div class="ready-text">PRÊT !</div>
         </div>
+
     </div>
 
-    <script>
-        const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSScVihkW4AxYZ2yvxfcKHDaYDkJTq6BRVuGscjPq1HLVL8YaiT5DGpLRnzI3T-hcjwIYmtCnUsSPG1/pub?gid=0&single=true&output=csv";
-
-        async function fetchData() {
-            try {
-                const response = await fetch(CSV_URL);
-                if (!response.ok) throw new Error("Erreur réseau");
-                
-                const csvText = await response.text();
-                const rows = csvText.split('\n');
-                
-                // Extraction de la Ligne 18 (index 17)
-                if(rows.length > 17) {
-                    const data = rows[17].split(','); 
-
-                    const current = parseInt(data[0]) || 0;       
-                    const goal = parseInt(data[1]) || 100;        
-                    const lastSub = data[2] ? data[2].trim() : "---"; 
-                    const eventTime = data[3] ? data[3].trim() : "--:--"; 
-                    const ticketCount = data[4] ? data[4].trim() : "0"; 
-
-                    // Calcul du pourcentage
-                    const percent = Math.min(Math.round((current / goal) * 100), 100);
-                    
-                    // Injection dans le DOM
-                    document.getElementById('progressBar').style.width = percent + "%";
-                    document.getElementById('percentText').innerText = percent + "%";
-                    document.getElementById('currentSubs').innerText = current;
-                    document.getElementById('maxSubs').innerText = goal;
-                    document.getElementById('lastSub').innerText = lastSub;
-                    document.getElementById('nextEvent').innerText = eventTime;
-                    document.getElementById('tickets').innerText = ticketCount;
-
-                    console.log(`Synchro Ligne 18 OK : ${percent}%`);
-                } else {
-                    console.warn("La ligne 18 n'existe pas encore dans le Google Sheet.");
-                }
-
-            } catch (error) {
-                console.error("Erreur lors du traitement du CSV :", error);
-            }
-        }
-
-        // Rafraîchissement automatique toutes les 5 secondes
-        setInterval(fetchData, 5000);
-        fetchData();
-    </script>
 </body>
 </html>
