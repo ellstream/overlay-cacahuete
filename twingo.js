@@ -1,6 +1,7 @@
 const SHEET_URL =
 "https://docs.google.com/spreadsheets/d/e/2PACX-1vSScVihkW4AxYZ2yvxfcKHDaYDkJTq6BRVuGscjPq1HLVL8YaiT5DGpLRnzI3T-hcjwIYmtCnUsSPG1/pub?gid=0&single=true&output=csv";
 
+let startDate = null;
 let endDate = null;
 
 async function loadData(){
@@ -54,6 +55,10 @@ async function loadData(){
             data["Twingo Visible"] ||
             "OFF";
 
+        const start =
+            data["Twingo Start"] ||
+            "";
+
         const end =
             data["Twingo End"] ||
             "";
@@ -85,6 +90,13 @@ async function loadData(){
             ? "block"
             : "none";
 
+        if(start){
+
+            startDate =
+                new Date(start);
+
+        }
+
         if(end){
 
             endDate =
@@ -100,36 +112,15 @@ async function loadData(){
 
 }
 
-function updateCountdown(){
-
-    if(!endDate){
-        return;
-    }
-
-    const now =
-        new Date();
-
-    let diff =
-        endDate - now;
-
-    if(diff <= 0){
-
-        document.getElementById(
-            "timer"
-        ).innerHTML =
-            "🎉 DÉFI TERMINÉ";
-
-        return;
-
-    }
+function formatTime(ms){
 
     const hours =
         Math.floor(
-            diff /
+            ms /
             (1000 * 60 * 60)
         );
 
-    diff -=
+    ms -=
         hours *
         1000 *
         60 *
@@ -137,24 +128,21 @@ function updateCountdown(){
 
     const minutes =
         Math.floor(
-            diff /
+            ms /
             (1000 * 60)
         );
 
-    diff -=
+    ms -=
         minutes *
         1000 *
         60;
 
     const seconds =
         Math.floor(
-            diff / 1000
+            ms / 1000
         );
 
-    document.getElementById(
-        "timer"
-    ).innerHTML =
-        "⏳ " +
+    return (
         String(hours)
             .padStart(2,"0")
         + ":" +
@@ -162,7 +150,59 @@ function updateCountdown(){
             .padStart(2,"0")
         + ":" +
         String(seconds)
-            .padStart(2,"0");
+            .padStart(2,"0")
+    );
+
+}
+
+function updateCountdown(){
+
+    if(
+        !startDate ||
+        !endDate
+    ){
+        return;
+    }
+
+    const now =
+        new Date();
+
+    const timer =
+        document.getElementById(
+            "timer"
+        );
+
+    if(now < startDate){
+
+        const diff =
+            startDate - now;
+
+        timer.innerHTML =
+            "🚀 COMMENCE DANS<br>" +
+            formatTime(diff);
+
+        return;
+
+    }
+
+    if(
+        now >= startDate &&
+        now < endDate
+    ){
+
+        const diff =
+            endDate - now;
+
+        timer.innerHTML =
+            "⏳ " +
+            formatTime(diff);
+
+        return;
+
+    }
+
+    timer.innerHTML =
+        "🎉 DÉFI TERMINÉ";
 
 }
 
