@@ -26,15 +26,18 @@ body{
 }
 
 .avatar{
-    width:70px;
-    height:70px;
-
+    width:70px !important;
+    height:70px !important;
+    
     object-fit:contain;
-
+    
+    flex-shrink:0;  
+   
     margin-right:12px;
 
     filter:
     drop-shadow(0 0 10px #7CFF00);
+
 }
 
 .content{
