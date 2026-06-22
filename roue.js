@@ -73,7 +73,7 @@ function createWheel(){
 
 const centerX=400;
 const centerY=400;
-const radius=360;
+const radius=320;
 
 const angleSize=360/prizes.length;
 
@@ -106,7 +106,7 @@ seg.setAttribute("stroke-width","3");
 const middleAngle=startAngle+angleSize/2;
 
 const textPos=
-polarToCartesian(centerX,centerY,255,middleAngle);
+polarToCartesian(centerX,centerY,230,middleAngle);
 
 const txt=document.getElementById("txt"+i);
 
