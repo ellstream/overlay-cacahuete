@@ -11,6 +11,11 @@ async function loadData() {
 
         const rows = text.trim().split("\n");
 
+const currentSubs = parseInt(rows[0].split(",")[1]);
+const targetSubs = parseInt(rows[1].split(",")[1]);
+
+const percent = Math.round((currentSubs / targetSubs) * 100);
+
         const values = rows[1].split(",");
 
         const currentSubs = parseInt(values[0]);
