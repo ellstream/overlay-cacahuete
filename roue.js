@@ -17,12 +17,12 @@ const prizes = [
 ];
 
 const colors = [
-"#53fc18","#101010",
-"#53fc18","#101010",
-"#53fc18","#101010",
-"#53fc18","#101010",
-"#53fc18","#101010",
-"#53fc18","#101010"
+"#53fc18","#0f0f0f",
+"#53fc18","#0f0f0f",
+"#53fc18","#0f0f0f",
+"#53fc18","#0f0f0f",
+"#53fc18","#0f0f0f",
+"#53fc18","#0f0f0f"
 ];
 
 let spinning = false;
@@ -40,32 +40,19 @@ function launchConfetti(){
 
 const container=document.getElementById("confetti");
 
-const emojis=[
-"💸",
-"📈",
-"🥜",
-"🤡",
-"💀",
-"🔥"
-];
+const emojis=["💸","📈","🥜","🤡","💀","🔥"];
 
-for(let i=0;i<80;i++){
+for(let i=0;i<60;i++){
 
 const el=document.createElement("div");
 
 el.className="sparkle";
-
-el.innerHTML=
-emojis[Math.floor(Math.random()*emojis.length)];
-
+el.innerHTML=emojis[Math.floor(Math.random()*emojis.length)];
 el.style.left=Math.random()*100+"%";
 
 container.appendChild(el);
 
-setTimeout(()=>{
-el.remove();
-},3000);
-
+setTimeout(()=>el.remove(),3000);
 }
 }
 
@@ -73,7 +60,7 @@ function createWheel(){
 
 const centerX=400;
 const centerY=400;
-const radius=320;
+const radius=330;
 
 const angleSize=360/prizes.length;
 
@@ -82,11 +69,8 @@ for(let i=0;i<prizes.length;i++){
 const startAngle=i*angleSize;
 const endAngle=startAngle+angleSize;
 
-const start=
-polarToCartesian(centerX,centerY,radius,endAngle);
-
-const end=
-polarToCartesian(centerX,centerY,radius,startAngle);
+const start=polarToCartesian(centerX,centerY,radius,endAngle);
+const end=polarToCartesian(centerX,centerY,radius,startAngle);
 
 const pathData=[
 "M",centerX,centerY,
@@ -106,7 +90,12 @@ seg.setAttribute("stroke-width","3");
 const middleAngle=startAngle+angleSize/2;
 
 const textPos=
-polarToCartesian(centerX,centerY,230,middleAngle);
+polarToCartesian(
+centerX,
+centerY,
+230,
+middleAngle
+);
 
 const txt=document.getElementById("txt"+i);
 
@@ -119,7 +108,6 @@ txt.setAttribute(
 );
 
 txt.textContent=prizes[i];
-
 }
 }
 
@@ -130,9 +118,11 @@ try{
 const response=
 await fetch(SHEET_URL+"&t="+Date.now());
 
-const csv=await response.text();
+const csv=
+await response.text();
 
-const rows=csv.trim().split("\n");
+const rows=
+csv.trim().split("\n");
 
 const data={};
 
@@ -142,44 +132,34 @@ const firstComma=row.indexOf(",");
 
 if(firstComma!==-1){
 
-const key=row.substring(0,firstComma)
-.replace(/"/g,"")
-.trim();
-
-const value=row.substring(firstComma+1)
-.replace(/"/g,"")
-.trim();
+const key=row.substring(0,firstComma).replace(/"/g,"").trim();
+const value=row.substring(firstComma+1).replace(/"/g,"").trim();
 
 data[key]=value;
-
 }
-
 });
 
 const trigger=data["Scam Trigger"]||"OFF";
 const forcedResult=data["Scam Result"]||"Random";
 
-if(
-trigger==="GO" &&
-lastTrigger!=="GO" &&
-spinning===false
-){
+if(trigger==="GO" && lastTrigger!=="GO" && !spinning){
+
 launchSpin(forcedResult);
+
 }
 
 lastTrigger=trigger;
 
 }catch(err){
-console.error(err);
-}
 
+console.error(err);
+
+}
 }
 
 function launchSpin(forcedResult){
 
 spinning=true;
-
-document.getElementById("scamContainer").style.display="flex";
 
 const wheel=document.getElementById("wheel");
 
@@ -210,8 +190,7 @@ wheel.style.transform=
 
 setTimeout(()=>{
 
-const resultBox=
-document.getElementById("resultBox");
+const resultBox=document.getElementById("resultBox");
 
 resultBox.innerHTML=
 "🏆 "+prizes[prizeIndex];
@@ -222,14 +201,7 @@ launchConfetti();
 
 spinning=false;
 
-setTimeout(()=>{
-
-document.getElementById("scamContainer").style.display="none";
-
-},5000);
-
 },8000);
-
 }
 
 createWheel();
