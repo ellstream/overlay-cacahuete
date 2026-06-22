@@ -6,38 +6,45 @@ body{
 }
 
 .widget{
-    width:450px;
-    height:90px;
+
+    width:430px;
+    height:82px;
 
     display:flex;
     align-items:center;
+    gap:12px;
 
-    background:rgba(0,0,0,.70);
+    background:rgba(0,0,0,.82);
 
-    border:2px solid #7CFF00;
+    border:2px solid #53FC18;
 
-    border-radius:20px;
+    border-radius:18px;
 
     box-shadow:
-    0 0 10px #7CFF00,
-    0 0 20px #7CFF00;
+        0 0 10px #53FC18,
+        0 0 20px rgba(83,252,24,.6);
 
-    padding:10px;
+    padding:8px 12px;
 }
 
 .avatar{
-    width:70px !important;
-    height:70px !important;
-    
-    object-fit:contain;
-    
-    flex-shrink:0;  
-   
-    margin-right:12px;
+    width:60px;
+    height:60px;
 
-    filter:
-    drop-shadow(0 0 10px #7CFF00);
+    border-radius:50%;
 
+    object-fit:cover;
+
+    border:3px solid #53FC18;
+
+    box-shadow:
+        0 0 8px #53FC18,
+        0 0 16px #53FC18,
+        inset 0 0 10px #53FC18;
+
+    background:#000;
+
+    flex-shrink:0;
 }
 
 .content{
@@ -65,33 +72,30 @@ body{
 
 .progress-bar{
 
-    width:280px;
-    height:22px;
+    width:260px;
+    height:18px;
 
-    border-radius:50px;
+    background:#111;
 
-    background:#101010;
+    border-radius:999px;
 
     overflow:hidden;
 
-    border:1px solid #5aff00;
+    border:1px solid #53FC18;
 }
 
 .fill{
 
     height:100%;
-    width:0%;
-
-    border-radius:50px;
 
     background:linear-gradient(
-        90deg,
-        #7cff00,
-        #a9ff2b
+      90deg,
+      #53FC18,
+      #8dff4a
     );
 
     box-shadow:
-    0 0 15px #7cff00;
+      0 0 10px #53FC18;
 }
 
 .percent{
