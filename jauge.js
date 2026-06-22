@@ -3,46 +3,44 @@ const CSV_URL =
 
 async function loadData() {
 
-    try {
+    const response = await fetch(CSV_URL);
+    const text = await response.text();
 
-        const response = await fetch(CSV_URL);
+    const rows = text.trim().split("\n");
 
-        const text = await response.text();
+    let currentSubs = 0;
+    let targetSubs = 100;
 
-        const rows = text.trim().split("\n");
+    rows.forEach(row => {
 
-const currentSubs = parseInt(rows[0].split(",")[1]);
-const targetSubs = parseInt(rows[1].split(",")[1]);
+        const cols = row.split(",");
 
-const percent = Math.round((currentSubs / targetSubs) * 100);
+        const key = cols[0]?.trim().toLowerCase();
+        const value = cols[1]?.trim();
 
-        const values = rows[1].split(",");
+        if(key === "subs_actuels"){
+            currentSubs = parseInt(value);
+        }
 
-        const currentSubs = parseInt(values[0]);
-        const targetSubs = parseInt(values[1]);
+        if(key === "objectif"){
+            targetSubs = parseInt(value);
+        }
 
-        const percent =
-            Math.round((currentSubs / targetSubs) * 100);
+    });
 
-        document.getElementById("fill")
-            .style.width = percent + "%";
+    const percent = Math.round(
+        (currentSubs / targetSubs) * 100
+    );
 
-        document.getElementById("percent")
-            .textContent = percent + "%";
+    document.getElementById("fill").style.width =
+        percent + "%";
 
-        document.getElementById("counter")
-            .textContent =
-            `${currentSubs} / ${targetSubs} SUBS`;
+    document.getElementById("percent").textContent =
+        percent + "%";
 
-    }
-
-    catch(error){
-
-        console.error(error);
-
-    }
+    document.getElementById("counter").textContent =
+        `${currentSubs} / ${targetSubs} SUBS`;
 }
 
 loadData();
-
-setInterval(loadData, 10000);
+setInterval(loadData,10000);
