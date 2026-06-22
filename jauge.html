@@ -3,263 +3,44 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Barre Mega Spin Cacahuète</title>
-<style>
-    /* Reset et fond sombre pour faire ressortir le fluo */
-    body {
-        background-color: #050505;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        margin: 0;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
 
-    /* --- LE CONTENEUR PRINCIPAL DE LA BARRE --- */
-    .mega-spin-container {
-        position: relative;
-        display: flex;
-        align-items: center;
-        background: linear-gradient(180deg, #2a2a2a 0%, #111111 100%);
-        border: 2px solid #555;
-        border-radius: 30px;
-        padding: 8px 12px 8px 8px;
-        min-width: 550px;
-        box-shadow: inset 0 2px 5px rgba(255,255,255,0.1), 0 0 15px rgba(118, 255, 3, 0.3);
-        gap: 15px;
-    }
+<link rel="stylesheet" href="style.css">
 
-    /* --- 1. ICÔNE ÉCLAIR (GAUCHE) --- */
-    .icon-container {
-        position: relative;
-        width: 55px;
-        height: 55px;
-        background: radial-gradient(circle, #222 40%, #111 100%);
-        border-radius: 50%;
-        border: 3px solid #76FF03; /* Vert fluo */
-        box-shadow: 0 0 15px #76FF03; /* Lueur verte */
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-shrink: 0;
-        z-index: 2;
-    }
-    .icon-container svg {
-        width: 30px;
-        height: 30px;
-        fill: #FFE600; /* Éclair jaune vif */
-    }
-
-    /* --- 2. LA JAUGE DE PROGRESSION --- */
-    .progress-wrapper {
-        flex-grow: 1;
-        display: flex;
-        flex-direction: column;
-        position: relative;
-    }
-
-    /* Titre "MEGA SPIN CHARGE" */
-    .progress-title {
-        display: flex;
-        align-items: center;
-        gap: 5px;
-        margin-bottom: -5px;
-        margin-left: 10px;
-        font-weight: 900;
-        font-size: 18px;
-        color: white;
-        text-shadow: 0 2px 0 #000;
-        z-index: 2;
-    }
-    .progress-title span {
-        color: #76FF03; /* Vert fluo */
-        font-style: italic;
-    }
-
-    /* La barre en elle-même */
-    .bar-container {
-        position: relative;
-        height: 30px;
-        background: #1A3F1A; /* Vert très sombre (fond de la barre) */
-        border-radius: 20px;
-        border: 2px solid #444;
-        overflow: hidden;
-        box-shadow: inset 0 2px 5px rgba(0,0,0,0.8);
-    }
-
-    /* Le remplissage vert fluo */
-    .bar-fill {
-        height: 100%;
-        width: 72%; /* Pourcentage actuel */
-        background: linear-gradient(90deg, #3A8C06 0%, #76FF03 100%);
-        border-radius: 20px;
-        box-shadow: inset 0 2px 5px rgba(255,255,255,0.3), 0 0 10px #76FF03;
-        transition: width 0.5s ease;
-        position: relative;
-    }
-    
-    /* Effet de bandes sombres en diagonale (style jeux vidéo) sur le remplissage */
-    .bar-fill::after {
-        content: '';
-        position: absolute;
-        top: 0; left: 0; right: 0; bottom: 0;
-        background: repeating-linear-gradient(
-            45deg,
-            transparent,
-            transparent 5px,
-            rgba(0,0,0,0.2) 5px,
-            rgba(0,0,0,0.2) 10px
-        );
-        border-radius: 20px;
-    }
-
-    /* Le pourcentage "72%" à l'intérieur de la barre */
-    .percent-text {
-        position: absolute;
-        right: 15px;
-        top: 50%;
-        transform: translateY(-50%);
-        color: white;
-        font-weight: 900;
-        font-size: 18px;
-        text-shadow: 0 2px 4px black;
-        z-index: 3;
-    }
-
-    /* --- 3. COMPTEUR "36 / 50 SUBS" --- */
-    .sub-counter {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 5px;
-        margin-top: 5px;
-        margin-right: 10px;
-        font-weight: 800;
-        font-size: 16px;
-        color: white;
-        text-shadow: 0 2px 0 #000;
-        align-self: flex-end;
-    }
-    .sub-counter svg {
-        width: 16px;
-        height: 16px;
-        fill: #76FF03; /* Étoile verte fluo */
-    }
-    .sub-counter span {
-        color: #FFE600; /* Chiffre en jaune pour contraster */
-    }
-
-    /* --- 4. ROUE / BOUTON "PRÊT" (DROITE) --- */
-    .spin-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        position: relative;
-        margin-left: 10px;
-        flex-shrink: 0;
-    }
-
-    /* La roue */
-    .wheel-icon {
-        width: 45px;
-        height: 45px;
-        background: conic-gradient(
-            #FF3366 0deg 60deg, 
-            #FFD700 60deg 120deg, 
-            #00E5FF 120deg 180deg, 
-            #76FF03 180deg 240deg, 
-            #FF6600 240deg 300deg, 
-            #9D4EDD 300deg 360deg
-        );
-        border-radius: 50%;
-        border: 4px solid #fff;
-        box-shadow: 0 0 10px rgba(255,255,255,0.5);
-        position: relative;
-    }
-    /* Le triangle en haut de la roue */
-    .wheel-pointer {
-        position: absolute;
-        top: -12px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 0; 
-        height: 0; 
-        border-left: 8px solid transparent;
-        border-right: 8px solid transparent;
-        border-bottom: 15px solid #FFD700;
-        filter: drop-shadow(0 2px 3px black);
-    }
-
-    /* Texte "MEGA SPIN" */
-    .spin-text {
-        font-weight: 900;
-        font-size: 14px;
-        color: white;
-        margin-top: 2px;
-        text-shadow: 0 2px 0 #000;
-        letter-spacing: -0.5px;
-    }
-
-    /* Texte "PRÊT !" fluo */
-    .ready-text {
-        font-weight: 900;
-        font-size: 18px;
-        color: #76FF03; /* Vert fluo Cacahuète */
-        text-shadow: 0 0 10px #76FF03, 0 0 20px #76FF03, 0 2px 0 #0a0a0a;
-        background: #111;
-        padding: 0 10px;
-        border-radius: 10px;
-        margin-top: -5px;
-        border: 1px solid #76FF03;
-        z-index: 2;
-    }
-
-</style>
+<title>Mega Spin</title>
 </head>
 <body>
 
-    <!-- BARRE COMPLÈTE -->
-    <div class="mega-spin-container">
-        
-        <!-- Icône Éclair Gauche -->
-        <div class="icon-container">
-            <svg viewBox="0 0 24 24">
-                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
-            </svg>
+<div class="widget">
+
+    <img src="cacahuete.png" class="avatar">
+
+    <div class="content">
+
+        <div class="title">
+            ⚡ MEGA SPIN CHARGÉ
         </div>
 
-        <!-- Section Progression -->
-        <div class="progress-wrapper">
-            <div class="progress-title">
-                MEGA SPIN <span>CHARGE</span>
-            </div>
-            
-            <div class="bar-container">
-                <div class="bar-fill"></div>
-                <div class="percent-text">72%</div>
+        <div class="progress-container">
+
+            <div class="progress-bar">
+                <div id="fill" class="fill"></div>
             </div>
 
-            <div class="sub-counter">
-                <!-- Étoile fluo -->
-                <svg viewBox="0 0 24 24">
-                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
-                </svg>
-                <span>36</span> / 50 SUBS
+            <div id="percent" class="percent">
+                0%
             </div>
+
         </div>
 
-        <!-- Section Roue Droite -->
-        <div class="spin-container">
-            <div class="wheel-icon">
-                <div class="wheel-pointer"></div>
-            </div>
-            <div class="spin-text">MEGA SPIN</div>
-            <div class="ready-text">PRÊT !</div>
+        <div id="counter" class="counter">
+            0 / 50 SUBS
         </div>
 
     </div>
+
+</div>
+
+<script src="script.js"></script>
 
 </body>
 </html>
