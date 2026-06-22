@@ -73,13 +73,19 @@ transform-box:fill-box;
 
 fill:white;
 
-font-size:15px;
-font-weight:bold;
+font-size:18px;
+
+font-weight:900;
 
 text-anchor:middle;
 dominant-baseline:middle;
 
-pointer-events:none;
+letter-spacing:0.5px;
+
+paint-order:stroke;
+stroke:#000;
+stroke-width:2px;
+
 }
 
 #centerLogo{
