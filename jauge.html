@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Mega Spin Overlay</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Impact&family=Montserrat:wght@700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="overlay-container">
+        <div class="main-panel">
+            <div class="header">
+                <span class="icon-bolt">⚡</span>
+                <h2>CHARGE DU MEGA SPIN</h2>
+                <span class="icon-peanut">🥜</span>
+            </div>
+
+            <div class="progress-section">
+                <div class="bar-container">
+                    <div id="progressBar" class="bar-fill" style="width: 0%;">
+                        <span id="percentText">0%</span>
+                    </div>
+                </div>
+                <div class="subs-counter">
+                    <span id="currentSubs">0</span> / <span id="maxSubs">0</span> <span class="neon-green">SUBS</span>
+                </div>
+            </div>
+
+            <div class="milestones">
+                <div class="step"><div class="num">25</div><div class="dot"></div><div class="label">ROUE BOOSTÉE</div></div>
+                <div class="line"></div>
+                <div class="step"><div class="num">50</div><div class="dot"></div><div class="label">CASE SPÉCIALE</div></div>
+                <div class="line"></div>
+                <div class="step"><div class="num">75</div><div class="dot"></div><div class="label">CHALLENGE</div></div>
+                <div class="line"></div>
+                <div class="step goal"><div class="num">100</div><div class="dot star">⭐</div><div class="label gold">MEGA SPIN !</div></div>
+            </div>
+
+            <div class="footer-stats">
+                <div class="stat"><span class="green">★</span><div><div class="label">DERNIER SUB</div><div id="lastSub" class="val">---</div></div></div>
+                <div class="divider"></div>
+                <div class="stat"><span>🕒</span><div><div class="label">PROCHAIN ÉVÉNEMENT</div><div id="nextEvent" class="val">--:--</div></div></div>
+                <div class="divider"></div>
+                <div class="stat"><span>🎫</span><div><div class="label">TES TICKETS</div><div id="tickets" class="val green">0</div></div></div>
+            </div>
+        </div>
+
+        <div class="avatar-side">
+            <div class="avatar-glow">
+                <img src="http://googleusercontent.com/image_collection/image_retrieval/1387986022670823529" alt="Peanut">
+            </div>
+            <div class="badge">MEGA SPIN</div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
