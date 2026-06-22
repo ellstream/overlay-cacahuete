@@ -31,16 +31,16 @@ margin-bottom:-10px;
 
 #wheelWrapper{
 position:relative;
-width:620px;
-height:620px;
+width:560px;
+height:560px;
 display:flex;
 justify-content:center;
 align-items:center;
 }
 
 #wheel{
-width:620px;
-height:620px;
+width:560px;
+height:560px;
 filter:
 drop-shadow(0 0 20px #53fc18)
 drop-shadow(0 0 40px #53fc18);
@@ -64,19 +64,25 @@ pointer-events:none;
 }
 
 #centerLogo{
+
 position:absolute;
-width:220px;
-height:220px;
+
+width:160px;
+height:160px;
+
 display:flex;
 justify-content:center;
 align-items:center;
+
 z-index:50;
+
 }
 
 #centerLogo img{
-width:220px;
+
+width:160px;
 height:auto;
-animation:floatLogo 3s ease-in-out infinite;
+
 }
 
 @keyframes floatLogo{
