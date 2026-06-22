@@ -86,37 +86,60 @@ pointer-events:none;
 
 position:absolute;
 
-width:150px;
-height:150px;
+width:170px;
+height:170px;
+
+border-radius:50%;
+
+background:radial-gradient(
+circle,
+#1a1a1a 0%,
+#0b0b0b 100%
+);
+
+backdrop-filter:blur(5px);
+
+border:5px solid #53fc18;
+
+box-shadow:
+0 0 20px #53fc18,
+0 0 40px #53fc18,
+0 0 60px rgba(83,252,24,.4);
 
 display:flex;
 justify-content:center;
 align-items:center;
 
+overflow:hidden;
+
 z-index:50;
+
+}
+
+#centerLogo::before{
+
+content:"";
+
+position:absolute;
+
+inset:8px;
+
+border-radius:50%;
+
+border:2px solid rgba(255,255,255,.15);
+
+pointer-events:none;
+
 }
 
 #centerLogo img{
 
-width:150px;
-height:auto;
+width:140px;
+height:140px;
+
+object-fit:contain;
 
 animation:floatLogo 3s ease-in-out infinite;
-}
-
-@keyframes floatLogo{
-
-0%{
-transform:translateY(0);
-}
-
-50%{
-transform:translateY(-5px);
-}
-
-100%{
-transform:translateY(0);
-}
 
 }
 
