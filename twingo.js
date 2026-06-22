@@ -184,7 +184,7 @@ function updateCountdown(){
             startDate - now;
 
         timer.innerHTML =
-            "🚀 " +
+            "🚀 COMMENCE DANS " +
             formatTime(diff);
 
         return;
