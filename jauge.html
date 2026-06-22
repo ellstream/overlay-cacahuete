@@ -3,10 +3,228 @@
 <head>
     <meta charset="UTF-8">
     <title>Mega Spin Overlay</title>
-    <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Impact&family=Montserrat:wght@700;900&display=swap" rel="stylesheet">
+    <style>
+        /* ==========================================
+           STYLE CSS (Optimisé pour Canvas 480p)
+           ========================================== */
+        body {
+            background: transparent; /* Transparent pour OBS */
+            font-family: 'Montserrat', sans-serif;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            box-sizing: border-box;
+            background-color: rgba(0, 0, 0, 0.1); /* Ligne à supprimer si fond trop sombre sur OBS */
+        }
+
+        /* Conteneur Principal - Ajusté pour max 854px de large */
+        .overlay-container {
+            display: flex;
+            background: rgba(7, 13, 4, 0.96);
+            border: 3px solid #5cd600;
+            border-radius: 20px;
+            padding: 15px;
+            width: 95%;          
+            max-width: 820px;    
+            box-shadow: 0 0 30px rgba(92, 214, 0, 0.3);
+            box-sizing: border-box;
+        }
+
+        .main-panel { 
+            flex: 1; 
+            padding-right: 15px; 
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow: hidden;
+        }
+
+        .header { 
+            display: flex; 
+            align-items: center; 
+            gap: 10px; 
+            margin-bottom: 12px; 
+        }
+
+        .header h2 { 
+            font-family: 'Impact', sans-serif; 
+            font-size: 26px; 
+            margin: 0; 
+            font-style: italic; 
+            letter-spacing: 1px; 
+            text-shadow: 2px 2px 0px #000;
+        }
+
+        .icon-bolt { color: #ffcc00; font-size: 24px; }
+        .icon-peanut { font-size: 22px; }
+
+        .progress-section { 
+            display: flex; 
+            align-items: center; 
+            gap: 12px; 
+            margin-bottom: 20px; 
+        }
+
+        .bar-container { 
+            flex: 1; 
+            background: #000; 
+            border: 2px solid #5cd600; 
+            border-radius: 10px; 
+            height: 36px; 
+            overflow: hidden; 
+        }
+
+        .bar-fill { 
+            background: linear-gradient(90deg, #3d8c00, #5cd600); 
+            height: 100%; 
+            display: flex; 
+            align-items: center; 
+            padding-left: 12px; 
+            transition: width 1s ease-in-out; 
+            box-shadow: 0 0 12px #5cd600; 
+            box-sizing: border-box;
+            width: 0%; /* Initialisé à 0 avant le chargement JS */
+        }
+
+        .bar-fill span { 
+            font-family: 'Impact', sans-serif; 
+            font-size: 20px; 
+            text-shadow: 1px 1px 2px #000;
+        }
+
+        .subs-counter { 
+            font-family: 'Impact', sans-serif; 
+            font-size: 20px; 
+            white-space: nowrap; 
+            text-shadow: 1px 1px 2px #000;
+        }
+
+        .neon-green { color: #5cd600; }
+
+        .milestones { 
+            display: flex; 
+            align-items: center; 
+            justify-content: space-between; 
+            margin-bottom: 15px; 
+            padding: 0 5px;
+        }
+
+        .step { 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            width: 85px; 
+        }
+
+        .num { 
+            font-family: 'Impact', sans-serif; 
+            font-size: 18px; 
+        }
+
+        .dot { 
+            width: 14px; 
+            height: 14px; 
+            background: #142601; 
+            border-radius: 50%; 
+            margin: 6px 0; 
+            border: 2px solid #5cd600; 
+            box-shadow: 0 0 6px #5cd600;
+        }
+
+        .line { 
+            flex: 1; 
+            height: 3px; 
+            background: #5cd600; 
+            margin-top: -14px; 
+        }
+
+        .label { 
+            font-size: 9px; 
+            font-weight: 900; 
+            text-align: center; 
+            white-space: nowrap;
+        }
+
+        .gold { 
+            color: #ffcc00; 
+            text-shadow: 0 0 5px rgba(255, 204, 0, 0.5);
+        }
+
+        .footer-stats { 
+            display: flex; 
+            justify-content: space-between; 
+            border-top: 1px solid rgba(92, 214, 0, 0.3); 
+            padding-top: 12px; 
+        }
+
+        .stat { 
+            display: flex; 
+            align-items: center; 
+            gap: 8px; 
+        }
+
+        .stat .label { 
+            color: #5cd600; 
+            text-align: left; 
+            font-size: 8px; 
+            font-weight: 900;
+        }
+
+        .stat .val { 
+            font-size: 15px; 
+            font-weight: 700; 
+        }
+
+        .green { color: #5cd600; }
+        .divider { width: 1px; height: 30px; background: rgba(255,255,255,0.1); }
+
+        .avatar-side { 
+            width: 140px; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; 
+            position: relative; 
+        }
+
+        .avatar-glow { 
+            width: 120px; 
+            height: 120px; 
+            border-radius: 50%; 
+            border: 3px solid #5cd600; 
+            overflow: hidden; 
+            box-shadow: 0 0 20px #5cd600, inset 0 0 15px rgba(92, 214, 0, 0.6); 
+            background: #111;
+        }
+
+        .avatar-glow img { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+        }
+
+        .badge { 
+            position: absolute; 
+            bottom: -5px; 
+            background: #000; 
+            border: 2px solid #5cd600; 
+            padding: 4px 15px; 
+            border-radius: 8px; 
+            font-family: 'Impact', sans-serif; 
+            font-size: 14px; 
+            font-style: italic; 
+            letter-spacing: 1px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.8);
+            white-space: nowrap;
+        }
+    </style>
 </head>
 <body>
+
     <div class="overlay-container">
         <div class="main-panel">
             <div class="header">
@@ -17,12 +235,12 @@
 
             <div class="progress-section">
                 <div class="bar-container">
-                    <div id="progressBar" class="bar-fill" style="width: 0%;">
+                    <div id="progressBar" class="bar-fill">
                         <span id="percentText">0%</span>
                     </div>
                 </div>
                 <div class="subs-counter">
-                    <span id="currentSubs">0</span> / <span id="maxSubs">0</span> <span class="neon-green">SUBS</span>
+                    <span id="currentSubs">0</span> / <span id="maxSubs">100</span> <span class="neon-green">SUBS</span>
                 </div>
             </div>
 
@@ -33,7 +251,7 @@
                 <div class="line"></div>
                 <div class="step"><div class="num">75</div><div class="dot"></div><div class="label">CHALLENGE</div></div>
                 <div class="line"></div>
-                <div class="step goal"><div class="num">100</div><div class="dot star">⭐</div><div class="label gold">MEGA SPIN !</div></div>
+                <div class="step goal"><div class="num">100</div><div class="dot gold">★</div><div class="label gold">MEGA SPIN !</div></div>
             </div>
 
             <div class="footer-stats">
@@ -47,11 +265,58 @@
 
         <div class="avatar-side">
             <div class="avatar-glow">
-                <img src="http://googleusercontent.com/image_collection/image_retrieval/1387986022670823529" alt="Peanut">
+                <img src="peanut.png" alt="Peanut" onerror="this.src='https://via.placeholder.com/150'">
             </div>
             <div class="badge">MEGA SPIN</div>
         </div>
     </div>
-    <script src="script.js"></script>
+
+    <script>
+        const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSScVihkW4AxYZ2yvxfcKHDaYDkJTq6BRVuGscjPq1HLVL8YaiT5DGpLRnzI3T-hcjwIYmtCnUsSPG1/pub?gid=0&single=true&output=csv";
+
+        async function fetchData() {
+            try {
+                const response = await fetch(CSV_URL);
+                if (!response.ok) throw new Error("Erreur réseau");
+                
+                const csvText = await response.text();
+                const rows = csvText.split('\n');
+                
+                // Extraction de la Ligne 18 (index 17)
+                if(rows.length > 18) {
+                    const data = rows[18].split(','); 
+
+                    const current = parseInt(data[0]) || 0;       
+                    const goal = parseInt(data[1]) || 100;        
+                    const lastSub = data[2] ? data[2].trim() : "---"; 
+                    const eventTime = data[3] ? data[3].trim() : "--:--"; 
+                    const ticketCount = data[4] ? data[4].trim() : "0"; 
+
+                    // Calcul du pourcentage
+                    const percent = Math.min(Math.round((current / goal) * 100), 100);
+                    
+                    // Injection dans le DOM
+                    document.getElementById('progressBar').style.width = percent + "%";
+                    document.getElementById('percentText').innerText = percent + "%";
+                    document.getElementById('currentSubs').innerText = current;
+                    document.getElementById('maxSubs').innerText = goal;
+                    document.getElementById('lastSub').innerText = lastSub;
+                    document.getElementById('nextEvent').innerText = eventTime;
+                    document.getElementById('tickets').innerText = ticketCount;
+
+                    console.log(`Synchro Ligne 18 OK : ${percent}%`);
+                } else {
+                    console.warn("La ligne 18 n'existe pas encore dans le Google Sheet.");
+                }
+
+            } catch (error) {
+                console.error("Erreur lors du traitement du CSV :", error);
+            }
+        }
+
+        // Rafraîchissement automatique toutes les 5 secondes
+        setInterval(fetchData, 5000);
+        fetchData();
+    </script>
 </body>
 </html>
