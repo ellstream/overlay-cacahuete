@@ -93,7 +93,7 @@ const textPos=
 polarToCartesian(
 centerX,
 centerY,
-230,
+215,
 middleAngle
 );
 
