@@ -9,20 +9,22 @@ font-family:Arial,sans-serif;
 
 #twingoOverlay{
 
-position:absolute;
+position:fixed;
 
-top:50px;
-left:50px;
+left:50%;
+bottom:30px;
 
-width:500px;
+transform:translateX(-50%);
 
-padding:25px;
+width:1500px;
 
-background:rgba(10,10,10,.85);
+padding:20px 40px;
 
-border:4px solid #53fc18;
+background:rgba(0,0,0,.8);
 
-border-radius:25px;
+border:3px solid #53fc18;
+
+border-radius:40px;
 
 box-shadow:
 0 0 20px #53fc18,
@@ -34,27 +36,32 @@ display:none;
 
 }
 
+#topLine{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+margin-bottom:20px;
+
+}
+
 #title{
 
-font-size:42px;
+font-size:36px;
 font-weight:bold;
-
-text-align:center;
-
-margin-bottom:25px;
 
 }
 
 #timer{
 
-font-size:64px;
+font-size:42px;
+
 font-weight:bold;
 
-text-align:center;
-
 color:#53fc18;
-
-margin-bottom:25px;
 
 text-shadow:
 0 0 10px #53fc18,
@@ -62,10 +69,28 @@ text-shadow:
 
 }
 
+#missions{
+
+font-size:30px;
+font-weight:bold;
+
+}
+
+#progressWrapper{
+
+display:flex;
+
+align-items:center;
+
+gap:20px;
+
+}
+
 #progressBar{
 
-width:100%;
-height:30px;
+flex:1;
+
+height:28px;
 
 background:#222;
 
@@ -75,15 +100,13 @@ border-radius:20px;
 
 overflow:hidden;
 
-margin-bottom:25px;
-
 }
 
 #progressFill{
 
-height:100%;
-
 width:0%;
+
+height:100%;
 
 background:#53fc18;
 
@@ -91,12 +114,14 @@ transition:width .5s;
 
 }
 
-#missions{
+#progressText{
 
-font-size:32px;
+font-size:28px;
 
 font-weight:bold;
 
-text-align:center;
+min-width:80px;
+
+text-align:right;
 
 }
