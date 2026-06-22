@@ -1,5 +1,5 @@
 const SHEET_URL =
-"https://docs.google.com/spreadsheets/d/e/TON-LIEN/pub?gid=0&single=true&output=csv";
+"https://docs.google.com/spreadsheets/d/e/2PACX-1vSScVihkW4AxYZ2yvxfcKHDaYDkJTq6BRVuGscjPq1HLVL8YaiT5DGpLRnzI3T-hcjwIYmtCnUsSPG1/pub?gid=0&single=true&output=csv";
 
 async function loadData(){
 
@@ -13,9 +13,7 @@ async function loadData(){
             );
 
         const csv =
-            console.log("TWINGO JS CHARGÉ");
             await response.text();
-        
 
         const rows =
             csv.trim().split("\n");
@@ -51,41 +49,30 @@ async function loadData(){
         });
 
         const visible =
-            data["Twingo Visible"] || "OFF";
+            data["Twingo Visible"] ||
+            "OFF";
 
         const timer =
-            data["Twingo Time"] || "24:00:00";
+            data["Twingo Time"] ||
+            "24:00:00";
 
         const progress =
-            data["Twingo Progress"] || "0";
+            data["Twingo Progress"] ||
+            "0";
 
         const missions =
-            data["Twingo Missions"] || "0/24";
-
-        const roi =
-            data["Roi"] || "---";
-
-        const tickets =
-            data["Golden Tickets"] || "0";
+            data["Twingo Missions"] ||
+            "0/24";
 
         document.getElementById(
             "timer"
-        ).innerHTML = "⏳ " + timer;
+        ).innerHTML =
+            "⏳ " + timer;
 
         document.getElementById(
             "missions"
         ).innerHTML =
             "🎯 " + missions + " MISSIONS";
-
-        document.getElementById(
-            "roi"
-        ).innerHTML =
-            "👑 Roi : " + roi;
-
-        document.getElementById(
-            "tickets"
-        ).innerHTML =
-            "🎟️ Tickets : " + tickets;
 
         document.getElementById(
             "progressFill"
