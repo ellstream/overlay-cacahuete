@@ -1,6 +1,8 @@
 const SHEET_URL =
 "https://docs.google.com/spreadsheets/d/e/2PACX-1vSScVihkW4AxYZ2yvxfcKHDaYDkJTq6BRVuGscjPq1HLVL8YaiT5DGpLRnzI3T-hcjwIYmtCnUsSPG1/pub?gid=0&single=true&output=csv";
 
+let endDate = null;
+
 async function loadData(){
 
     try{
@@ -52,9 +54,9 @@ async function loadData(){
             data["Twingo Visible"] ||
             "OFF";
 
-        const timer =
-            data["Twingo Time"] ||
-            "24:00:00";
+        const end =
+            data["Twingo End"] ||
+            "";
 
         const progress =
             data["Twingo Progress"] ||
@@ -65,14 +67,11 @@ async function loadData(){
             "0/24";
 
         document.getElementById(
-            "timer"
-        ).innerHTML =
-            "⏳ " + timer;
-
-        document.getElementById(
             "missions"
         ).innerHTML =
-            "🎯 " + missions + " MISSIONS";
+            "🎯 " +
+            missions +
+            " MISSIONS";
 
         document.getElementById(
             "progressFill"
@@ -86,6 +85,13 @@ async function loadData(){
             ? "block"
             : "none";
 
+        if(end){
+
+            endDate =
+                new Date(end);
+
+        }
+
     }catch(err){
 
         console.error(err);
@@ -94,9 +100,80 @@ async function loadData(){
 
 }
 
+function updateCountdown(){
+
+    if(!endDate){
+        return;
+    }
+
+    const now =
+        new Date();
+
+    let diff =
+        endDate - now;
+
+    if(diff <= 0){
+
+        document.getElementById(
+            "timer"
+        ).innerHTML =
+            "🎉 DÉFI TERMINÉ";
+
+        return;
+
+    }
+
+    const hours =
+        Math.floor(
+            diff /
+            (1000 * 60 * 60)
+        );
+
+    diff -=
+        hours *
+        1000 *
+        60 *
+        60;
+
+    const minutes =
+        Math.floor(
+            diff /
+            (1000 * 60)
+        );
+
+    diff -=
+        minutes *
+        1000 *
+        60;
+
+    const seconds =
+        Math.floor(
+            diff / 1000
+        );
+
+    document.getElementById(
+        "timer"
+    ).innerHTML =
+        "⏳ " +
+        String(hours)
+            .padStart(2,"0")
+        + ":" +
+        String(minutes)
+            .padStart(2,"0")
+        + ":" +
+        String(seconds)
+            .padStart(2,"0");
+
+}
+
 loadData();
 
 setInterval(
     loadData,
     3000
+);
+
+setInterval(
+    updateCountdown,
+    1000
 );
