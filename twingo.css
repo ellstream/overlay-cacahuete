@@ -12,23 +12,22 @@ font-family:Arial,sans-serif;
 position:fixed;
 
 left:50%;
-bottom:20px;
+bottom:10px;
 
 transform:translateX(-50%);
 
-width:950px;
+width:700px;
 
-padding:15px 25px;
+padding:10px 15px;
 
 background:rgba(0,0,0,.85);
 
-border:3px solid #53fc18;
+border:2px solid #53fc18;
 
-border-radius:25px;
+border-radius:15px;
 
 box-shadow:
-0 0 15px #53fc18,
-0 0 30px #53fc18;
+0 0 10px #53fc18;
 
 color:white;
 
@@ -37,7 +36,7 @@ display:none;
 }
 
 /* =========================
-   LIGNE SUPÉRIEURE
+   LIGNE PRINCIPALE
 ========================= */
 
 #topLine{
@@ -48,15 +47,15 @@ justify-content:space-between;
 
 align-items:center;
 
-margin-bottom:12px;
+margin-bottom:8px;
 
-gap:20px;
+gap:10px;
 
 }
 
 #title{
 
-font-size:28px;
+font-size:18px;
 
 font-weight:bold;
 
@@ -66,25 +65,25 @@ white-space:nowrap;
 
 #timer{
 
-font-size:32px;
+font-size:22px;
 
 font-weight:bold;
 
 color:#53fc18;
 
-text-shadow:
-0 0 8px #53fc18,
-0 0 15px #53fc18;
-
 text-align:center;
 
 flex:1;
+
+text-shadow:
+0 0 5px #53fc18,
+0 0 10px #53fc18;
 
 }
 
 #missions{
 
-font-size:24px;
+font-size:16px;
 
 font-weight:bold;
 
@@ -102,7 +101,7 @@ display:flex;
 
 align-items:center;
 
-gap:15px;
+gap:10px;
 
 }
 
@@ -110,11 +109,11 @@ gap:15px;
 
 flex:1;
 
-height:18px;
+height:10px;
 
 background:#222;
 
-border:2px solid #53fc18;
+border:1px solid #53fc18;
 
 border-radius:20px;
 
@@ -131,8 +130,8 @@ height:100%;
 background:#53fc18;
 
 box-shadow:
-0 0 10px #53fc18,
-0 0 20px #53fc18;
+0 0 5px #53fc18,
+0 0 10px #53fc18;
 
 transition:width .5s;
 
@@ -140,11 +139,11 @@ transition:width .5s;
 
 #progressText{
 
-font-size:22px;
+font-size:16px;
 
 font-weight:bold;
 
-min-width:60px;
+min-width:45px;
 
 text-align:right;
 
@@ -153,7 +152,7 @@ color:white;
 }
 
 /* =========================
-   ANIMATION FIN DU DÉFI
+   FIN DU DÉFI
 ========================= */
 
 .challengeComplete{
@@ -166,60 +165,60 @@ pulseGreen 1s infinite;
 @keyframes pulseGreen{
 
 0%{
-
 transform:scale(1);
-
 }
 
 50%{
-
 transform:scale(1.03);
-
 }
 
 100%{
-
 transform:scale(1);
-
 }
 
 }
 
 /* =========================
-   VERSION MOBILE
+   MOBILE
 ========================= */
 
-@media(max-width:1000px){
+@media(max-width:768px){
 
 #twingoOverlay{
 
-width:90vw;
+width:95vw;
 
-padding:12px 18px;
+padding:8px 12px;
 
 }
 
 #title{
 
-font-size:20px;
+font-size:14px;
 
 }
 
 #timer{
 
-font-size:24px;
+font-size:16px;
 
 }
 
 #missions{
 
-font-size:18px;
+font-size:13px;
 
 }
 
 #progressText{
 
-font-size:18px;
+font-size:13px;
+
+}
+
+#progressBar{
+
+height:8px;
 
 }
 
