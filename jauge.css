@@ -1,208 +1,116 @@
-/* ==========================================
-   RESET & CONFIGURATION GÉNÉRALE (480p)
-   ========================================== */
-body {
-    background: transparent; /* Indispensable pour la transparence sur OBS */
-    font-family: 'Montserrat', sans-serif;
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-    box-sizing: border-box;
+body{
+    margin:0;
+    background:transparent;
+    overflow:hidden;
+    font-family:Arial, Helvetica, sans-serif;
 }
 
-/* Conteneur Principal - Adapté pour max 854px de large (480p) */
-.overlay-container {
-    display: flex;
-    background: rgba(7, 13, 4, 0.96);
-    border: 3px solid #5cd600;
-    border-radius: 20px;
-    padding: 15px;
-    width: 95%;          /* Devient fluide pour s'adapter à l'écran */
-    max-width: 820px;    /* Sécurité pour ne pas déborder des 854px du 480p */
-    box-shadow: 0 0 30px rgba(92, 214, 0, 0.3);
-    box-sizing: border-box;
+.widget{
+    width:450px;
+    height:90px;
+
+    display:flex;
+    align-items:center;
+
+    background:rgba(0,0,0,.70);
+
+    border:2px solid #7CFF00;
+
+    border-radius:20px;
+
+    box-shadow:
+    0 0 10px #7CFF00,
+    0 0 20px #7CFF00;
+
+    padding:10px;
 }
 
-/* Panneau de Gauche (Données et Jauges) */
-.main-panel { 
-    flex: 1; 
-    padding-right: 15px; 
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    overflow: hidden;
+.avatar{
+    width:70px;
+    height:70px;
+
+    object-fit:contain;
+
+    margin-right:12px;
+
+    filter:
+    drop-shadow(0 0 10px #7CFF00);
 }
 
-/* ==========================================
-   HEADER (TITRE + LOGOS)
-   ========================================== */
-.header { 
-    display: flex; 
-    align-items: center; 
-    gap: 10px; 
-    margin-bottom: 12px; 
+.content{
+    flex:1;
 }
 
-.header h2 { 
-    font-family: 'Impact', sans-serif; 
-    font-size: 26px; /* Légèrement réduit pour le 480p */
-    margin: 0; 
-    font-style: italic; 
-    letter-spacing: 1px; 
-    text-shadow: 2px 2px 0px #000;
+.title{
+    color:white;
+
+    font-size:18px;
+
+    font-weight:900;
+
+    margin-bottom:8px;
+
+    text-shadow:
+    0 0 10px #7CFF00;
 }
 
-.icon-bolt { color: #ffcc00; font-size: 24px; }
-.icon-peanut { font-size: 22px; }
-
-/* ==========================================
-   JAUGE DE PROGRESSION
-   ========================================== */
-.progress-section { 
-    display: flex; 
-    align-items: center; 
-    gap: 12px; 
-    margin-bottom: 20px; 
+.progress-container{
+    display:flex;
+    align-items:center;
+    gap:10px;
 }
 
-.bar-container { 
-    flex: 1; 
-    background: #000; 
-    border: 2px solid #5cd600; 
-    border-radius: 10px; 
-    height: 36px; /* Plus compact */
-    overflow: hidden; 
+.progress-bar{
+
+    width:280px;
+    height:22px;
+
+    border-radius:50px;
+
+    background:#101010;
+
+    overflow:hidden;
+
+    border:1px solid #5aff00;
 }
 
-.bar-fill { 
-    background: linear-gradient(90deg, #3d8c00, #5cd600); 
-    height: 100%; 
-    display: flex; 
-    align-items: center; 
-    padding-left: 12px; 
-    transition: width 1s ease-in-out; 
-    box-shadow: 0 0 12px #5cd600; 
-    box-sizing: border-box;
+.fill{
+
+    height:100%;
+    width:0%;
+
+    border-radius:50px;
+
+    background:linear-gradient(
+        90deg,
+        #7cff00,
+        #a9ff2b
+    );
+
+    box-shadow:
+    0 0 15px #7cff00;
 }
 
-.bar-fill span { 
-    font-family: 'Impact', sans-serif; 
-    font-size: 20px; 
-    text-shadow: 1px 1px 2px #000;
+.percent{
+
+    width:55px;
+
+    text-align:right;
+
+    color:white;
+
+    font-size:20px;
+
+    font-weight:900;
 }
 
-.subs-counter { 
-    font-family: 'Impact', sans-serif; 
-    font-size: 20px; 
-    white-space: nowrap; 
-    text-shadow: 1px 1px 2px #000;
+.counter{
+
+    margin-top:5px;
+
+    color:#7cff00;
+
+    font-size:15px;
+
+    font-weight:800;
 }
-
-.neon-green { color: #5cd600; }
-
-/* ==========================================
-   PALIERS (MILESTONES)
-   ========================================== */
-.milestones { 
-    display: flex; 
-    align-items: center; 
-    justify-content: space-between; 
-    margin-bottom: 15px; 
-    padding: 0 5px;
-}
-
-.step { 
-    display: flex; 
-    flex-direction: column; 
-    align-items: center; 
-    width: 85px; 
-}
-
-.num { 
-    font-family: 'Impact', sans-serif; 
-    font-size: 18px; 
-}
-
-.dot { 
-    width: 14px; 
-    height: 14px; 
-    background: #142601; 
-    border-radius: 50%; 
-    margin: 6px 0; 
-    border: 2px solid #5cd600; 
-    box-shadow: 0 0 6px #5cd600;
-}
-
-.line { 
-    flex: 1; 
-    height: 3px; 
-    background: #5cd600; 
-    margin-top: -14px; 
-}
-
-.label { 
-    font-size: 9px; 
-    font-weight: 900; 
-    text-align: center; 
-    white-space: nowrap;
-}
-
-.gold { 
-    color: #ffcc00; 
-    text-shadow: 0 0 5px rgba(255, 204, 0, 0.5);
-}
-
-/* ==========================================
-   BAS DE PAGE (STATISTIQUES)
-   ========================================== */
-.footer-stats { 
-    display: flex; 
-    justify-content: space-between; 
-    border-top: 1px solid rgba(92, 214, 0, 0.3); 
-    padding-top: 12px; 
-}
-
-.stat { 
-    display: flex; 
-    align-items: center; 
-    gap: 8px; 
-}
-
-.stat .label { 
-    color: #5cd600; 
-    text-align: left; 
-    font-size: 8px; 
-    font-weight: 900;
-}
-
-.stat .val { 
-    font-size: 15px; 
-    font-weight: 700; 
-}
-
-.green { color: #5cd600; }
-.divider { width: 1px; height: 30px; background: rgba(255,255,255,0.1); }
-
-/* ==========================================
-   PANNEAU DE DROITE (AVATAR PEANUT OPTIMISÉ)
-   ========================================== */
-.avatar-side { 
-    width: 140px; /* Réduit pour éviter les débordements en 480p */
-    display: flex; 
-    flex-direction: column; 
-    align-items: center; 
-    justify-content: center; 
-    position: relative; 
-}
-
-.avatar-glow { 
-    width: 120px; /* Diamètre ajusté pour le ratio 480p */
-    height: 120px; 
-    border-radius: 50%; 
-    border: 3px solid #5cd600; 
-    overflow: hidden; 
-    box-shadow: 0 0 20px #5cd600, inset 0 0 15px rgba(92, 214, 0, 0.6); 
-    background: #111;
