@@ -11,7 +11,7 @@ async function fetchData() {
         const rows = csvText.split('\n');
         
         // Modification ici : rows[17] cible directement la LIGNE 18 de ton Google Sheet
-        const data = rows[17].split(','); 
+        const data = rows[18].split(','); 
 
         // Extraction des données depuis la ligne 18 (A18, B18, C18, D18, E18)
         const current = parseInt(data[0]) || 0;       // Colonne A18 : Subs actuels
