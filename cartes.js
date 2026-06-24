@@ -9,16 +9,31 @@ async function refreshData() {
         rows.forEach(row => {
             const [key, val] = row.split(',');
             if (key && val) {
-                const el = document.getElementById('content' + key.trim().slice(-1).toUpperCase());
-                if (el) el.innerText = val.replace(/"/g, "");
+                const cleanKey = key.trim();
+                const cleanVal = val.replace(/"/g, "").trim();
+
+                // 1. Mise à jour du texte des cartes
+                if (cleanKey.startsWith("Carte")) {
+                    const id = cleanKey.slice(-1).toUpperCase();
+                    const el = document.getElementById('content' + id);
+                    if (el) el.innerText = cleanVal;
+                }
+
+                // 2. Automatisation totale : Retourner la carte via "Choix"
+                if (cleanKey === "Choix") {
+                    const choix = cleanVal.toUpperCase(); 
+                    const targetCard = document.getElementById('card' + choix);
+                    
+                    // Retourne la carte si elle existe et n'est pas encore retournée
+                    if (targetCard && !targetCard.classList.contains('flipped')) {
+                        targetCard.classList.add('flipped');
+                    }
+                }
             }
         });
     } catch(e) { console.error(e); }
 }
 
-function flipCard(id) {
-    document.getElementById('card' + id).classList.toggle('flipped');
-}
-
+// Rafraîchissement automatique toutes les 2 secondes
 setInterval(refreshData, 2000);
 refreshData();
