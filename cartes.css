@@ -142,3 +142,4 @@ h1, .salle-titre {
     from { transform: scale(1); filter: drop-shadow(0 0 5px rgba(83, 252, 24, 0.3)); }
     to { transform: scale(1.05); filter: drop-shadow(0 0 15px #53fc18); }
 }
+
