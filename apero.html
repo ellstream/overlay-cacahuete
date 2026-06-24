@@ -17,6 +17,8 @@ overflow:hidden;
 font-family:Impact,sans-serif;
 }
 
+<audio id="aperoAudio" src="Aperoson.mp3" preload="auto"></audio>
+  
 #apero-wrapper{
 position:relative;
 width:100vw;
@@ -112,6 +114,10 @@ opacity:0;
 </div>
 
 <script>
+
+// Lancer le son au chargement
+const audio = document.getElementById("aperoAudio");
+audio.play().catch(e => console.log("Interaction utilisateur requise pour l'audio"));
 
 const emojis = [
 "🍺",
