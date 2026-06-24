@@ -1,192 +1,258 @@
+/* =========================
+   CACAHUÈTE CASINO
+========================= */
+
 body{
 margin:0;
 overflow:hidden;
-
-background:none;
-
+background:transparent;
 font-family:Arial,sans-serif;
 }
 
-#scamContainer{
+#megaSpinContainer{
 width:100vw;
 height:100vh;
-
 display:flex;
 flex-direction:column;
 justify-content:center;
 align-items:center;
 }
 
+/* =========================
+   FLÈCHE
+========================= */
+
 #pointer{
 
 width:0;
 height:0;
 
-border-left:22px solid transparent;
-border-right:22px solid transparent;
-border-top:45px solid #53fc18;
-
-filter:
-drop-shadow(0 0 10px #53fc18)
-drop-shadow(0 0 20px #53fc18);
-
-z-index:100;
-margin-bottom:-5px;
-}
-
-#wheelWrapper{
-
-position:relative;
-
-width:560px;
-height:560px;
-
-display:flex;
-justify-content:center;
-align-items:center;
-}
-
-#wheel{
-
-width:560px;
-height:560px;
+border-left:40px solid transparent;
+border-right:40px solid transparent;
+border-top:80px solid #53fc18;
 
 filter:
 drop-shadow(0 0 15px #53fc18)
 drop-shadow(0 0 35px #53fc18);
 
-transition:
-transform 8s cubic-bezier(.12,.88,.17,1);
+z-index:100;
 
-transform-origin:center center;
-}
+margin-bottom:-15px;
 
-#wheelGroup{
-transform-origin:center;
-transform-box:fill-box;
-}
-
-.wheelText{
-
-fill:white;
-
-font-size:18px;
-
-font-weight:900;
-
-text-anchor:middle;
-dominant-baseline:middle;
-
-letter-spacing:0.5px;
-
-paint-order:stroke;
-stroke:#000;
-stroke-width:2px;
+animation:pointerGlow 2s infinite alternate;
 
 }
 
-#centerLogo{
+@keyframes pointerGlow{
 
-position:absolute;
+from{
+filter:
+drop-shadow(0 0 10px #53fc18)
+drop-shadow(0 0 25px #53fc18);
+}
 
-width:170px;
-height:170px;
+to{
+filter:
+drop-shadow(0 0 20px #53fc18)
+drop-shadow(0 0 45px #53fc18);
+}
 
-border-radius:50%;
+}
 
-background:radial-gradient(
-circle,
-#1a1a1a 0%,
-#0b0b0b 100%
-);
+/* =========================
+   ROUE
+========================= */
 
-backdrop-filter:blur(5px);
+#wheelWrapper{
 
-border:5px solid #53fc18;
+position:relative;
 
-box-shadow:
-0 0 20px #53fc18,
-0 0 40px #53fc18,
-0 0 60px rgba(83,252,24,.4);
+width:900px;
+height:900px;
 
 display:flex;
 justify-content:center;
 align-items:center;
 
-overflow:hidden;
+}
 
-z-index:50;
+#wheel{
+
+width:900px;
+height:900px;
+
+filter:
+drop-shadow(0 0 25px #53fc18)
+drop-shadow(0 0 50px #53fc18);
+
+transition:
+transform 8s cubic-bezier(.12,.88,.17,1);
+
+transform-origin:center center;
 
 }
 
-#centerLogo::before{
+#wheelGroup{
 
-content:"";
+transform-origin:center;
+transform-box:fill-box;
+
+}
+
+/* =========================
+   TEXTES DES CASES
+========================= */
+
+.wheelText{
+
+fill:white;
+
+font-size:21px;
+
+font-weight:900;
+
+text-anchor:middle;
+
+dominant-baseline:middle;
+
+pointer-events:none;
+
+letter-spacing:.5px;
+
+filter:
+drop-shadow(0 0 4px #000)
+drop-shadow(0 0 8px #000);
+
+}
+
+/* =========================
+   LOGO CENTRAL
+========================= */
+
+#centerLogo{
 
 position:absolute;
 
-inset:8px;
+width:290px;
+height:290px;
 
 border-radius:50%;
 
-border:2px solid rgba(255,255,255,.15);
+background:#0b0b0b;
 
-pointer-events:none;
+border:6px solid #53fc18;
+
+box-shadow:
+0 0 25px #53fc18,
+0 0 50px #53fc18,
+inset 0 0 20px rgba(83,252,24,.3);
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+z-index:50;
+
+overflow:hidden;
 
 }
 
 #centerLogo img{
 
-width:140px;
-height:140px;
+width:95%;
+height:auto;
 
-object-fit:contain;
-
-animation:floatLogo 3s ease-in-out infinite;
+animation:
+floatLogo 3s ease-in-out infinite;
 
 }
 
+@keyframes floatLogo{
+
+0%{
+transform:translateY(0px);
+}
+
+50%{
+transform:translateY(-8px);
+}
+
+100%{
+transform:translateY(0px);
+}
+
+}
+
+/* =========================
+   RESULTAT
+========================= */
+
 #resultBox{
 
-margin-top:20px;
+margin-top:35px;
 
-padding:15px 30px;
+padding:22px 50px;
 
-background:rgba(10,10,10,.85);
+background:
+rgba(10,10,10,.90);
 
-border:2px solid #53fc18;
+border:4px solid #53fc18;
 
-border-radius:20px;
+border-radius:25px;
 
 color:white;
 
-font-size:26px;
-font-weight:bold;
+font-size:44px;
+
+font-weight:900;
 
 text-align:center;
 
 box-shadow:
-0 0 15px #53fc18,
-0 0 30px #53fc18;
+0 0 25px #53fc18,
+0 0 50px #53fc18;
 
-min-width:350px;
+min-width:700px;
+
+backdrop-filter:blur(5px);
+
 }
+
+/* =========================
+   ANIMATION GAGNANT
+========================= */
 
 .win{
 
-animation:winnerFlash .7s infinite;
+animation:
+winnerFlash .7s infinite;
+
 }
 
 @keyframes winnerFlash{
 
-0%{transform:scale(1);}
-50%{transform:scale(1.05);}
-100%{transform:scale(1);}
+0%{
+transform:scale(1);
 }
+
+50%{
+transform:scale(1.06);
+}
+
+100%{
+transform:scale(1);
+}
+
+}
+
+/* =========================
+   CONFETTIS
+========================= */
 
 #confetti{
 
 position:fixed;
+
 top:0;
 left:0;
 
@@ -196,28 +262,88 @@ height:100%;
 pointer-events:none;
 
 z-index:9999;
+
 overflow:hidden;
+
 }
 
 .sparkle{
 
 position:absolute;
 
-font-size:28px;
+font-size:30px;
 
-animation:fall 3s linear forwards;
+animation:
+fall 3s linear forwards;
+
 }
 
 @keyframes fall{
 
 0%{
-transform:translateY(-100px) rotate(0deg);
+transform:
+translateY(-100px)
+rotate(0deg);
+
 opacity:1;
 }
 
 100%{
-transform:translateY(120vh) rotate(720deg);
+transform:
+translateY(120vh)
+rotate(720deg);
+
 opacity:0;
+}
+
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:900px){
+
+#wheelWrapper{
+
+width:550px;
+height:550px;
+
+}
+
+#wheel{
+
+width:550px;
+height:550px;
+
+}
+
+#centerLogo{
+
+width:170px;
+height:170px;
+
+}
+
+#resultBox{
+
+font-size:26px;
+min-width:320px;
+
+}
+
+.wheelText{
+
+font-size:14px;
+
+}
+
+#pointer{
+
+border-left:25px solid transparent;
+border-right:25px solid transparent;
+border-top:50px solid #53fc18;
+
 }
 
 }
