@@ -1,32 +1,34 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JAUGE CASINO DES DESTINS</title>
-    <link rel="stylesheet" href="jauge.css">
+<meta charset="UTF-8">
+<title>Jetons du Casino</title>
+<link rel="stylesheet" href="jauge-casino.css">
 </head>
+
 <body>
 
-    <!-- Zone pour la pluie de billets du Palier 5 -->
-    <div id="confetti-container"></div>
+<div id="casinoBox">
 
-    <!-- Zone des alertes Pop-up géantes (Palier 4 et 5) -->
-    <div id="popupAlerte"></div>
+<div id="title">
+🎰 JETONS DU CASINO
+</div>
 
-    <!-- Ta Jauge de Progression -->
-    <div id="casinoBarContainer">
-        <div id="casinoHeader">
-            <span class="casinoTitle">🎰 CASINO DES DESTINS</span>
-            <span id="casinoLevel">⭐ NIVEAU : 1</span>
-        </div>
+<div id="counter">
+🪙 0 / 5
+</div>
 
-        <div id="progressWrapper">
-            <div id="progressBarFill"></div>
-            <div id="progressText">0 / 5 SUBS</div>
-        </div>
-    </div>
+<div id="barBg">
+<div id="barFill"></div>
+</div>
 
-    <script src="jauge.js"></script>
+<div id="status">
+Collecte en cours...
+</div>
+
+</div>
+
+<script src="jauge-casino.js"></script>
+
 </body>
 </html>
