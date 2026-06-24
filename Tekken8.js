@@ -53,11 +53,8 @@ function launchConfetti() {
 function createWheel() {
     const centerX = 400;
     const centerY = 400;
-    const radius = 350; // Diamètre total étendu pour la roue de 850px
+    const radius = 365; // Rayon étendu pour la roue géante de 900px
     const angleSize = 360 / prizes.length;
-
-    // On s'assure de cibler le groupe ou la roue pour appliquer les éléments au bon endroit
-    const wheelGroup = document.getElementById("wheelGroup") || document.getElementById("wheel");
 
     for (let i = 0; i < prizes.length; i++) {
         const startAngle = i * angleSize;
@@ -83,20 +80,19 @@ function createWheel() {
 
         const middleAngle = startAngle + angleSize / 2;
         
-        // Positionnement idéal pour la taille de 850px (dégage le logo central)
-        const textPos = polarToCartesian(centerX, centerY, 255, middleAngle);
+        // Position du texte idéalement calée entre le logo central et le bord extérieur
+        const textPos = polarToCartesian(centerX, centerY, 265, middleAngle);
 
         const txt = document.getElementById("txt" + i);
         if (txt) {
             txt.setAttribute("x", textPos.x);
             txt.setAttribute("y", textPos.y);
             txt.setAttribute("transform", `rotate(${middleAngle + 90} ${textPos.x} ${textPos.y})`);
-            txt.innerHTML = ""; // On vide le texte précédent avant de réinjecter
+            txt.innerHTML = "";
 
             const label = prizes[i];
             const words = label.split(" ");
             
-            // DÉCOUPAGE CHIRURGICAL SUR 3 LIGNES COMPACTES
             if (words.length >= 4 && label.length > 15) {
                 const totalWords = words.length;
                 const part = Math.ceil(totalWords / 3);
@@ -105,29 +101,25 @@ function createWheel() {
                 const line2 = words.slice(part, part * 2).join(" ");
                 const line3 = words.slice(part * 2).join(" ");
 
-                // Ligne 1
                 const tspan1 = document.createElementNS("http://www.w3.org/2000/svg", "tspan");
                 tspan1.setAttribute("x", textPos.x);
-                tspan1.setAttribute("dy", "-10"); 
+                tspan1.setAttribute("dy", "-11"); 
                 tspan1.textContent = line1;
 
-                // Ligne 2
                 const tspan2 = document.createElementNS("http://www.w3.org/2000/svg", "tspan");
                 tspan2.setAttribute("x", textPos.x);
-                tspan2.setAttribute("dy", "11"); 
+                tspan2.setAttribute("dy", "12"); 
                 tspan2.textContent = line2;
 
-                // Ligne 3
                 const tspan3 = document.createElementNS("http://www.w3.org/2000/svg", "tspan");
                 tspan3.setAttribute("x", textPos.x);
-                tspan3.setAttribute("dy", "11"); 
+                tspan3.setAttribute("dy", "12"); 
                 tspan3.textContent = line3;
 
                 txt.appendChild(tspan1);
                 txt.appendChild(tspan2);
                 txt.appendChild(tspan3);
             } else if (label.length > 12) {
-                // Découpage de sécurité sur 2 lignes si texte moyen
                 const mid = Math.ceil(words.length / 2);
                 const line1 = words.slice(0, mid).join(" ");
                 const line2 = words.slice(mid).join(" ");
@@ -139,13 +131,12 @@ function createWheel() {
 
                 const tspan2 = document.createElementNS("http://www.w3.org/2000/svg", "tspan");
                 tspan2.setAttribute("x", textPos.x);
-                tspan2.setAttribute("dy", "12");
+                tspan2.setAttribute("dy", "13");
                 tspan2.textContent = line2;
 
                 txt.appendChild(tspan1);
                 txt.appendChild(tspan2);
             } else {
-                // Une seule ligne pour les textes courts (ex: ReSpin)
                 txt.textContent = label;
             }
         }
