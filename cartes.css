@@ -1,11 +1,12 @@
 /* ==========================================
    LES CARTES DU DESTIN - OVERLAY OBS
+   Style : Cyber-Malware & Casino Clandestin
 ========================================== */
 
 body {
     margin: 0;
     padding: 0;
-    background: transparent; /* Transparent pour OBS */
+    background: transparent; /* Fond transparent indispensable pour OBS */
     font-family: 'Arial Black', 'Impact', sans-serif;
     color: white;
     overflow: hidden;
@@ -13,6 +14,7 @@ body {
     height: 100vh;
 }
 
+/* Conteneur principal qui centre tout l'écran */
 #cardsScreenContainer {
     width: 100%;
     height: 100%;
@@ -23,48 +25,49 @@ body {
     box-sizing: border-box;
 }
 
+/* Titre principal de l'overlay */
 #cardsTitle {
     font-size: 28px;
     color: #53fc18;
     text-shadow: 0 0 15px #53fc18;
     margin-bottom: 40px;
     text-align: center;
+    letter-spacing: 0.5px;
 }
 
-/* Alignement des 3 cartes */
+/* Zone d'alignement des 3 cartes */
 #cardsWrapper {
     display: flex;
     gap: 40px;
-    perspective: 1000px; /* Effet 3D pour le retournement */
+    perspective: 1000px; /* Donné de la profondeur pour l'effet de retournement 3D */
 }
 
-/* Zone de la carte */
+/* Taille physique de chaque emplacement de carte */
 .card-container {
     width: 200px;
     height: 300px;
 }
 
-/* La carte qui tourne */
+/* La carte qui pivote */
 .card {
     width: 100%;
     height: 100%;
     position: relative;
     transform-style: preserve-3d;
     transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    cursor: pointer;
 }
 
-/* Classe injectée par le JS pour retourner la carte */
+/* Classe injectée par le JS pour retourner la carte à 180° */
 .card.flipped {
     transform: rotateY(180deg);
 }
 
-/* Propriétés communes face/dos */
+/* Propriétés communes aux deux faces de la carte */
 .card-front, .card-back {
     position: absolute;
     width: 100%;
     height: 100%;
-    backface-visibility: hidden; /* Cache l'envers pendant la rotation */
+    backface-visibility: hidden; /* Masque l'envers de la face qui tourne */
     border-radius: 15px;
     display: flex;
     flex-direction: column;
@@ -73,51 +76,79 @@ body {
     text-align: center;
     padding: 15px;
     box-sizing: border-box;
-    border: 4px solid #53fc18;
 }
 
-/* FACE CACHÉE (Le dos de la carte visible au début) */
+/* ==========================================
+   FACE CACHÉE (Le dos de la carte visible au début)
+   Style : Cyber-Malware Néon
+========================================== */
 .card-front {
-    /* Fond noir avec un dégradé radial sombre pour donner du relief */
-    background: radial-gradient(circle, #151515 0%, #070707 100%);
-    font-size: 60px;
-    
-    /* Effet de lueur néon verte (Glow) sur la bordure de la carte */
+    background: radial-gradient(circle, #121212 0%, #050505 100%);
     border: 4px solid #53fc18;
     box-shadow: 
         0 0 15px rgba(83, 252, 24, 0.4),
-        inset 0 0 20px rgba(83, 252, 24, 0.15); /* Lueur interne */
-        
-    /* Texture en lignes de balayage style écran rétro/hacker */
-    background-image: linear-gradient(rgba(18, 18, 18, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
-                      linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
-    background-size: 100% 4px, 6px 100%;
+        inset 0 0 20px rgba(83, 252, 24, 0.2);
+    
+    /* Texture en lignes de balayage style écran de hacker rétro */
+    background-image: linear-gradient(rgba(18, 18, 18, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+    background-size: 100% 4px;
 }
 
-/* Le texte ou l'icône sur le dos (ex: le point d'interrogation ou le texte) */
-.card-front {
-    color: #53fc18;
-    text-shadow: 0 0 10px #53fc18;
+/* Style du logo au centre de la carte */
+.card-logo {
+    width: 90px;
+    height: 90px;
+    object-fit: contain;
+    border-radius: 50%;
+    filter: drop-shadow(0 0 8px #53fc18);
+    animation: pulseLogo 2s ease-in-out infinite alternate;
 }
 
+/* Animation de pulsation sur le logo */
+@keyframes pulseLogo {
+    from { 
+        filter: drop-shadow(0 0 5px #53fc18); 
+        transform: scale(1); 
+    }
+    to { 
+        filter: drop-shadow(0 0 15px #53fc18); 
+        transform: scale(1.04); 
+    }
+}
+
+/* Petit badge textuel sous ton logo (ex: CARTE A) */
 .card-label {
-    font-size: 26px;
-    color: white;
-    font-family: 'Impact', sans-serif;
-    letter-spacing: 2px;
-    background: #0f0f0f;
-    padding: 2px 15px;
-    border-radius: 4px;
-    border: 1px solid rgba(83, 252, 24, 0.3);
-    margin-top: 15px;
+    font-size: 16px;
+    color: #53fc18;
+    font-family: 'Arial Black', sans-serif;
+    letter-spacing: 1px;
+    background: #000;
+    padding: 4px 14px;
+    border-radius: 6px;
+    border: 1px solid rgba(83, 252, 24, 0.4);
+    margin-top: 25px;
+    text-shadow: 0 0 5px #53fc18;
 }
 
-/* DOS DE LA CARTE (Le résultat révélé) */
+/* ==========================================
+   FACE RÉVÉLÉE (Le résultat qui apparaît après flip)
+   Style : Contenu textuel lisible
+========================================== */
 .card-back {
-    background: #1a1a1a;
+    background: #111111;
     color: white;
     font-size: 16px;
     font-weight: 900;
-    transform: rotateY(180deg); /* Position de départ inversée */
-    box-shadow: 0 0 25px #53fc18;
+    line-height: 1.4;
+    border: 4px solid #53fc18;
+    transform: rotateY(180deg); /* Inversée par défaut pour être droite après le flip */
+    box-shadow: 0 0 30px #53fc18;
+    
+    /* Contour noir autour des lettres pour garantir une lisibilité maximale sur OBS */
+    text-shadow: 
+        -2px -2px 0 #000,  
+         2px -2px 0 #000,
+        -2px  2px 0 #000,
+         2px  2px 0 #000,
+         0 0 10px rgba(0,0,0,0.8);
 }
