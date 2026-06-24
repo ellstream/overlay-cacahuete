@@ -1,12 +1,12 @@
 /* =========================
-   CACAHUÈTE CASINO (Optimisé 720p)
+   CACAHUÈTE CASINO (Optimisé Lisibilité)
 ========================= */
 
 body {
     margin: 0;
     overflow: hidden;
     background: transparent;
-    font-family: Arial, sans-serif;
+    font-family: 'Arial Black', 'Impact', sans-serif; /* Police plus lisible et grasse */
 }
 
 #megaSpinContainer {
@@ -14,49 +14,39 @@ body {
     height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: center; /* Centrage vertical complet */
-    align-items: center;     /* Centrage horizontal complet */
+    justify-content: center;
+    align-items: center;
     box-sizing: border-box;
-    padding: 10px;
+    padding: 5px;
 }
 
 /* =========================
    FLÈCHE
 ========================= */
-
 #pointer {
     width: 0;
     height: 0;
-    border-left: 20px solid transparent;
-    border-right: 20px solid transparent;
-    border-top: 40px solid #53fc18;
-    
-    filter: 
-        drop-shadow(0 0 10px #53fc18) 
-        drop-shadow(0 0 20px #53fc18);
-    
+    border-left: 22px solid transparent;
+    border-right: 22px solid transparent;
+    border-top: 44px solid #53fc18;
+    filter: drop-shadow(0 0 10px #53fc18) drop-shadow(0 0 20px #53fc18);
     z-index: 100;
-    margin-bottom: -10px; /* Aligné au bord de la roue */
+    margin-bottom: -15px;
     animation: pointerGlow 2s infinite alternate;
 }
 
 @keyframes pointerGlow {
-    from {
-        filter: drop-shadow(0 0 8px #53fc18) drop-shadow(0 0 15px #53fc18);
-    }
-    to {
-        filter: drop-shadow(0 0 15px #53fc18) drop-shadow(0 0 30px #53fc18);
-    }
+    from { filter: drop-shadow(0 0 8px #53fc18); }
+    to { filter: drop-shadow(0 0 20px #53fc18); }
 }
 
 /* =========================
-   ROUE (Redimensionnée pour 720p)
+   ROUE (AGRANDIE)
 ========================= */
-
 #wheelWrapper {
     position: relative;
-    width: 480px;  /* Ajusté pour écran 1280x720 */
-    height: 480px; /* Ajusté pour écran 1280x720 */
+    width: 560px;  /* Augmenté pour occuper l'espace vertical */
+    height: 560px; /* Augmenté pour occuper l'espace vertical */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -65,9 +55,7 @@ body {
 #wheel {
     width: 100%;
     height: 100%;
-    filter: 
-        drop-shadow(0 0 15px #53fc18) 
-        drop-shadow(0 0 30px #53fc18);
+    filter: drop-shadow(0 0 15px #53fc18) drop-shadow(0 0 30px #53fc18);
     transition: transform 8s cubic-bezier(.12, .88, .17, 1);
     transform-origin: center center;
 }
@@ -78,37 +66,35 @@ body {
 }
 
 /* =========================
-   TEXTES DES CASES (Optimisés anti-débordement)
+   TEXTES (PLUS LISIBLES)
 ========================= */
-
 .wheelText {
     fill: white;
-    font-size: 13px; /* Légèrement réduit pour faire rentrer tout le texte */
-    font-weight: 800;
+    font-size: 13px; /* Taille optimale pour la nouvelle position */
+    font-weight: 900;
     text-anchor: middle;
     dominant-baseline: middle;
     pointer-events: none;
-    letter-spacing: 0.3px;
+    letter-spacing: -0.3px; /* Légèrement resserré pour éviter le débordement */
     filter: 
         drop-shadow(0 0 3px #000) 
-        drop-shadow(0 0 6px #000);
+        drop-shadow(0 0 6px #000)
+        drop-shadow(0 0 9px #000); /* Ombre renforcée pour détacher le texte du vert */
 }
 
 /* =========================
-   LOGO CENTRAL
+   LOGO CENTRAL (AJUSTÉ)
 ========================= */
-
 #centerLogo {
     position: absolute;
-    width: 160px; /* Proportionnel à la taille 480px de la roue */
-    height: 160px;
+    width: 155px; /* Légèrement réduit pour laisser de la place aux textes */
+    height: 155px;
     border-radius: 50%;
     background: #0b0b0b;
-    border: 4px solid #53fc18;
+    border: 5px solid #53fc18;
     box-shadow: 
         0 0 15px #53fc18, 
-        0 0 30px #53fc18, 
-        inset 0 0 15px rgba(83, 252, 24, .3);
+        0 0 30px #53fc18;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -117,71 +103,39 @@ body {
 }
 
 #centerLogo img {
-    width: 90%;
+    width: 95%;
     height: auto;
     animation: floatLogo 3s ease-in-out infinite;
 }
 
 @keyframes floatLogo {
     0% { transform: translateY(0px); }
-    50% { transform: translateY(-5px); }
+    50% { transform: translateY(-4px); }
     100% { transform: translateY(0px); }
 }
 
 /* =========================
    RESULTAT
 ========================= */
-
 #resultBox {
-    margin-top: 20px;
-    padding: 12px 35px;
-    background: rgba(10, 10, 10, .90);
-    border: 3px solid #53fc18;
+    margin-top: 15px;
+    padding: 14px 30px;
+    background: rgba(10, 10, 10, .95);
+    border: 4px solid #53fc18;
     border-radius: 15px;
     color: white;
-    font-size: 28px; /* Plus lisible et adapté */
+    font-size: 30px;
     font-weight: 900;
     text-align: center;
-    box-shadow: 
-        0 0 15px #53fc18, 
-        0 0 35px #53fc18;
-    min-width: 450px;
-    max-width: 600px;
+    box-shadow: 0 0 20px #53fc18;
+    min-width: 500px;
+    max-width: 650px;
     backdrop-filter: blur(5px);
 }
 
-/* =========================
-   ANIMATION GAGNANT & CONFETTIS
-========================= */
-
-.win {
-    animation: winnerFlash .7s infinite;
-}
-
+.win { animation: winnerFlash .7s infinite; }
 @keyframes winnerFlash {
     0% { transform: scale(1); }
-    50% { transform: scale(1.04); }
+    50% { transform: scale(1.03); }
     100% { transform: scale(1); }
-}
-
-#confetti {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 9999;
-    overflow: hidden;
-}
-
-.sparkle {
-    position: absolute;
-    font-size: 24px;
-    animation: fall 3s linear forwards;
-}
-
-@keyframes fall {
-    0% { transform: translateY(-50px) rotate(0deg); opacity: 1; }
-    100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
 }
