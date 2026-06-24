@@ -77,8 +77,8 @@ function createWheel() {
 
         const middleAngle = startAngle + angleSize / 2;
         
-        // MODIFICATION : Position du texte repoussée à 265 pour éviter le logo central
-        const textPos = polarToCartesian(centerX, centerY, 265, middleAngle);
+        // OPTIMISATION : Calibré à 255 (la zone idéale de sécurité entre le logo et le bord)
+        const textPos = polarToCartesian(centerX, centerY, 255, middleAngle);
 
         const txt = document.getElementById("txt" + i);
         txt.setAttribute("x", textPos.x);
@@ -88,7 +88,6 @@ function createWheel() {
         const label = prizes[i];
         txt.innerHTML = "";
 
-        // Séparation propre en deux lignes si le texte est long
         if (label.length > 15) {
             const words = label.split(" ");
             const mid = Math.ceil(words.length / 2);
@@ -97,12 +96,12 @@ function createWheel() {
 
             const tspan1 = document.createElementNS("http://www.w3.org/2000/svg", "tspan");
             tspan1.setAttribute("x", textPos.x);
-            tspan1.setAttribute("dy", "-7"); // Ajusté pour remonter proprement la première ligne
+            tspan1.setAttribute("dy", "-5"); // Rapprochement vers le centre de la ligne 1
             tspan1.textContent = line1;
 
             const tspan2 = document.createElementNS("http://www.w3.org/2000/svg", "tspan");
             tspan2.setAttribute("x", textPos.x);
-            tspan2.setAttribute("dy", "16"); // Espace parfait pour éviter la superposition
+            tspan2.setAttribute("dy", "12"); // Resserrement de l'interligne pour éviter le débordement
             tspan2.textContent = line2;
 
             txt.appendChild(tspan1);
@@ -174,7 +173,6 @@ function launchSpin(forcedResult) {
     }, 8000);
 }
 
-// Initialisation de la roue
 createWheel();
 loadData();
 setInterval(loadData, 3000);
