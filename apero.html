@@ -2,58 +2,20 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Overlay Apéro</title>
+    <title>Overlay Apero</title>
     <style>
-        body { margin: 0; padding: 0; background: transparent; overflow: hidden; }
-        
+        body { margin: 0; padding: 0; background: transparent; overflow: hidden; font-family: sans-serif; }
         .apero-bar {
-            width: 100%;
-            height: 120px;
+            width: 100%; height: 120px;
             background: linear-gradient(90deg, #ff4e00, #ffb800);
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            display: flex; align-items: center; justify-content: center;
             border-bottom: 8px solid #ffdc00;
-            box-shadow: 0 10px 30px rgba(255, 78, 0, 0.5);
-            font-family: 'Arial Black', sans-serif;
-            text-transform: uppercase;
-            color: #fff;
-            animation: slideDown 1s ease-out;
-        }
-
-        .text {
-            font-size: 48px;
-            text-shadow: 3px 3px 0 #000;
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-
-        /* Animation de pulsation des verres */
-        .glass { animation: cheers 1.5s infinite alternate; }
-
-        @keyframes cheers {
-            0% { transform: rotate(-10deg) scale(1); }
-            100% { transform: rotate(10deg) scale(1.1); }
-        }
-
-        @keyframes slideDown {
-            from { transform: translateY(-150px); }
-            to { transform: translateY(0); }
+            color: #fff; font-size: 48px; font-weight: bold;
+            text-transform: uppercase; text-shadow: 3px 3px 0 #000;
         }
     </style>
 </head>
 <body>
-
-    <div class="apero-bar">
-        <div class="text">
-            <span class="glass">🍻</span> 
-            C'EST L'HEURE DE L'APÉRO SUR SCAM INDUSTRIES !
-            <span class="glass">🥂</span>
-        </div>
-    </div>
-
-    <!-- Recharge auto pour éviter le cache -->
-    <script>setInterval(() => window.location.reload(), 60000);</script>
+    <div class="apero-bar">🍻 C'EST L'HEURE DE L'APÉRO ! 🥂</div>
 </body>
 </html>
