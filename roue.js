@@ -2,17 +2,17 @@ const SHEET_URL =
 "https://docs.google.com/spreadsheets/d/e/2PACX-1vSScVihkW4AxYZ2yvxfcKHDaYDkJTq6BRVuGscjPq1HLVL8YaiT5DGpLRnzI3T-hcjwIYmtCnUsSPG1/pub?gid=0&single=true&output=csv";
 
 const prizes = [
-"👑 Reine",
-"🥜 Tribunal",
-"📺 Pub",
-"🤐 Silence",
-"🎮 Tekken",
-"📰 News",
-"🌶️ Piment",
-"📞 Appel",
-"😂 Chat",
-"🎲 Défi",
-"💀 Double",
+"📜 10 MIN DE SILENCE...MUTISME LÉGENDAIRE",
+"🌶️🔥 PIMENT INFERNAL...LARME DE FEU",
+"💰🥤 SEAU D’OR...JACKPOT LIQUIDE",
+"🏪 DÉFI SUPÉRETTE...MISSION IMPOSSIBLE",
+"🎮💢 TEKKEN RAGE...COMBO CATASTROPHE",
+"📸🤮 SELFIE MOCHE...PHOTO DOSSIER",
+"🧹😴 DÉFI MÉNAGE...CENDRILLON",
+"🛌💤 DÉFI SIESTE...COMA EXPRESS",
+"🥤💦 JE BOIS UN VERRE...GLUGLU MASTER",
+"🥜🎉 JACKPOT CACAHUÈTE : TRÉSOR DU STREAM",
+"🎯💥 PUNCHLINE...VANNE NUCLÉAIRE",
 "🔄 ReSpin"
 ];
 
