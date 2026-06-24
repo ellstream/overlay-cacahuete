@@ -78,8 +78,8 @@ function createWheel() {
 
         const middleAngle = startAngle + angleSize / 2;
         
-        // Placement idéal du texte linéaire sur la nouvelle dimension
-        const textPos = polarToCartesian(centerX, centerY, 245, middleAngle);
+        // On décale légèrement le rayon vers l'extérieur (250) pour laisser respirer le logo central
+        const textPos = polarToCartesian(centerX, centerY, 250, middleAngle);
 
         const txt = document.getElementById("txt" + i);
         txt.setAttribute("x", textPos.x);
@@ -89,8 +89,41 @@ function createWheel() {
         const label = prizes[i];
         txt.innerHTML = "";
 
-        if (label.length > 15) {
-            const words = label.split(" ");
+        // DÉCOUPAGE INTELLIGENT SUR 3 LIGNES MAX
+        const words = label.split(" ");
+        
+        if (words.length >= 4 && label.length > 15) {
+            // On calcule la répartition des mots pour faire 3 tranches équilibrées
+            const totalWords = words.length;
+            const part = Math.ceil(totalWords / 3);
+            
+            const line1 = words.slice(0, part).join(" ");
+            const line2 = words.slice(part, part * 2).join(" ");
+            const line3 = words.slice(part * 2).join(" ");
+
+            // Première ligne (décalée vers le haut)
+            const tspan1 = document.createElementNS("http://www.w3.org/2000/svg", "tspan");
+            tspan1.setAttribute("x", textPos.x);
+            tspan1.setAttribute("dy", "-12"); 
+            tspan1.textContent = line1;
+
+            // Deuxième ligne (au centre)
+            const tspan2 = document.createElementNS("http://www.w3.org/2000/svg", "tspan");
+            tspan2.setAttribute("x", textPos.x);
+            tspan2.setAttribute("dy", "13"); 
+            tspan2.textContent = line2;
+
+            // Troisième ligne (décalée vers le bas)
+            const tspan3 = document.createElementNS("http://www.w3.org/2000/svg", "tspan");
+            tspan3.setAttribute("x", textPos.x);
+            tspan3.setAttribute("dy", "13"); 
+            tspan3.textContent = line3;
+
+            txt.appendChild(tspan1);
+            txt.appendChild(tspan2);
+            txt.appendChild(tspan3);
+        } else if (label.length > 12) {
+            // Sécurité si le texte est moyennement long : découpage classique en 2 lignes
             const mid = Math.ceil(words.length / 2);
             const line1 = words.slice(0, mid).join(" ");
             const line2 = words.slice(mid).join(" ");
@@ -108,11 +141,11 @@ function createWheel() {
             txt.appendChild(tspan1);
             txt.appendChild(tspan2);
         } else {
+            // Si le texte est très court (ex: "🔄 ReSpin"), on le laisse sur une seule ligne
             txt.textContent = label;
         }
     }
 }
-
 async function loadData() {
     try {
         const response = await fetch(SHEET_URL + "&t=" + Date.now());
