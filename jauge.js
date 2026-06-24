@@ -39,9 +39,13 @@ async function loadData() {
 
         // ÉVOLUTION DU NIVEAU SELON TES PALIERS (0->5)
         const levelElement = document.getElementById("casinoLevel");
+        
         if (currentSubs >= 5) {
             levelElement.textContent = "🚨 JACKPOT PRÊT !";
             levelElement.style.color = "#ff3333"; // Rouge alerte pour le niveau Max
+        } else if (currentSubs >= 4) {
+            levelElement.textContent = "⚡ NIVEAU : 4 (LA FIÈVRE)";
+            levelElement.style.color = "#ff5500"; // Orange Flash pour le nouveau Palier 4
         } else if (currentSubs >= 3) {
             levelElement.textContent = "⭐ NIVEAU : 3 (INTERDIT)";
             levelElement.style.color = "#ffaa00"; 
