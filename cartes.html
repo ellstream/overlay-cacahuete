@@ -3,202 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LA SALLE INTERDITE - LES CARTES DU DESTIN</title>
-    <style>
-        /* ==========================================
-           LES CARTES DU DESTIN - VERSION TOUT-EN-UN
-        ========================================== */
-
-        body {
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-            background: transparent; /* Transparent pour OBS */
-            font-family: 'Arial Black', 'Impact', sans-serif;
-            display: flex;
-            flex-direction: column; /* Aligne le titre en haut et les cartes dessous */
-            justify-content: center;
-            align-items: center;
-            width: 100vw;
-            height: 100vh;
-            box-sizing: border-box;
-        }
-
-        /* ==========================================
-           TITRE DE LA SCÈNE (LA SALLE INTERDITE)
-        ========================================== */
-        .salle-titre {
-            color: white;
-            font-size: 32px;
-            font-weight: 900;
-            text-align: center;
-            margin-bottom: 40px;
-            text-transform: uppercase;
-            text-shadow: 
-                -3px -3px 0 #000,  
-                 3px -3px 0 #000,
-                -3px  3px 0 #000,
-                 3px  3px 0 #000,
-                 0 0 20px rgba(255, 255, 255, 0.2);
-            z-index: 10;
-        }
-
-        /* ==========================================
-           CONTENEUR DES 3 CARTES (ALIGNEMENT HORIZONTAL)
-        ========================================== */
-        #cardsContainer {
-            display: flex;
-            flex-direction: row; /* Force l'alignement côte à côte */
-            gap: 50px;           /* Espace entre les cartes */
-            justify-content: center;
-            align-items: center;
-            perspective: 1500px; /* Effet de profondeur 3D pour le flip */
-            width: auto;
-            height: auto;
-            z-index: 5;
-        }
-
-        /* ==========================================
-           STRUCTURE INDIVIDUELLE D'UNE CARTE
-        ========================================== */
-        .card-scene {
-            width: 280px;        /* Largeur fixe de la carte */
-            height: 420px;       /* Hauteur fixe de la carte */
-            cursor: pointer;
-        }
-
-        .card {
-            width: 100%;
-            height: 100%;
-            position: relative;
-            transform-style: preserve-3d;
-            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        /* Classe de rotation */
-        .card.flipped {
-            transform: rotateY(180deg);
-        }
-
-        /* Propriétés communes aux deux faces */
-        .card-front, .card-back {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            backface-visibility: hidden; /* Cache l'envers */
-            border-radius: 20px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            box-sizing: border-box;
-            padding: 25px;
-        }
-
-        /* ==========================================
-           ⚪ DOS DE LA CARTE (Blanc Opaque au départ)
-        ========================================== */
-        .card-front {
-            background-color: #ffffff !important; /* Force le fond blanc pur */
-            border: 5px solid #53fc18;             /* Grosse bordure néon */
-            box-shadow: 
-                0 0 25px rgba(83, 252, 24, 0.5),
-                inset 0 0 20px rgba(0, 0, 0, 0.15);
-        }
-
-        /* Logo SCAM INDUSTRIES au centre */
-        .card-logo {
-            width: 160px;
-            height: 160px;
-            object-fit: contain;
-            animation: pulseLogo 2s infinite alternate;
-        }
-
-        /* Label sous la carte (CARTE A, B, C) */
-        .card-label {
-            margin-top: 25px;
-            color: #0f0f0f; /* Écrit en noir sur fond blanc */
-            font-size: 22px;
-            font-weight: 900;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-
-        /* ==========================================
-           🟢 FACE DE LA CARTE (Le Défi révélé)
-        ========================================== */
-        .card-back {
-            background-color: #0f0f0f; 
-            color: #ffffff;
-            border: 5px solid #53fc18;
-            box-shadow: 0 0 30px #53fc18;
-            transform: rotateY(180deg); /* Retourné par défaut */
-            font-size: 22px;
-            font-weight: 900;
-            text-align: center;
-            line-height: 1.5;
-        }
-
-        .card-content {
-            width: 100%;
-            word-wrap: break-word;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
-        }
-
-        /* Animation de pulsation du logo */
-        @keyframes pulseLogo {
-            from { transform: scale(1); filter: drop-shadow(0 0 5px rgba(83, 252, 24, 0.3)); }
-            to { transform: scale(1.05); filter: drop-shadow(0 0 15px #53fc18); }
-        }
-    </style>
+    <title>SALLE INTERDITE - LES CARTES DU DESTIN</title>
+    <link rel="stylesheet" href="cartes.css?v=1000">
 </head>
 <body>
 
-    <div class="salle-titre">
-        ⚠️ LA SALLE INTERDITE : CHOISISSEZ UNE CARTE ! 🎰
-    </div>
-
-    <div id="cardsContainer">
+    <div id="cardsScreenContainer">
+        <!-- Titre de l'overlay -->
+        <h1 id="cardsTitle">⚠️ LA SALLE INTERDITE : CHOISISSEZ UNE CARTE !</h1>
         
-        <!-- CARTE A -->
-        <div class="card-scene" onclick="flipCard(0)">
-            <div class="card" id="card0">
-                <div class="card-front">
-                    <img src="Roue-scam.png" alt="Logo" class="card-logo">
-                    <div class="card-label">Carte A</div>
+        <div id="cardsWrapper">
+            <!-- CARTE A -->
+            <div class="card-container" id="cardContainerA">
+                <div class="card" id="cardA">
+                    <!-- Dos de la carte (Fermée) -->
+                    <div class="card-front">
+                        <img src="Roue-scam.png" class="card-logo" alt="Scam Logo">
+                        <span class="card-label">CARTE A</span>
+                    </div>
+                    <!-- Face de la carte (Révélée) -->
+                    <div class="card-back">
+                        <div class="card-content" id="contentA">DÉFI...</div>
+                    </div>
                 </div>
-                <div class="card-back">
-                    <div class="card-content" id="content0">Chargement...</div>
+            </div>
+
+            <!-- CARTE B -->
+            <div class="card-container" id="cardContainerB">
+                <div class="card" id="cardB">
+                    <!-- Dos de la carte (Fermée) -->
+                    <div class="card-front">
+                        <img src="Roue-scam.png" class="card-logo" alt="Scam Logo">
+                        <span class="card-label">CARTE B</span>
+                    </div>
+                    <!-- Face de la carte (Révélée) -->
+                    <div class="card-back">
+                        <div class="card-content" id="contentB">DÉFI...</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CARTE C -->
+            <div class="card-container" id="cardContainerC">
+                <div class="card" id="cardC">
+                    <!-- Dos de la carte (Fermée) -->
+                    <div class="card-front">
+                        <img src="Roue-scam.png" class="card-logo" alt="Scam Logo">
+                        <span class="card-label">CARTE C</span>
+                    </div>
+                    <!-- Face de la carte (Révélée) -->
+                    <div class="card-back">
+                        <div class="card-content" id="contentC">DÉFI...</div>
+                    </div>
                 </div>
             </div>
         </div>
-
-        <!-- CARTE B -->
-        <div class="card-scene" onclick="flipCard(1)">
-            <div class="card" id="card1">
-                <div class="card-front">
-                    <img src="Roue-scam.png" alt="Logo" class="card-logo">
-                    <div class="card-label">Carte B</div>
-                </div>
-                <div class="card-back">
-                    <div class="card-content" id="content1">Chargement...</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- CARTE C -->
-        <div class="card-scene" onclick="flipCard(2)">
-            <div class="card" id="card2">
-                <div class="card-front">
-                    <img src="Roue-scam.png" alt="Logo" class="card-logo">
-                    <div class="card-label">Carte C</div>
-                </div>
-                <div class="card-back">
-                    <div class="card-content" id="content2">Chargement...</div>
-                </div>
-            </div>
-        </div>
-
     </div>
 
     <script src="cartes.js"></script>
