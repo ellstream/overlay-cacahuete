@@ -1,46 +1,41 @@
 const SHEET_URL =
 "https://docs.google.com/spreadsheets/d/e/2PACX-1vRzMx8EveEFg84HJSOU5IempyqWc4sshrrzocmTAKNf5yNY8ihEqCnJ4vtyyujEsvRPNN3Uv_uUTzAF/pub?output=csv";
 
-async function loadData(){
+async function loadData() {
+    try {
+        const response = await fetch(SHEET_URL + "&t=" + Date.now());
+        const csv = await response.text();
+        const rows = csv.trim().split("\n");
 
-try{
+        let totalJetons = 0;
 
-const response =
-await fetch(
-SHEET_URL +
-"&t=" +
-Date.now()
-);
+        rows.forEach(row => {
+            const parts = row.split(",");
+            if (parts.length >= 2) {
+                const key = parts[0].replace(/"/g, "").trim();
+                const value = parseInt(parts[1].replace(/"/g, "").trim()) || 0;
+                
+                // On vérifie si la clé contient "Jetons_Casino"
+                if (key.includes("Jetons_Casino")) {
+                    totalJetons += value;
+                }
+            }
+        });
 
-const csv =
-await response.text();
+        // Mise à jour de l'interface
+        const jetons = Math.min(5, totalJetons);
+        document.getElementById("counter").innerHTML = `🪙 ${jetons} / 5`;
+        document.getElementById("barFill").style.width = (jetons / 5) * 100 + "%";
 
-const rows =
-csv.trim().split("\n");
+        const status = document.getElementById("status");
+        if (jetons >= 5) status.innerHTML = "👑 SALLE SECRÈTE DÉBLOQUÉE";
+        else if (jetons >= 3) status.innerHTML = "🚪 SALLE INTERDITE DÉBLOQUÉE";
+        else status.innerHTML = "Collecte en cours...";
 
-const data={};
-
-rows.forEach(row=>{
-
-const firstComma=row.indexOf(",");
-
-if(firstComma!==-1){
-
-const key =
-row.substring(0,firstComma)
-.replace(/"/g,"")
-.trim();
-
-const value =
-row.substring(firstComma+1)
-.replace(/"/g,"")
-.trim();
-
-data[key]=value;
-
+    } catch(err) {
+        console.error("Erreur de chargement :", err);
+    }
 }
-
-});
 
 const jetons =
 parseInt(
