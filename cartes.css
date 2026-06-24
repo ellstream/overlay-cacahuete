@@ -1,154 +1,124 @@
 /* ==========================================
-   LES CARTES DU DESTIN - OVERLAY OBS
-   Style : Cyber-Malware & Casino Clandestin
+   LES CARTES DU DESTIN - OVERLAY COMPLET
 ========================================== */
 
 body {
     margin: 0;
     padding: 0;
-    background: transparent; /* Fond transparent indispensable pour OBS */
-    font-family: 'Arial Black', 'Impact', sans-serif;
-    color: white;
     overflow: hidden;
+    background: transparent; /* Transparent pour OBS */
+    font-family: 'Arial Black', 'Impact', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100vw;
     height: 100vh;
 }
 
-/* Conteneur principal qui centre tout l'écran */
-#cardsScreenContainer {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    box-sizing: border-box;
-}
-
-/* Titre principal de l'overlay */
-#cardsTitle {
-    font-size: 28px;
-    color: #53fc18;
-    text-shadow: 0 0 15px #53fc18;
-    margin-bottom: 40px;
-    text-align: center;
-    letter-spacing: 0.5px;
-}
-
-/* Zone d'alignement des 3 cartes */
-#cardsWrapper {
+/* Zone qui aligne les 3 cartes horizontalement */
+#cardsContainer {
     display: flex;
     gap: 40px;
-    perspective: 1000px; /* Donné de la profondeur pour l'effet de retournement 3D */
+    justify-content: center;
+    align-items: center;
+    perspective: 1200px; /* Donne l'effet de profondeur 3D au retournement */
 }
 
-/* Taille physique de chaque emplacement de carte */
-.card-container {
-    width: 200px;
-    height: 300px;
+/* Structure globale d'une carte */
+.card-scene {
+    width: 260px;
+    height: 380px;
 }
 
-/* La carte qui pivote */
 .card {
     width: 100%;
     height: 100%;
     position: relative;
     transform-style: preserve-3d;
     transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: pointer;
 }
 
-/* Classe injectée par le JS pour retourner la carte à 180° */
+/* Classe déclenchée par le JS pour retourner la carte */
 .card.flipped {
     transform: rotateY(180deg);
 }
 
-/* Propriétés communes aux deux faces de la carte */
+/* Style partagé par les deux faces */
 .card-front, .card-back {
     position: absolute;
     width: 100%;
     height: 100%;
-    backface-visibility: hidden; /* Masque l'envers de la face qui tourne */
+    backface-visibility: hidden; /* Cache la face arrière pendant qu'on voit l'avant */
     border-radius: 15px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    text-align: center;
-    padding: 15px;
     box-sizing: border-box;
+    padding: 20px;
 }
 
 /* ==========================================
-   FACE CACHÉE (Le dos de la carte visible au début)
-   Style : Cyber-Malware Néon
+   ⚪ DOS DE LA CARTE (Visible au départ)
 ========================================== */
 .card-front {
-    background: radial-gradient(circle, #121212 0%, #050505 100%);
-    border: 4px solid #53fc18;
+    background-color: #ffffff; /* FOND BLANC PARFAITEMENT OPAQUE */
+    border: 4px solid #53fc18;   /* Bordure néon vert fluo */
     box-shadow: 
         0 0 15px rgba(83, 252, 24, 0.4),
-        inset 0 0 20px rgba(83, 252, 24, 0.2);
-    
-    /* Texture en lignes de balayage style écran de hacker rétro */
-    background-image: linear-gradient(rgba(18, 18, 18, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
-    background-size: 100% 4px;
+        inset 0 0 20px rgba(0, 0, 0, 0.15); /* Ombrage interne pour le relief */
 }
 
-/* Style du logo au centre de la carte */
+/* Logo central sur le fond blanc (Roue-scam.png) */
 .card-logo {
-    width: 90px;
-    height: 90px;
+    width: 140px;
+    height: 140px;
     object-fit: contain;
-    border-radius: 50%;
-    filter: drop-shadow(0 0 8px #53fc18);
-    animation: pulseLogo 2s ease-in-out infinite alternate;
+    animation: pulseLogo 2s infinite alternate;
 }
 
-/* Animation de pulsation sur le logo */
-@keyframes pulseLogo {
-    from { 
-        filter: drop-shadow(0 0 5px #53fc18); 
-        transform: scale(1); 
-    }
-    to { 
-        filter: drop-shadow(0 0 15px #53fc18); 
-        transform: scale(1.04); 
-    }
-}
-
-/* Petit badge textuel sous ton logo (ex: CARTE A) */
+/* Label sous le logo (ex: CARTE A) */
 .card-label {
-    font-size: 16px;
-    color: #53fc18;
-    font-family: 'Arial Black', sans-serif;
+    margin-top: 20px;
+    color: #0f0f0f; /* Texte noir pour trancher sur le fond blanc */
+    font-size: 20px;
+    font-weight: 900;
     letter-spacing: 1px;
-    background: #000;
-    padding: 4px 14px;
-    border-radius: 6px;
-    border: 1px solid rgba(83, 252, 24, 0.4);
-    margin-top: 25px;
-    text-shadow: 0 0 5px #53fc18;
 }
 
 /* ==========================================
-   FACE RÉVÉLÉE (Le résultat qui apparaît après flip)
-   Style : Contenu textuel lisible
+   🟢 FACE DE LA CARTE (Révélée / Le Défi)
 ========================================== */
 .card-back {
-    background: #111111;
-    color: white;
-    font-size: 16px;
+    background-color: #0f0f0f; /* Fond noir sombre */
+    color: #ffffff;            /* Texte du défi blanc */
+    border: 4px solid #53fc18;  /* Bordure néon vert */
+    box-shadow: 0 0 25px #53fc18;
+    transform: rotateY(180deg); /* Retourne la face cachée par défaut */
+    font-size: 20px;
     font-weight: 900;
+    text-align: center;
     line-height: 1.4;
-    border: 4px solid #53fc18;
-    transform: rotateY(180deg); /* Inversée par défaut pour être droite après le flip */
-    box-shadow: 0 0 30px #53fc18;
-    
-    /* Contour noir autour des lettres pour garantir une lisibilité maximale sur OBS */
-    text-shadow: 
-        -2px -2px 0 #000,  
-         2px -2px 0 #000,
-        -2px  2px 0 #000,
-         2px  2px 0 #000,
-         0 0 10px rgba(0,0,0,0.8);
+    word-wrap: break-word;
+}
+
+/* Conteneur du texte injecté depuis Google Sheets */
+.card-content {
+    width: 100%;
+    padding: 10px;
+}
+
+/* ==========================================
+   ANIMATIONS
+========================================== */
+@keyframes pulseLogo {
+    from { 
+        transform: scale(1); 
+        filter: drop-shadow(0 0 5px rgba(83, 252, 24, 0.3)); 
+    }
+    to { 
+        transform: scale(1.05); 
+        filter: drop-shadow(0 0 15px #53fc18); 
+    }
 }
