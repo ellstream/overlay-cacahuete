@@ -1,34 +1,59 @@
-<div id="cardsWrapper">
-            <!-- Carte A -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SALLE INTERDITE - LES CARTES DU DESTIN</title>
+    <link rel="stylesheet" href="cartes.css">
+</head>
+<body>
+
+    <div id="cardsScreenContainer">
+        <!-- Titre de l'overlay -->
+        <h1 id="cardsTitle">⚠️ LA SALLE INTERDITE : CHOISISSEZ UNE CARTE !</h1>
+        
+        <div id="cardsWrapper">
+            <!-- CARTE A -->
             <div class="card-container" id="cardContainerA">
                 <div class="card" id="cardA">
+                    <!-- Dos de la carte (Fermée) -->
                     <div class="card-front">
                         <img src="Roue-scam.png" class="card-logo" alt="Scam Logo">
                         <span class="card-label">CARTE A</span>
                     </div>
+                    <!-- Face de la carte (Révélée) -->
                     <div class="card-back" id="contentA">DÉFI...</div>
                 </div>
             </div>
 
-            <!-- Carte B -->
+            <!-- CARTE B -->
             <div class="card-container" id="cardContainerB">
                 <div class="card" id="cardB">
+                    <!-- Dos de la carte (Fermée) -->
                     <div class="card-front">
                         <img src="Roue-scam.png" class="card-logo" alt="Scam Logo">
                         <span class="card-label">CARTE B</span>
                     </div>
+                    <!-- Face de la carte (Révélée) -->
                     <div class="card-back" id="contentB">DÉFI...</div>
                 </div>
             </div>
 
-            <!-- Carte C -->
+            <!-- CARTE C -->
             <div class="card-container" id="cardContainerC">
                 <div class="card" id="cardC">
+                    <!-- Dos de la carte (Fermée) -->
                     <div class="card-front">
                         <img src="Roue-scam.png" class="card-logo" alt="Scam Logo">
                         <span class="card-label">CARTE C</span>
                     </div>
+                    <!-- Face de la carte (Révélée) -->
                     <div class="card-back" id="contentC">DÉFI...</div>
                 </div>
             </div>
         </div>
+    </div>
+
+    <script src="cartes.js"></script>
+</body>
+</html>
