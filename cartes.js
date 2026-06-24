@@ -1,4 +1,4 @@
-const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSScVihkW4AxYZ2yvxfcKHDaYDkJTq6BRVuGscjPq1HLVL8YaiT5DGpLRnzI3T-hcjwIYmtCnUsSPG1/pub?gid=0&single=true&output=csv";
+const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTCtMSWUpqXxoeBYfXO1WhfTgznbB06nu-nMVqEB33F0TgMMHH-31-xAp4PDoR267pHTTKfHakDPmLK/pub?output=csv";
 
 let currentFlipped = "NONE";
 
