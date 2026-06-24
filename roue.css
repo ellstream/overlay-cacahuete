@@ -64,17 +64,16 @@ body {
 ========================= */
 .wheelText {
     fill: white;
-    font-size: 13px; /* Repasse à une taille très lisible */
+    font-size: 11px; /* Légèrement réduit pour caler parfaitement les 3 lignes */
     font-weight: 900;
     text-anchor: middle;
     dominant-baseline: middle;
     pointer-events: none;
-    letter-spacing: -0.3px;
+    letter-spacing: -0.2px;
     filter: 
         drop-shadow(0px 0px 3px #000) 
         drop-shadow(0px 0px 5px #000);
 }
-
 /* =========================
    LOGO CENTRAL
 ========================= */
