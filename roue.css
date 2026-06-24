@@ -1,15 +1,16 @@
 /* ==========================================
-   ROUE DU SCAM V3 - CODE TOTAL COMPLET
+   ROUE DU SCAM V3 - VERSION MAXI GÉANTE (900px)
 ========================================== */
 
 body {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background: transparent; /* Transparent pour OBS */
+    background: transparent; /* Fond transparent pour OBS */
     font-family: 'Arial Black', 'Impact', sans-serif;
 }
 
+/* Conteneur principal plein écran */
 #megaSpinContainer {
     width: 100vw;
     height: 100vh;
@@ -17,9 +18,12 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    box-sizing: border-box;
 }
 
-/* FLÈCHE DU HAUT */
+/* ==========================================
+   FLÈCHE INDICATRICE (TOP)
+========================================== */
 #pointer {
     width: 0;
     height: 0;
@@ -28,64 +32,81 @@ body {
     border-top: 50px solid #53fc18;
     filter: drop-shadow(0 0 15px #53fc18);
     z-index: 100;
-    margin-bottom: -25px;
+    margin-bottom: -20px; /* Ajusté pour la nouvelle taille de roue */
 }
 
-/* STRUCTURE DE LA ROUE 850PX */
+/* ==========================================
+   CONTENEUR DE LA ROUE MAXI GÉANTE
+========================================== */
 #wheelWrapper {
     position: relative;
-    width: 850px; 
-    height: 850px; 
+    width: 900px;  /* Augmenté à 900px pour une taille monumentale */
+    height: 900px; 
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
+/* Structure globale du SVG */
 #wheel {
     width: 100%;
     height: 100%;
     filter: drop-shadow(0 0 20px #53fc18);
     transition: transform 8s cubic-bezier(.12, .88, .17, 1);
+    transform-origin: center center;
 }
 
+/* Le groupe en rotation */
 #wheelGroup {
     transform-origin: center;
     transform-box: fill-box;
 }
 
-/* TEXTES DES CASES (3 LIGNES) */
+/* ==========================================
+   TEXTES SUR 3 LIGNES (STYLE ULTRA COMPACT)
+========================================== */
 .wheelText {
     fill: white;
-    font-size: 10.5px;
+    font-size: 11px; /* Légèrement ré-augmenté car la roue est plus grande */
     font-weight: 900;
     text-anchor: middle;
     dominant-baseline: middle;
     pointer-events: none;
     letter-spacing: -0.3px;
-    filter: drop-shadow(0px 0px 3px #000) drop-shadow(0px 0px 5px #000);
+    filter: 
+        drop-shadow(0px 0px 3px #000) 
+        drop-shadow(0px 0px 5px #000);
 }
 
-/* LOGO CENTRAL */
+/* ==========================================
+   🎯 LOGO CENTRAL SÉCURISÉ (BIEN RENTRÉ DANS LE CERCLE)
+========================================== */
 #centerLogo {
     position: absolute;
-    width: 195px; 
-    height: 195px;
+    width: 200px;          /* Taille globale du cercle central */
+    height: 200px;
     border-radius: 50%;
-    background: #0b0b0b;
+    background: #0b0b0b;   /* Fond noir mat */
     border: 5px solid #53fc18;
-    box-shadow: 0 0 20px #53fc18;
+    box-shadow: 0 0 25px #53fc18;
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 50;
+    overflow: hidden;      /* Coupe tout ce qui dépasse du cercle */
+    box-sizing: border-box;
+    padding: 10px;         /* Marge interne pour forcer le logo à rester à l'intérieur */
 }
 
 #centerLogo img {
-    width: 95%;
-    height: auto;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;   /* Force l'image à se redimensionner proprement sans être coupée ni déformée */
 }
 
-/* BANDEAU RÉSULTAT */
+/* ==========================================
+   BANDEAU DE RÉSULTAT (BAS)
+========================================== */
 #resultBox {
     margin-top: 15px;
     padding: 12px 35px;
@@ -107,7 +128,7 @@ body {
     50% { transform: scale(1.03); box-shadow: 0 0 40px #53fc18; }
 }
 
-/* EFFETS DE VICTOIRE (SPARKLES) */
+/* PARTICULES */
 .sparkle {
     position: absolute;
     top: -50px;
