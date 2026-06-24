@@ -77,10 +77,10 @@ setTimeout(
 
 function createWheel(){
 
-const centerX = 450;
-const centerY = 450;
+const centerX = 400;
+const centerY = 400;
 
-const radius = 420;
+const radius = 330;
 
 const angleSize =
 360 / prizes.length;
