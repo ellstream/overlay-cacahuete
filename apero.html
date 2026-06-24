@@ -55,25 +55,23 @@
         <div class="apero-bar">🍻 C'EST L'HEURE DE L'APÉRO SUR SCAM INDUSTRIES ! 🥂</div>
         
         <script>
-            // Génération dynamique des verres qui montent
-            function createGlass() {
-                const glass = document.createElement('div');
-                glass.className = 'glass';
-                glass.innerHTML = Math.random() > 0.5 ? '🍻' : '🥂';
-                glass.style.left = Math.random() * 100 + 'vw';
-                glass.style.animationDuration = (Math.random() * 2 + 3) + 's';
-                document.body.appendChild(glass);
-                
-                // Nettoyage automatique pour ne pas surcharger la mémoire
+    window.onload = function() {
+        function createGlass() {
+            const glass = document.createElement('div');
+            glass.className = 'glass';
+            glass.innerHTML = Math.random() > 0.5 ? '🍻' : '🥂';
+            glass.style.left = Math.random() * 100 + 'vw';
+            glass.style.animationDuration = (Math.random() * 2 + 3) + 's';
+            // On s'assure qu'on ajoute bien au bon élément
+            const container = document.getElementById('apero-wrapper');
+            if (container) {
+                container.appendChild(glass);
                 setTimeout(() => glass.remove(), 5000);
             }
-            
-            // Crée un nouveau verre toutes les 500ms
-            setInterval(createGlass, 500);
-
-            // Recharge la page toutes les minutes pour éviter le cache
-            setInterval(() => window.location.reload(), 60000);
-        </script>
+        }
+        setInterval(createGlass, 500);
+    };
+     </script>
     </div>
 </body>
 </html>
