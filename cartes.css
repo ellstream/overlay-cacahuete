@@ -1,5 +1,5 @@
 /* ==========================================
-   LES CARTES DU DESTIN - OVERLAY COMPLET
+   LES CARTES DU DESTIN - CORRECTIF TOTAL
 ========================================== */
 
 body {
@@ -9,25 +9,54 @@ body {
     background: transparent; /* Transparent pour OBS */
     font-family: 'Arial Black', 'Impact', sans-serif;
     display: flex;
+    flex-direction: column; /* Aligne le titre en haut et les cartes dessous */
     justify-content: center;
     align-items: center;
     width: 100vw;
     height: 100vh;
+    box-sizing: border-box;
 }
 
-/* Zone qui aligne les 3 cartes horizontalement */
+/* ==========================================
+   TITRE DE LA SCÈNE (LA SALLE INTERDITE)
+========================================== */
+h1, .salle-titre {
+    color: white;
+    font-size: 32px;
+    font-weight: 900;
+    text-align: center;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+    text-shadow: 
+        -3px -3px 0 #000,  
+         3px -3px 0 #000,
+        -3px  3px 0 #000,
+         3px  3px 0 #000,
+         0 0 20px rgba(255, 255, 255, 0.2);
+    z-index: 10;
+}
+
+/* ==========================================
+   CONTENEUR DES 3 CARTES (ALIGNEMENT HORIZONTAL)
+========================================== */
 #cardsContainer {
     display: flex;
-    gap: 40px;
+    flex-direction: row; /* Force l'alignement côte à côte */
+    gap: 50px;           /* Espace entre les cartes */
     justify-content: center;
     align-items: center;
-    perspective: 1200px; /* Donne l'effet de profondeur 3D au retournement */
+    perspective: 1500px; /* Effet de profondeur 3D pour le flip */
+    width: auto;
+    height: auto;
+    z-index: 5;
 }
 
-/* Structure globale d'une carte */
+/* ==========================================
+   STRUCTURE INDIVIDUELLE D'UNE CARTE
+========================================== */
 .card-scene {
-    width: 260px;
-    height: 380px;
+    width: 280px;        /* Largeur fixe de la carte */
+    height: 420px;       /* Hauteur fixe de la carte (ne sera plus écrasée !) */
 }
 
 .card {
@@ -36,89 +65,80 @@ body {
     position: relative;
     transform-style: preserve-3d;
     transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    cursor: pointer;
 }
 
-/* Classe déclenchée par le JS pour retourner la carte */
+/* Classe de rotation JS */
 .card.flipped {
     transform: rotateY(180deg);
 }
 
-/* Style partagé par les deux faces */
+/* Propriétés communes aux deux faces */
 .card-front, .card-back {
     position: absolute;
     width: 100%;
     height: 100%;
-    backface-visibility: hidden; /* Cache la face arrière pendant qu'on voit l'avant */
-    border-radius: 15px;
+    backface-visibility: hidden; /* Cache l'envers */
+    border-radius: 20px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     box-sizing: border-box;
-    padding: 20px;
+    padding: 25px;
 }
 
 /* ==========================================
-   ⚪ DOS DE LA CARTE (Visible au départ)
+   ⚪ DOS DE LA CARTE (Blanc Opaque au départ)
 ========================================== */
 .card-front {
-    background-color: #ffffff; /* FOND BLANC PARFAITEMENT OPAQUE */
-    border: 4px solid #53fc18;   /* Bordure néon vert fluo */
+    background-color: #ffffff !important; /* Force le fond blanc pur */
+    border: 5px solid #53fc18;             /* Grosse bordure néon */
     box-shadow: 
-        0 0 15px rgba(83, 252, 24, 0.4),
-        inset 0 0 20px rgba(0, 0, 0, 0.15); /* Ombrage interne pour le relief */
+        0 0 25px rgba(83, 252, 24, 0.5),
+        inset 0 0 20px rgba(0, 0, 0, 0.15);
 }
 
-/* Logo central sur le fond blanc (Roue-scam.png) */
+/* Logo SCAM INDUSTRIES au centre */
 .card-logo {
-    width: 140px;
-    height: 140px;
+    width: 160px;
+    height: 160px;
     object-fit: contain;
     animation: pulseLogo 2s infinite alternate;
 }
 
-/* Label sous le logo (ex: CARTE A) */
+/* Label sous la carte (CARTE A, B, C) */
 .card-label {
-    margin-top: 20px;
-    color: #0f0f0f; /* Texte noir pour trancher sur le fond blanc */
-    font-size: 20px;
+    margin-top: 25px;
+    color: #0f0f0f; /* Écrit en noir sur fond blanc */
+    font-size: 22px;
     font-weight: 900;
     letter-spacing: 1px;
+    text-transform: uppercase;
 }
 
 /* ==========================================
-   🟢 FACE DE LA CARTE (Révélée / Le Défi)
+   🟢 FACE DE LA CARTE (Le Défi révélé)
 ========================================== */
 .card-back {
-    background-color: #0f0f0f; /* Fond noir sombre */
-    color: #ffffff;            /* Texte du défi blanc */
-    border: 4px solid #53fc18;  /* Bordure néon vert */
-    box-shadow: 0 0 25px #53fc18;
-    transform: rotateY(180deg); /* Retourne la face cachée par défaut */
-    font-size: 20px;
+    background-color: #0f0f0f; 
+    color: #ffffff;
+    border: 5px solid #53fc18;
+    box-shadow: 0 0 30px #53fc18;
+    transform: rotateY(180deg); /* Retourné par défaut */
+    font-size: 22px;
     font-weight: 900;
     text-align: center;
-    line-height: 1.4;
-    word-wrap: break-word;
+    line-height: 1.5;
 }
 
-/* Conteneur du texte injecté depuis Google Sheets */
 .card-content {
     width: 100%;
-    padding: 10px;
+    word-wrap: break-word;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
 }
 
-/* ==========================================
-   ANIMATIONS
-========================================== */
+/* Animation de pulsation du logo */
 @keyframes pulseLogo {
-    from { 
-        transform: scale(1); 
-        filter: drop-shadow(0 0 5px rgba(83, 252, 24, 0.3)); 
-    }
-    to { 
-        transform: scale(1.05); 
-        filter: drop-shadow(0 0 15px #53fc18); 
-    }
+    from { transform: scale(1); filter: drop-shadow(0 0 5px rgba(83, 252, 24, 0.3)); }
+    to { transform: scale(1.05); filter: drop-shadow(0 0 15px #53fc18); }
 }
