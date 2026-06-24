@@ -1,52 +1,20 @@
 /* ==========================================
-   POP-UP ALERTE PALIER 4 (LA FIÈVRE)
-========================================== */
-#popupAlerte {
-    position: fixed;
-    top: 35%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0);
-    background: rgba(15, 15, 15, 0.95);
-    border: 5px solid #ff5500;
-    box-shadow: 0 0 30px #ff5500;
-    color: white;
-    padding: 20px 40px;
-    font-size: 32px;
-    font-weight: 900;
-    text-align: center;
-    border-radius: 15px;
-    z-index: 999;
-    pointer-events: none;
-    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    text-shadow: 0 0 10px #ff5500;
-}
-
-/* Classe activée par le JS pour afficher le pop-up */
-#popupAlerte.show {
-    transform: translate(-50%, -50%) scale(1);
-    animation: pulseAlerte 0.6s infinite alternate;
-}
-
-@keyframes pulseAlerte {
-    from { box-shadow: 0 0 20px #ff5500; }
-    to { box-shadow: 0 0 40px #ff5500; transform: translate(-50%, -50%) scale(1.05); }
-}
-
-/* ==========================================
    JAUGE OVERLAY - STYLE CASINO DES DESTINS
 ========================================== */
 
 body {
     margin: 0;
     padding: 0;
-    background: transparent; /* Fond transparent pour OBS */
+    background: transparent; /* Indispensable pour OBS */
     font-family: 'Arial Black', 'Impact', sans-serif;
     overflow: hidden;
+    width: 100vw;
+    height: 100vh;
 }
 
 #casinoBarContainer {
     width: 450px;
-    background: rgba(10, 10, 10, 0.90);
+    background: rgba(10, 10, 10, 0.95);
     border: 3px solid #53fc18;
     border-radius: 12px;
     padding: 10px 15px;
@@ -54,7 +22,10 @@ body {
         0 0 15px #53fc18,
         inset 0 0 10px rgba(83, 252, 24, 0.2);
     box-sizing: border-box;
-    margin: 20px; /* Espace pour les lueurs */
+    position: fixed;
+    bottom: 20px; /* Positionné en bas à gauche par défaut, déplaçable dans OBS */
+    left: 20px;
+    z-index: 10;
 }
 
 /* En-tête (Titre et Niveau) */
@@ -76,6 +47,7 @@ body {
     color: #53fc18;
     font-size: 13px;
     text-shadow: 0 0 8px rgba(83, 252, 24, 0.6);
+    transition: color 0.5s ease;
 }
 
 /* Conteneur de la jauge */
@@ -89,13 +61,13 @@ body {
     overflow: hidden;
 }
 
-/* Remplissage de la jauge (Vert Fluo) */
+/* Remplissage de la jauge */
 #progressBarFill {
-    width: 0%; /* Modifié dynamiquement par le JS */
+    width: 0%;
     height: 100%;
     background: #53fc18;
     box-shadow: 0 0 12px #53fc18;
-    transition: width 0.8s cubic-bezier(0.12, 0.88, 0.17, 1);
+    transition: width 0.8s cubic-bezier(0.12, 0.88, 0.17, 1), background-color 0.5s ease;
 }
 
 /* Texte central (X / 5 SUBS) */
@@ -112,9 +84,95 @@ body {
     font-size: 13px;
     font-weight: 900;
     text-shadow: 
-        -1px -1px 0 #000,  
-         1px -1px 0 #000,
-        -1px  1px 0 #000,
-         1px  1px 0 #000; /* Contour noir autour du texte */
+        -2px -2px 0 #000,  
+         2px -2px 0 #000,
+        -2px  2px 0 #000,
+         2px  2px 0 #000;
     pointer-events: none;
+}
+
+/* ==========================================
+   POP-UPS DES ALERTES GÉANTES (PALIERS 4 & 5)
+========================================== */
+#popupAlerte {
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    background: rgba(10, 10, 10, 0.98);
+    color: white;
+    padding: 30px 50px;
+    font-size: 36px;
+    font-weight: 900;
+    text-align: center;
+    border-radius: 20px;
+    z-index: 999;
+    pointer-events: none;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Activation du Pop-up */
+#popupAlerte.show {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+/* Thème Palier 4 (La Fièvre - Orange) */
+.theme-palier4 {
+    border: 5px solid #ff5500;
+    box-shadow: 0 0 35px #ff5500;
+    text-shadow: 0 0 12px #ff5500;
+    animation: pulseOrange 0.5s infinite alternate;
+}
+
+@keyframes pulseOrange {
+    from { transform: translate(-50%, -50%) scale(1); }
+    to { transform: translate(-50%, -50%) scale(1.04); box-shadow: 0 0 50px #ff5500; }
+}
+
+/* Thème Palier 5 (Le Jackpot - Rouge Alerte Braquage) */
+.theme-palier5 {
+    border: 6px solid #ff0033;
+    box-shadow: 0 0 45px #ff0033;
+    text-shadow: 0 0 15px #ff0033;
+    animation: alerteBraquage 0.3s infinite alternate;
+}
+
+@keyframes alerteBraquage {
+    0% { transform: translate(-50%, -50%) scale(1); background: rgba(10, 10, 10, 0.98); }
+    100% { transform: translate(-50%, -50%) scale(1.06); background: rgba(60, 0, 10, 0.95); box-shadow: 0 0 65px #ff0033; }
+}
+
+/* ==========================================
+   EFFETS PARTICULES / PLUIE DE BILLETS
+========================================== */
+#confetti-container {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 99;
+    overflow: hidden;
+}
+
+.money-drop {
+    position: absolute;
+    top: -50px;
+    font-size: 32px;
+    animation: fall Down linear forwards;
+}
+
+@keyframes fallDown {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(110vh) rotate(720deg);
+        opacity: 0;
+    }
 }
