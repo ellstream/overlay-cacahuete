@@ -1,5 +1,5 @@
 const SHEET_URL =
-"https://docs.google.com/spreadsheets/d/e/2PACX-1vRzMx8EveEFg84HJSOU5IempyqWc4sshrrzocmTAKNf5yNY8ihEqCnJ4vtyyujEsvRPNN3Uv_uUTzAF/pub?output=csv";
+"https://docs.google.com/spreadsheets/d/e/2PACX-1vTCtMSWUpqXxoeBYfXO1WhfTgznbB06nu-nMVqEB33F0TgMMHH-31-xAp4PDoR267pHTTKfHakDPmLK/pub?output=csv";
 
 async function loadData() {
     try {
