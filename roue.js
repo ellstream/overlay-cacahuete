@@ -77,9 +77,8 @@ function createWheel() {
 
         const middleAngle = startAngle + angleSize / 2;
         
-        // OPTIMISATION : On ramène la base du texte plus proche du centre (235 au lieu de 305) 
-        // pour éviter que les mots touchent le bord extérieur vert de la roue.
-        const textPos = polarToCartesian(centerX, centerY, 235, middleAngle);
+        // MODIFICATION : Position du texte repoussée à 265 pour éviter le logo central
+        const textPos = polarToCartesian(centerX, centerY, 265, middleAngle);
 
         const txt = document.getElementById("txt" + i);
         txt.setAttribute("x", textPos.x);
@@ -89,7 +88,7 @@ function createWheel() {
         const label = prizes[i];
         txt.innerHTML = "";
 
-        // Si le texte est long, on le sépare proprement en 2 lignes équilibrées
+        // Séparation propre en deux lignes si le texte est long
         if (label.length > 15) {
             const words = label.split(" ");
             const mid = Math.ceil(words.length / 2);
@@ -98,12 +97,12 @@ function createWheel() {
 
             const tspan1 = document.createElementNS("http://www.w3.org/2000/svg", "tspan");
             tspan1.setAttribute("x", textPos.x);
-            tspan1.setAttribute("dy", "-6"); // Écartement de la ligne supérieure resserré
+            tspan1.setAttribute("dy", "-7"); // Ajusté pour remonter proprement la première ligne
             tspan1.textContent = line1;
 
             const tspan2 = document.createElementNS("http://www.w3.org/2000/svg", "tspan");
             tspan2.setAttribute("x", textPos.x);
-            tspan2.setAttribute("dy", "15"); // Écartement de la deuxième ligne optimisé
+            tspan2.setAttribute("dy", "16"); // Espace parfait pour éviter la superposition
             tspan2.textContent = line2;
 
             txt.appendChild(tspan1);
@@ -146,7 +145,6 @@ async function loadData() {
 function launchSpin(forcedResult) {
     spinning = true;
     
-    // On retire l'ancienne animation de victoire de la boîte de texte pour le nouveau lancer
     const resultBox = document.getElementById("resultBox");
     resultBox.classList.remove("win");
     resultBox.innerHTML = "🎰 LE SCAM EST EN COURS...";
@@ -176,7 +174,7 @@ function launchSpin(forcedResult) {
     }, 8000);
 }
 
-// Initialisation
+// Initialisation de la roue
 createWheel();
 loadData();
 setInterval(loadData, 3000);
