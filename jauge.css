@@ -1,123 +1,86 @@
-body{
-    margin:0;
-    background:transparent;
-    overflow:hidden;
-    font-family:Arial, Helvetica, sans-serif;
+/* ==========================================
+   JAUGE OVERLAY - STYLE CASINO DES DESTINS
+========================================== */
+
+body {
+    margin: 0;
+    padding: 0;
+    background: transparent; /* Fond transparent pour OBS */
+    font-family: 'Arial Black', 'Impact', sans-serif;
+    overflow: hidden;
 }
 
-.widget{
-
-    width:300px;
-    height:82px;
-
-    display:flex;
-    align-items:center;
-    gap:12px;
-
-    background:rgba(0,0,0,.82);
-
-    border:2px solid #53FC18;
-
-    border-radius:18px;
-
-    box-shadow:
-        0 0 10px #53FC18,
-        0 0 20px rgba(83,252,24,.6);
-
-    padding:8px 12px;
+#casinoBarContainer {
+    width: 450px;
+    background: rgba(10, 10, 10, 0.90);
+    border: 3px solid #53fc18;
+    border-radius: 12px;
+    padding: 10px 15px;
+    box-shadow: 
+        0 0 15px #53fc18,
+        inset 0 0 10px rgba(83, 252, 24, 0.2);
+    box-sizing: border-box;
+    margin: 20px; /* Espace pour les lueurs */
 }
 
-.avatar{
-    width:60px;
-    height:60px;
-
-    border-radius:50%;
-
-    object-fit:cover;
-
-    border:3px solid #53FC18;
-
-    box-shadow:
-        0 0 8px #53FC18,
-        0 0 16px #53FC18,
-        inset 0 0 10px #53FC18;
-
-    background:#000;
-
-    flex-shrink:0;
+/* En-tête (Titre et Niveau) */
+#casinoHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
 }
 
-.content{
-    flex:1;
+.casinoTitle {
+    color: white;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    text-shadow: 0 0 4px #000;
 }
 
-.title{
-    color:white;
-
-    font-size:18px;
-
-    font-weight:900;
-
-    margin-bottom:8px;
-
-    text-shadow:
-    0 0 10px #7CFF00;
+#casinoLevel {
+    color: #53fc18;
+    font-size: 13px;
+    text-shadow: 0 0 8px rgba(83, 252, 24, 0.6);
 }
 
-.progress-container{
-    display:flex;
-    align-items:center;
-    gap:10px;
+/* Conteneur de la jauge */
+#progressWrapper {
+    position: relative;
+    width: 100%;
+    height: 24px;
+    background: #1a1a1a;
+    border: 2px solid #53fc18;
+    border-radius: 6px;
+    overflow: hidden;
 }
 
-.progress-bar{
-
-    width:260px;
-    height:18px;
-
-    background:#111;
-
-    border-radius:999px;
-
-    overflow:hidden;
-
-    border:1px solid #53FC18;
+/* Remplissage de la jauge (Vert Fluo) */
+#progressBarFill {
+    width: 0%; /* Modifié dynamiquement par le JS */
+    height: 100%;
+    background: #53fc18;
+    box-shadow: 0 0 12px #53fc18;
+    transition: width 0.8s cubic-bezier(0.12, 0.88, 0.17, 1);
 }
 
-.fill{
-
-    height:100%;
-
-    background:linear-gradient(
-      90deg,
-      #53FC18,
-      #8dff4a
-    );
-
-    box-shadow:
-      0 0 10px #53FC18;
-}
-
-.percent{
-
-    width:55px;
-
-    text-align:right;
-
-    color:white;
-
-    font-size:20px;
-
-    font-weight:900;
-}
-
-.counter{
-
-    margin-top:5px;
-
-    color:#7cff00;
-
-    font-size:15px;
-
-    font-weight:800;
+/* Texte central (X / 5 SUBS) */
+#progressText {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 13px;
+    font-weight: 900;
+    text-shadow: 
+        -1px -1px 0 #000,  
+         1px -1px 0 #000,
+        -1px  1px 0 #000,
+         1px  1px 0 #000; /* Contour noir autour du texte */
+    pointer-events: none;
 }
