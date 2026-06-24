@@ -53,8 +53,11 @@ function launchConfetti() {
 function createWheel() {
     const centerX = 400;
     const centerY = 400;
-    const radius = 330;
+    const radius = 350; // Diamètre total étendu pour la roue de 850px
     const angleSize = 360 / prizes.length;
+
+    // On s'assure de cibler le groupe ou la roue pour appliquer les éléments au bon endroit
+    const wheelGroup = document.getElementById("wheelGroup") || document.getElementById("wheel");
 
     for (let i = 0; i < prizes.length; i++) {
         const startAngle = i * angleSize;
@@ -71,78 +74,80 @@ function createWheel() {
         ].join(" ");
 
         const seg = document.getElementById("seg" + i);
-        seg.setAttribute("d", pathData);
-        seg.setAttribute("fill", colors[i]);
-        seg.setAttribute("stroke", "#53fc18");
-        seg.setAttribute("stroke-width", "4");
+        if (seg) {
+            seg.setAttribute("d", pathData);
+            seg.setAttribute("fill", colors[i]);
+            seg.setAttribute("stroke", "#53fc18");
+            seg.setAttribute("stroke-width", "4");
+        }
 
         const middleAngle = startAngle + angleSize / 2;
         
-        // On décale légèrement le rayon vers l'extérieur (250) pour laisser respirer le logo central
-        const textPos = polarToCartesian(centerX, centerY, 250, middleAngle);
+        // Positionnement idéal pour la taille de 850px (dégage le logo central)
+        const textPos = polarToCartesian(centerX, centerY, 255, middleAngle);
 
         const txt = document.getElementById("txt" + i);
-        txt.setAttribute("x", textPos.x);
-        txt.setAttribute("y", textPos.y);
-        txt.setAttribute("transform", `rotate(${middleAngle + 90} ${textPos.x} ${textPos.y})`);
+        if (txt) {
+            txt.setAttribute("x", textPos.x);
+            txt.setAttribute("y", textPos.y);
+            txt.setAttribute("transform", `rotate(${middleAngle + 90} ${textPos.x} ${textPos.y})`);
+            txt.innerHTML = ""; // On vide le texte précédent avant de réinjecter
 
-        const label = prizes[i];
-        txt.innerHTML = "";
-
-        // DÉCOUPAGE INTELLIGENT SUR 3 LIGNES MAX
-        const words = label.split(" ");
-        
-        if (words.length >= 4 && label.length > 15) {
-            // On calcule la répartition des mots pour faire 3 tranches équilibrées
-            const totalWords = words.length;
-            const part = Math.ceil(totalWords / 3);
+            const label = prizes[i];
+            const words = label.split(" ");
             
-            const line1 = words.slice(0, part).join(" ");
-            const line2 = words.slice(part, part * 2).join(" ");
-            const line3 = words.slice(part * 2).join(" ");
+            // DÉCOUPAGE CHIRURGICAL SUR 3 LIGNES COMPACTES
+            if (words.length >= 4 && label.length > 15) {
+                const totalWords = words.length;
+                const part = Math.ceil(totalWords / 3);
+                
+                const line1 = words.slice(0, part).join(" ");
+                const line2 = words.slice(part, part * 2).join(" ");
+                const line3 = words.slice(part * 2).join(" ");
 
-            // Première ligne (décalée vers le haut)
-            const tspan1 = document.createElementNS("http://www.w3.org/2000/svg", "tspan");
-            tspan1.setAttribute("x", textPos.x);
-            tspan1.setAttribute("dy", "-12"); 
-            tspan1.textContent = line1;
+                // Ligne 1
+                const tspan1 = document.createElementNS("http://www.w3.org/2000/svg", "tspan");
+                tspan1.setAttribute("x", textPos.x);
+                tspan1.setAttribute("dy", "-10"); 
+                tspan1.textContent = line1;
 
-            // Deuxième ligne (au centre)
-            const tspan2 = document.createElementNS("http://www.w3.org/2000/svg", "tspan");
-            tspan2.setAttribute("x", textPos.x);
-            tspan2.setAttribute("dy", "13"); 
-            tspan2.textContent = line2;
+                // Ligne 2
+                const tspan2 = document.createElementNS("http://www.w3.org/2000/svg", "tspan");
+                tspan2.setAttribute("x", textPos.x);
+                tspan2.setAttribute("dy", "11"); 
+                tspan2.textContent = line2;
 
-            // Troisième ligne (décalée vers le bas)
-            const tspan3 = document.createElementNS("http://www.w3.org/2000/svg", "tspan");
-            tspan3.setAttribute("x", textPos.x);
-            tspan3.setAttribute("dy", "13"); 
-            tspan3.textContent = line3;
+                // Ligne 3
+                const tspan3 = document.createElementNS("http://www.w3.org/2000/svg", "tspan");
+                tspan3.setAttribute("x", textPos.x);
+                tspan3.setAttribute("dy", "11"); 
+                tspan3.textContent = line3;
 
-            txt.appendChild(tspan1);
-            txt.appendChild(tspan2);
-            txt.appendChild(tspan3);
-        } else if (label.length > 12) {
-            // Sécurité si le texte est moyennement long : découpage classique en 2 lignes
-            const mid = Math.ceil(words.length / 2);
-            const line1 = words.slice(0, mid).join(" ");
-            const line2 = words.slice(mid).join(" ");
+                txt.appendChild(tspan1);
+                txt.appendChild(tspan2);
+                txt.appendChild(tspan3);
+            } else if (label.length > 12) {
+                // Découpage de sécurité sur 2 lignes si texte moyen
+                const mid = Math.ceil(words.length / 2);
+                const line1 = words.slice(0, mid).join(" ");
+                const line2 = words.slice(mid).join(" ");
 
-            const tspan1 = document.createElementNS("http://www.w3.org/2000/svg", "tspan");
-            tspan1.setAttribute("x", textPos.x);
-            tspan1.setAttribute("dy", "-6");
-            tspan1.textContent = line1;
+                const tspan1 = document.createElementNS("http://www.w3.org/2000/svg", "tspan");
+                tspan1.setAttribute("x", textPos.x);
+                tspan1.setAttribute("dy", "-5");
+                tspan1.textContent = line1;
 
-            const tspan2 = document.createElementNS("http://www.w3.org/2000/svg", "tspan");
-            tspan2.setAttribute("x", textPos.x);
-            tspan2.setAttribute("dy", "14");
-            tspan2.textContent = line2;
+                const tspan2 = document.createElementNS("http://www.w3.org/2000/svg", "tspan");
+                tspan2.setAttribute("x", textPos.x);
+                tspan2.setAttribute("dy", "12");
+                tspan2.textContent = line2;
 
-            txt.appendChild(tspan1);
-            txt.appendChild(tspan2);
-        } else {
-            // Si le texte est très court (ex: "🔄 ReSpin"), on le laisse sur une seule ligne
-            txt.textContent = label;
+                txt.appendChild(tspan1);
+                txt.appendChild(tspan2);
+            } else {
+                // Une seule ligne pour les textes courts (ex: ReSpin)
+                txt.textContent = label;
+            }
         }
     }
 }
