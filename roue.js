@@ -1,4 +1,4 @@
-const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSScVihkW4AxYZ2yvxfcKHDaYDkJTq6BRVuGscjPq1HLVL8YaiT5DGpLRnzI3T-hcjwIYmtCnUsSPG1/pub?gid=0&single=true&output=csv";
+const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRYpO5M5w8fIsav1NY5tUj9JR8kEdtfrjc_qPUd8BVYRDCfzJQ1TY9Z9npR4naD2CR752yZAZqJL2U6/pub?output=csv";
 
 const prizes = [
     "📜 10 MIN DE SILENCE...MUTISME LÉGENDAIRE",
