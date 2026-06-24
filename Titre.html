@@ -2,12 +2,15 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Titre Casino</title>
+    <title>Titre Casino Premium</title>
     <style>
+        /* Importation d'une police beaucoup plus moderne et agressive */
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap');
+
         body {
             margin: 0;
             padding: 0;
-            background: transparent; /* Transparent pour OBS */
+            background: transparent;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -16,57 +19,78 @@
             overflow: hidden;
         }
 
-        /* LE STYLE DU TITRE CASINO INTÉGRÉ */
-        .casino-banner-title {
-            font-family: 'Impact', 'Arial Black', sans-serif;
-            font-size: 46px;             /* Taille XL pour le stream */
-            font-weight: 900;
-            color: #ffffff;              /* Lettres blanches */
-            text-align: center;
-            text-transform: uppercase;   
-            letter-spacing: 2px;         
-            
-            /* TRIPLE EFFET : Contour noir + Ombre 3D + Halo Néon Vert Fluo */
-            text-shadow: 
-                -2px -2px 0 #000,  
-                 2px -2px 0 #000,
-                -2px  2px 0 #000,
-                 2px  2px 0 #000,
-                 0px  4px 8px rgba(0, 0, 0, 0.8),
-                 0px  0px 15px #53fc18,   
-                 0px  0px 25px #53fc18;   
-
-            /* Animation de pulsation du néon vert */
-            animation: neonPulse 1.5s infinite alternate ease-in-out;
+        /* 🎰 LE BANDEAU DE CASINO LUXE */
+        .casino-container {
+            background: linear-gradient(135deg, rgba(15, 15, 15, 0.95) 0%, rgba(5, 5, 5, 0.98) 100%);
+            padding: 15px 50px;
+            border-radius: 50px; /* Bords bien arrondis style capsule */
+            border: 3px solid #53fc18;
+            box-shadow: 
+                0 0 20px rgba(83, 252, 24, 0.3),
+                inset 0 0 15px rgba(83, 252, 24, 0.2),
+                0 10px 30px rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: floatingBanner 4s infinite ease-in-out;
         }
 
-        /* L'animation qui fait vibrer le titre */
-        @keyframes neonPulse {
-            from {
-                transform: scale(1);
-                text-shadow: 
-                    -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000,
-                    0px 4px 8px rgba(0, 0, 0, 0.8),
-                    0px 0px 12px #53fc18,
-                    0px 0px 20px #53fc18;
-            }
-            to {
-                transform: scale(1.03); /* Légère oscillation */
-                text-shadow: 
-                    -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000,
-                    0px 4px 8px rgba(0, 0, 0, 0.8),
-                    0px 0px 20px #53fc18,
-                    0px 0px 35px #53fc18; /* Le néon brille plus fort */
-            }
+        /* ✍️ LE TITRE TEXTE EN OR BLANC MÉTALLIQUE */
+        .casino-banner-title {
+            font-family: 'Montserrat', 'Arial Black', sans-serif;
+            font-size: 38px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #ffffff;
+            
+            /* Effet dégradé Chrome/Argenté sur le texte */
+            background: linear-gradient(to bottom, #ffffff 0%, #e0e0e0 40%, #b3b3b3 55%, #ffffff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+
+            /* Ombre portée noire pour détacher les lettres du fond */
+            filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.8));
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        /* Style spécial pour les émojis pour qu'ils gardent leur punch */
+        .emoji {
+            -webkit-text-fill-color: initial; /* Empêche le dégradé de casser l'émoji */
+            filter: drop-shadow(0 0 8px #53fc18);
+            animation: iconPulse 1.5s infinite alternate;
+        }
+
+        /* ==========================================
+           ANIMATIONS PROS
+        ========================================== */
+        
+        /* Légère oscillation de haut en bas pour donner de la vie */
+        @keyframes floatingBanner {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-6px); box-shadow: 0 0 30px rgba(83, 252, 24, 0.5), 0 15px 35px rgba(0, 0, 0, 0.8); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* Pulsation sur les smileys Casino */
+        @keyframes iconPulse {
+            from { transform: scale(1); }
+            to { transform: scale(1.12); }
         }
     </style>
 </head>
 <body>
 
-    <div class="casino-banner-title">
-        🎰 CASINO DES DESTINS : PLACEZ VOS JEUX ! 🥜
+    <!-- Structure du bandeau haut de gamme -->
+    <div class="casino-container">
+        <div class="casino-banner-title">
+            <span class="emoji">🎰</span>
+            CASINO DES DESTINS : PLACEZ VOS JEUX !
+            <span class="emoji">🥜</span>
+        </div>
     </div>
 
 </body>
 </html>
-
