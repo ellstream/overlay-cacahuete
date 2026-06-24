@@ -1,46 +1,28 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<link rel="stylesheet" href="jauge.css">
-
-<title>Mega Spin</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JAUGE CASINO DES DESTINS</title>
+    <link rel="stylesheet" href="jauge.css">
 </head>
 <body>
 
-<div class="avatar-wrap">
-
-</div>
-
-    <div class="content">
-
-        <div class="title">
-            ⚡ MEGA SPIN CHARGÉ
+    <div id="casinoBarContainer">
+        <!-- Titre du concept -->
+        <div id="casinoHeader">
+            <span class="casinoTitle">🎰 CASINO DES DESTINS</span>
+            <span id="casinoLevel">⭐ NIVEAU : 1</span>
         </div>
 
-        <div class="progress-container">
-
-            <div class="progress-bar">
-                <div id="fill" class="fill"></div>
-            </div>
-
-            <div id="percent" class="percent">
-                0%
-            </div>
-
+        <!-- Conteneur de la barre de progression -->
+        <div id="progressWrapper">
+            <div id="progressBarFill"></div>
+            <!-- Texte au-dessus de la jauge -->
+            <div id="progressText">0 / 5 SUBS</div>
         </div>
-
-        <div id="counter" class="counter">
-            0 / 50 SUBS
-        </div>
-
     </div>
 
-</div>
-
-<script src="jauge.js"></script>
-
+    <script src="jauge.js"></script>
 </body>
 </html>
