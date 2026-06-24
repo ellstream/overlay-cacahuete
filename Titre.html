@@ -7,7 +7,7 @@
         body {
             margin: 0;
             padding: 0;
-            background: transparent;
+            background: transparent; /* Transparent pour OBS */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -15,7 +15,50 @@
             height: 100vh;
             overflow: hidden;
         }
-        /* Tu colles le bloc .casino-banner-title du CSS ci-dessus ici */
+
+        /* LE STYLE DU TITRE CASINO INTÉGRÉ */
+        .casino-banner-title {
+            font-family: 'Impact', 'Arial Black', sans-serif;
+            font-size: 46px;             /* Taille XL pour le stream */
+            font-weight: 900;
+            color: #ffffff;              /* Lettres blanches */
+            text-align: center;
+            text-transform: uppercase;   
+            letter-spacing: 2px;         
+            
+            /* TRIPLE EFFET : Contour noir + Ombre 3D + Halo Néon Vert Fluo */
+            text-shadow: 
+                -2px -2px 0 #000,  
+                 2px -2px 0 #000,
+                -2px  2px 0 #000,
+                 2px  2px 0 #000,
+                 0px  4px 8px rgba(0, 0, 0, 0.8),
+                 0px  0px 15px #53fc18,   
+                 0px  0px 25px #53fc18;   
+
+            /* Animation de pulsation du néon vert */
+            animation: neonPulse 1.5s infinite alternate ease-in-out;
+        }
+
+        /* L'animation qui fait vibrer le titre */
+        @keyframes neonPulse {
+            from {
+                transform: scale(1);
+                text-shadow: 
+                    -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000,
+                    0px 4px 8px rgba(0, 0, 0, 0.8),
+                    0px 0px 12px #53fc18,
+                    0px 0px 20px #53fc18;
+            }
+            to {
+                transform: scale(1.03); /* Légère oscillation */
+                text-shadow: 
+                    -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000,
+                    0px 4px 8px rgba(0, 0, 0, 0.8),
+                    0px 0px 20px #53fc18,
+                    0px 0px 35px #53fc18; /* Le néon brille plus fort */
+            }
+        }
     </style>
 </head>
 <body>
