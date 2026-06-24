@@ -4,18 +4,76 @@
     <meta charset="UTF-8">
     <title>Overlay Apero</title>
     <style>
-        body { margin: 0; padding: 0; background: transparent; overflow: hidden; font-family: sans-serif; }
+        body { 
+            margin: 0; 
+            padding: 0; 
+            background: transparent; 
+            overflow: hidden; 
+            font-family: 'Impact', sans-serif; 
+        }
+        
+        .apero-container {
+            width: 100vw; 
+            height: 100vh; 
+            position: relative;
+        }
+
         .apero-bar {
-            width: 100%; height: 120px;
+            width: 100%; 
+            height: 120px;
             background: linear-gradient(90deg, #ff4e00, #ffb800);
-            display: flex; align-items: center; justify-content: center;
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
             border-bottom: 8px solid #ffdc00;
-            color: #fff; font-size: 48px; font-weight: bold;
-            text-transform: uppercase; text-shadow: 3px 3px 0 #000;
+            color: #fff; 
+            font-size: 50px; 
+            text-transform: uppercase;
+            text-shadow: 3px 3px 0 #000; 
+            position: absolute; 
+            top: 0; 
+            z-index: 10;
+        }
+
+        /* Les verres qui flottent */
+        .glass {
+            position: absolute; 
+            font-size: 60px;
+            animation: float 4s linear infinite;
+            pointer-events: none; /* Empêche les verres de bloquer la souris */
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
         }
     </style>
 </head>
 <body>
-    <div class="apero-bar">🍻 C'EST L'HEURE DE L'APÉRO ! 🥂</div>
+    <div class="apero-container">
+        <div class="apero-bar">🍻 C'EST L'HEURE DE L'APÉRO SUR SCAM INDUSTRIES ! 🥂</div>
+        
+        <script>
+            // Génération dynamique des verres qui montent
+            function createGlass() {
+                const glass = document.createElement('div');
+                glass.className = 'glass';
+                glass.innerHTML = Math.random() > 0.5 ? '🍻' : '🥂';
+                glass.style.left = Math.random() * 100 + 'vw';
+                glass.style.animationDuration = (Math.random() * 2 + 3) + 's';
+                document.body.appendChild(glass);
+                
+                // Nettoyage automatique pour ne pas surcharger la mémoire
+                setTimeout(() => glass.remove(), 5000);
+            }
+            
+            // Crée un nouveau verre toutes les 500ms
+            setInterval(createGlass, 500);
+
+            // Recharge la page toutes les minutes pour éviter le cache
+            setInterval(() => window.location.reload(), 60000);
+        </script>
+    </div>
 </body>
 </html>
