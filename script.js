@@ -50,7 +50,7 @@ async function loadData(){
         const objectif =
             Number(megaText.split("/")[1]) || 5;
 
-        const restant =
+        const restant =(
             Math.max(0, objectif - megaValue);
 
         document.getElementById("megaRemaining").innerText =
