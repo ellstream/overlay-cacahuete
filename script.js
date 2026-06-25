@@ -44,31 +44,36 @@ async function loadData(){
         document.getElementById("mega").innerText =
             "🎰 Mega Spin : " + megaText;
 
-        const megaValue =
-            Number(megaText.split("/")[0]) || 0;
+ const megaText =
+    data["Mega Spin"] || "0/5";
 
-        const objectif =
-            Number(megaText.split("/")[1]) || 5;
+document.getElementById("mega").innerText =
+    "🎰 Mega Spin : " + megaText;
 
-        const restant =(
-            Math.max(0, objectif - megaValue);
+const megaValue =
+    Number(megaText.split("/")[0]) || 0;
 
-     document.getElementById("megaRemaining").innerText =
-    "⭐ Objectif=" + objectif +
-    " | Actuel=" + megaValue +
-    " | Restant=" + restant;
+const objectif =
+    Number(megaText.split("/")[1]) || 5;
 
-        if(megaValue >= objectif){
+const restant =
+    Math.max(0, objectif - megaValue);
 
-            document.getElementById("megaReady").style.display =
-                "block";
+document.getElementById("megaRemaining").innerText =
+    "⭐ " + restant +
+    " subs restants avant le Mega Spin";
 
-        }else{
+if(megaValue >= objectif){
 
-            document.getElementById("megaReady").style.display =
-                "none";
+    document.getElementById("megaReady").style.display =
+        "block";
 
-        }
+}else{
+
+    document.getElementById("megaReady").style.display =
+        "none";
+
+}
 
         /* =========================
            GOLDEN TICKETS
