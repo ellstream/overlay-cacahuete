@@ -53,8 +53,10 @@ async function loadData(){
         const restant =(
             Math.max(0, objectif - megaValue);
 
-        document.getElementById("megaRemaining").innerText =
-            "⭐ " + restant + " subs restants avant le Mega Spin";
+     document.getElementById("megaRemaining").innerText =
+    "⭐ Objectif=" + objectif +
+    " | Actuel=" + megaValue +
+    " | Restant=" + restant;
 
         if(megaValue >= objectif){
 
