@@ -151,26 +151,41 @@ function createCoins(){
 
     coins.innerHTML="";
 
+
     for(let i=0;i<80;i++){
+
 
         const coin=document.createElement("div");
 
+
         coin.className="coin";
+
 
         coin.innerHTML="🪙";
 
-        coin.style.left=Math.random()*100+"%";
 
-        coin.style.animationDuration=
-        (3+Math.random()*2)+"s";
+        coin.style.left =
+        Math.random()*1920 + "px";
 
-        coin.style.animationDelay=
-        (Math.random()*1.5)+"s";
 
-        coin.style.fontSize=
-        (28+Math.random()*30)+"px";
+        coin.style.top =
+        (-100 - Math.random()*500) + "px";
+
+
+        coin.style.animationDuration =
+        (3 + Math.random()*3) + "s";
+
+
+        coin.style.animationDelay =
+        Math.random()*2 + "s";
+
+
+        coin.style.fontSize =
+        (25 + Math.random()*40) + "px";
+
 
         coins.appendChild(coin);
+
 
     }
 
