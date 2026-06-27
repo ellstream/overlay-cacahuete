@@ -102,8 +102,8 @@ body {
 #casinoBox.red-mode {
     border-color: #ff2a2a !important;
     box-shadow: 
-        0 0 20px #ff2a2a,
-        0 0 40px rgba(255, 42, 42, 0.7) !important;
+        0 0 25px #ff2a2a,
+        0 0 45px rgba(255, 42, 42, 0.8) !important;
 }
 
 #casinoBox.red-mode #barFill {
