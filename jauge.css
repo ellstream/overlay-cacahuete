@@ -1,30 +1,38 @@
 html,body{
 
+
 margin:0;
 
 padding:0;
+
 
 width:1920px;
 
 height:1080px;
 
+
 overflow:hidden;
+
 
 background:transparent;
 
+
 font-family:
+
 Arial Black,
 Arial,
 sans-serif;
+
 
 }
 
 
 
 
-/* =========================
-   PANNEAU PRINCIPAL
-========================= */
+
+/* ==========================
+   PANNEAU
+========================== */
 
 
 #jauge{
@@ -35,7 +43,7 @@ position:absolute;
 
 left:710px;
 
-top:820px;
+top:760px;
 
 
 
@@ -47,15 +55,7 @@ height:170px;
 
 background:
 
-linear-gradient(
-
-180deg,
-
-rgba(0,0,0,.82),
-
-rgba(0,0,0,.55)
-
-);
+rgba(0,0,0,0.85);
 
 
 
@@ -68,7 +68,7 @@ border:
 box-shadow:
 
 
-inset 0 0 50px rgba(0,0,0,.9);
+inset 0 0 60px rgba(0,0,0,1);
 
 
 
@@ -85,40 +85,14 @@ transition:
 
 
 
-/* =========================
-   CASINO
-========================= */
 
 
-.casino{
+/* ==========================
+   TITRE
+========================== */
 
 
-border-color:#00ff66!important;
-
-
-
-box-shadow:
-
-
-0 0 15px #00ff66,
-
-0 0 50px rgba(0,255,100,.5),
-
-inset 0 0 50px rgba(0,255,100,.15);
-
-
-}
-
-
-
-
-
-/* =========================
-   HEADER
-========================= */
-
-
-.header{
+.title{
 
 
 height:45px;
@@ -133,75 +107,75 @@ align-items:center;
 justify-content:center;
 
 
-gap:12px;
-
-
 
 color:white;
 
 
-font-size:24px;
+
+font-size:26px;
+
 
 
 letter-spacing:3px;
 
 
 
-text-shadow:
+}
 
-0 0 15px #00ff66;
+
+
+
+
+/* ==========================
+   PASTILLES
+========================== */
+
+
+.lights{
+
+
+display:flex;
+
+
+justify-content:center;
+
+
+gap:25px;
+
+
+margin-top:20px;
 
 
 }
 
 
 
-.icon{
-
-font-size:28px;
-
-}
+.light{
 
 
+width:45px;
 
 
-/* =========================
-   BARRE
-========================= */
+height:45px;
 
 
-.vault{
+border-radius:50%;
 
-
-padding:
-
-10px 25px;
-
-
-}
-
-
-
-.bar-background{
-
-
-height:28px;
 
 
 background:
 
-rgba(0,0,0,.8);
+rgba(255,255,255,.08);
 
 
 
 border:
 
-1px solid rgba(255,255,255,.2);
+2px solid rgba(255,255,255,.2);
 
 
 
-overflow:hidden;
-
+transition:.8s;
 
 
 }
@@ -210,39 +184,96 @@ overflow:hidden;
 
 
 
-#barre{
+/* ==========================
+   COMPTEUR
+========================== */
 
 
-height:100%;
+#niveau{
 
 
-width:0%;
+text-align:center;
 
 
-background:
+margin-top:12px;
 
-linear-gradient(
 
-90deg,
+font-size:38px;
 
-#00ff66,
 
-#00ffaa
+color:white;
 
-);
+
+letter-spacing:8px;
+
+
+}
+
+
+
+
+.subtitle{
+
+
+text-align:center;
+
+
+color:white;
+
+
+font-size:16px;
+
+
+letter-spacing:4px;
+
+
+opacity:.8;
+
+
+}
+
+
+
+
+
+/* ==========================
+   CASINO VERT
+========================== */
+
+
+.casino{
+
+
+border-color:#00ff66!important;
 
 
 
 box-shadow:
 
 
-0 0 30px #00ff66;
+0 0 20px #00ff66,
+
+0 0 70px rgba(0,255,100,.5),
+
+inset 0 0 60px rgba(0,255,100,.15);
 
 
 
-transition:
+}
 
-width 1s ease;
+
+
+.casino .light.active{
+
+
+background:#00ff66;
+
+
+
+box-shadow:
+
+
+0 0 25px #00ff66;
 
 
 }
@@ -251,32 +282,14 @@ width 1s ease;
 
 
 
-/* =========================
-   COMPTEUR
-========================= */
-
-
-#compteur{
-
-
-text-align:center;
-
-
-font-size:40px;
-
-
-color:white;
-
-
-
-letter-spacing:6px;
-
+.casino .title,
+.casino #niveau{
 
 
 text-shadow:
 
-0 0 20px #00ff66;
 
+0 0 20px #00ff66;
 
 
 }
@@ -285,9 +298,10 @@ text-shadow:
 
 
 
-/* =========================
+
+/* ==========================
    SALLE INTERDITE
-========================= */
+========================== */
 
 
 .interdit{
@@ -300,35 +314,27 @@ border-color:#ff0033!important;
 box-shadow:
 
 
-0 0 20px red,
+0 0 25px red,
 
-0 0 80px rgba(255,0,0,.6),
+0 0 90px rgba(255,0,0,.6),
 
-inset 0 0 50px rgba(255,0,0,.2);
+inset 0 0 60px rgba(255,0,0,.2);
+
 
 
 }
 
 
 
-.interdit #barre{
+.interdit .light.active{
 
 
-background:
-
-linear-gradient(
-
-90deg,
-
-#ff0033,
-
-#ff5500
-
-);
+background:#ff0033;
 
 
 
 box-shadow:
+
 
 0 0 30px red;
 
@@ -337,13 +343,13 @@ box-shadow:
 
 
 
-.interdit .header,
-.interdit #compteur{
+.interdit .title,
+.interdit #niveau{
 
 
 text-shadow:
 
-0 0 20px red;
+0 0 25px red;
 
 
 }
@@ -352,9 +358,10 @@ text-shadow:
 
 
 
-/* =========================
+
+/* ==========================
    JACKPOT
-========================= */
+========================== */
 
 
 .jackpot{
@@ -363,63 +370,53 @@ text-shadow:
 border-color:#ffd700!important;
 
 
+
 box-shadow:
 
 
-0 0 30px gold,
+0 0 35px gold,
 
 0 0 120px orange,
 
-inset 0 0 70px rgba(255,215,0,.3);
+inset 0 0 80px rgba(255,215,0,.3);
+
 
 
 animation:
 
-jackpotPulse .5s infinite;
+pulseGold .5s infinite;
+
 
 
 }
 
 
 
+.jackpot .light.active{
 
-.jackpot #barre{
 
-
-background:
-
-linear-gradient(
-
-90deg,
-
-gold,
-
-yellow,
-
-orange
-
-);
+background:#ffd700;
 
 
 
 box-shadow:
 
-0 0 50px gold;
+
+0 0 40px gold;
 
 
 }
 
 
 
-
-
-.jackpot .header,
-.jackpot #compteur{
+.jackpot .title,
+.jackpot #niveau{
 
 
 text-shadow:
 
-0 0 30px gold;
+
+0 0 35px gold;
 
 
 }
@@ -427,16 +424,13 @@ text-shadow:
 
 
 
-
-@keyframes jackpotPulse{
+@keyframes pulseGold{
 
 
 50%{
 
 
-filter:
-
-brightness(1.5);
+filter:brightness(1.8);
 
 
 }
@@ -448,10 +442,9 @@ brightness(1.5);
 
 
 
-/* =========================
-   REFLET ANIME
-========================= */
 
+
+/* REFLET */
 
 .shine{
 
@@ -461,12 +454,15 @@ position:absolute;
 
 top:0;
 
-left:-100px;
+
+left:-150px;
 
 
-width:60px;
+width:80px;
+
 
 height:100%;
+
 
 
 background:
@@ -483,120 +479,24 @@ skewX(-20deg);
 
 animation:
 
-shineMove 4s infinite;
+shine 5s infinite;
+
 
 
 }
 
 
 
-
-@keyframes shineMove{
+@keyframes shine{
 
 
 to{
 
-left:600px;
 
-}
-
-
-}
-
-
-
-
-
-/* =========================
-   PARTICULES
-========================= */
-
-
-.particles span{
-
-
-position:absolute;
-
-
-bottom:-50px;
-
-
-opacity:.08;
-
-
-font-size:50px;
-
-
-animation:
-
-float 8s infinite;
+left:700px;
 
 
 }
 
 
-
-.particles span:nth-child(1){
-
-left:10%;
-
-}
-
-
-.particles span:nth-child(2){
-
-left:35%;
-
-animation-delay:2s;
-
-}
-
-
-.particles span:nth-child(3){
-
-left:65%;
-
-animation-delay:4s;
-
-}
-
-
-.particles span:nth-child(4){
-
-left:85%;
-
-animation-delay:6s;
-
-}
-
-
-
-
-
-@keyframes float{
-
-
-from{
-
-transform:
-
-translateY(0);
-
-
-}
-
-
-
-to{
-
-transform:
-
-translateY(-250px);
-
-
-}
-
-
-
-}
 }
