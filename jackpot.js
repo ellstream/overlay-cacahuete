@@ -63,27 +63,31 @@ function launchJackpot(){
 
     createParticles();
 
-    setTimeout(()=>{
+   setTimeout(()=>{
 
-        overlay.classList.remove("show","pulse");
+    overlay.classList.remove("show","pulse");
 
-        overlay.classList.add("hide");
+    overlay.classList.add("hide");
 
-        halo.classList.remove("haloShow");
 
-        flash.classList.remove("flash");
+    halo.classList.remove("haloShow");
 
-        coins.innerHTML="";
 
-        tickets.innerHTML="";
+    flash.classList.remove("flash");
 
-        particles.innerHTML="";
 
-        jackpotActif=false;
+    coins.innerHTML="";
 
-    },5000);
+    tickets.innerHTML="";
 
-}
+    particles.innerHTML="";
+
+
+    jackpotActif=false;
+
+
+},7500);
+
 
 function animateCasinoTitle(){
 
