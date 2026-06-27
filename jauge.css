@@ -1,136 +1,216 @@
 html,body{
 
-
 margin:0;
 
 padding:0;
-
 
 width:1920px;
 
 height:1080px;
 
-
 overflow:hidden;
-
 
 background:transparent;
 
-
-font-family:Arial Black, sans-serif;
-
+font-family:
+Arial Black,
+Arial,
+sans-serif;
 
 }
 
 
 
 
+/* =========================
+   PANNEAU PRINCIPAL
+========================= */
 
-/* CONTENEUR */
 
+#jauge{
 
-#jauge {
 
 position:absolute;
 
-left:760px;
 
-top:760px;
+left:710px;
 
-width:420px;
+top:820px;
 
-height:130px;
 
-}
+
+width:500px;
+
+height:170px;
+
+
 
 background:
 
 linear-gradient(
+
 180deg,
-rgba(0,0,0,0.75),
-rgba(0,0,0,0.45)
+
+rgba(0,0,0,.82),
+
+rgba(0,0,0,.55)
+
 );
 
-border:2px solid rgba(255,255,255,.15);
 
-backdrop-filter:blur(4px);
+
+border:
+
+2px solid rgba(255,255,255,.15);
+
+
 
 box-shadow:
 
-0 0 20px rgba(0,255,100,.5),
-inset 0 0 40px rgba(0,0,0,.8);
 
-
-transition:1s;
+inset 0 0 50px rgba(0,0,0,.9);
 
 
 
 overflow:hidden;
 
 
+transition:
+
+1s;
+
+
 }
 
 
-/* TITRE */
 
 
-.titre{
+/* =========================
+   CASINO
+========================= */
 
 
-text-align:center;
+.casino{
+
+
+border-color:#00ff66!important;
+
+
+
+box-shadow:
+
+
+0 0 15px #00ff66,
+
+0 0 50px rgba(0,255,100,.5),
+
+inset 0 0 50px rgba(0,255,100,.15);
+
+
+}
+
+
+
+
+
+/* =========================
+   HEADER
+========================= */
+
+
+.header{
+
+
+height:45px;
+
+
+display:flex;
+
+
+align-items:center;
+
+
+justify-content:center;
+
+
+gap:12px;
+
 
 
 color:white;
 
 
-font-size:22px;
+font-size:24px;
+
+
 letter-spacing:3px;
-text-transform:uppercase;
+
+
 
 text-shadow:
 
-0 0 10px #00ff66;
-
-
-margin-bottom:20px;
+0 0 15px #00ff66;
 
 
 }
 
 
 
+.icon{
+
+font-size:28px;
+
+}
 
 
-/* BARRE */
 
 
-.barre-container{
+/* =========================
+   BARRE
+========================= */
 
 
-height:30px;
+.vault{
 
 
-border:
+padding:
 
-2px solid white;
+10px 25px;
 
+
+}
+
+
+
+.bar-background{
+
+
+height:28px;
 
 
 background:
 
-rgba(0,0,0,.7);
+rgba(0,0,0,.8);
+
+
+
+border:
+
+1px solid rgba(255,255,255,.2);
 
 
 
 overflow:hidden;
 
 
+
 }
 
 
 
 
-.barre{
+
+#barre{
 
 
 height:100%;
@@ -139,29 +219,30 @@ height:100%;
 width:0%;
 
 
-.barre {
-
 background:
 
 linear-gradient(
+
 90deg,
+
 #00ff66,
+
 #00ffaa
+
 );
+
 
 
 box-shadow:
 
-0 0 25px #00ff66;
 
-}
+0 0 30px #00ff66;
+
 
 
 transition:
 
-width 1s ease,
-
-background 1s;
+width 1s ease;
 
 
 }
@@ -170,33 +251,31 @@ background 1s;
 
 
 
+/* =========================
+   COMPTEUR
+========================= */
 
 
-/* COMPTEUR */
-
-
-.compteur{
+#compteur{
 
 
 text-align:center;
 
 
-margin-top:15px;
-
-
-font-size:42px;
-
-letter-spacing:5px;
+font-size:40px;
 
 
 color:white;
 
 
 
+letter-spacing:6px;
+
+
+
 text-shadow:
 
-
-0 0 15px #00ff66;
+0 0 20px #00ff66;
 
 
 
@@ -206,13 +285,240 @@ text-shadow:
 
 
 
-/* SYMBOLS */
+/* =========================
+   SALLE INTERDITE
+========================= */
 
 
-.particules span{
+.interdit{
+
+
+border-color:#ff0033!important;
+
+
+
+box-shadow:
+
+
+0 0 20px red,
+
+0 0 80px rgba(255,0,0,.6),
+
+inset 0 0 50px rgba(255,0,0,.2);
+
+
+}
+
+
+
+.interdit #barre{
+
+
+background:
+
+linear-gradient(
+
+90deg,
+
+#ff0033,
+
+#ff5500
+
+);
+
+
+
+box-shadow:
+
+0 0 30px red;
+
+
+}
+
+
+
+.interdit .header,
+.interdit #compteur{
+
+
+text-shadow:
+
+0 0 20px red;
+
+
+}
+
+
+
+
+
+/* =========================
+   JACKPOT
+========================= */
+
+
+.jackpot{
+
+
+border-color:#ffd700!important;
+
+
+box-shadow:
+
+
+0 0 30px gold,
+
+0 0 120px orange,
+
+inset 0 0 70px rgba(255,215,0,.3);
+
+
+animation:
+
+jackpotPulse .5s infinite;
+
+
+}
+
+
+
+
+.jackpot #barre{
+
+
+background:
+
+linear-gradient(
+
+90deg,
+
+gold,
+
+yellow,
+
+orange
+
+);
+
+
+
+box-shadow:
+
+0 0 50px gold;
+
+
+}
+
+
+
+
+
+.jackpot .header,
+.jackpot #compteur{
+
+
+text-shadow:
+
+0 0 30px gold;
+
+
+}
+
+
+
+
+
+@keyframes jackpotPulse{
+
+
+50%{
+
+
+filter:
+
+brightness(1.5);
+
+
+}
+
+
+}
+
+
+
+
+
+/* =========================
+   REFLET ANIME
+========================= */
+
+
+.shine{
 
 
 position:absolute;
+
+
+top:0;
+
+left:-100px;
+
+
+width:60px;
+
+height:100%;
+
+
+background:
+
+rgba(255,255,255,.15);
+
+
+
+transform:
+
+skewX(-20deg);
+
+
+
+animation:
+
+shineMove 4s infinite;
+
+
+}
+
+
+
+
+@keyframes shineMove{
+
+
+to{
+
+left:600px;
+
+}
+
+
+}
+
+
+
+
+
+/* =========================
+   PARTICULES
+========================= */
+
+
+.particles span{
+
+
+position:absolute;
+
+
+bottom:-50px;
 
 
 opacity:.08;
@@ -226,29 +532,27 @@ animation:
 float 8s infinite;
 
 
-
 }
 
 
 
-.particules span:nth-child(1){
+.particles span:nth-child(1){
 
-left:20%;
+left:10%;
 
 }
 
 
-.particules span:nth-child(2){
+.particles span:nth-child(2){
 
-left:40%;
+left:35%;
 
 animation-delay:2s;
 
 }
 
 
-
-.particules span:nth-child(3){
+.particles span:nth-child(3){
 
 left:65%;
 
@@ -257,8 +561,7 @@ animation-delay:4s;
 }
 
 
-
-.particules span:nth-child(4){
+.particles span:nth-child(4){
 
 left:85%;
 
@@ -277,144 +580,23 @@ from{
 
 transform:
 
-translateY(150px);
+translateY(0);
+
 
 }
+
 
 
 to{
 
 transform:
 
-translateY(-200px);
-
-}
+translateY(-250px);
 
 
 }
 
 
 
-
-
-
-/* SALLE INTERDITE */
-
-
-#jauge.interdit{
-
-
-border-color:red;
-
-
-box-shadow:
-
-
-0 0 20px red,
-
-0 0 70px rgba(255,0,0,.7);
-
-
-
 }
-
-
-
-#jauge.interdit .barre{
-
-
-background:red;
-
-
-box-shadow:
-
-0 0 30px red;
-
-
-}
-
-
-
-#jauge.interdit .titre{
-
-
-text-shadow:
-
-0 0 20px red;
-
-
-}
-
-
-
-
-
-
-
-/* JACKPOT */
-
-
-#jauge.jackpot{
-
-
-border-color:gold;
-
-
-box-shadow:
-
-
-0 0 30px gold,
-
-0 0 120px orange;
-
-
-
-animation:
-
-jackpot 0.5s infinite;
-
-
-}
-
-
-
-#jauge.jackpot .barre{
-
-
-background:gold;
-
-
-box-shadow:
-
-0 0 40px gold;
-
-
-}
-
-
-
-#jauge.jackpot .titre{
-
-
-text-shadow:
-
-0 0 30px gold;
-
-
-}
-
-
-
-
-
-@keyframes jackpot{
-
-
-50%{
-
-filter:brightness(2);
-
-}
-
-
 }
