@@ -63,7 +63,7 @@ function launchJackpot(){
 
     createParticles();
 
-   setTimeout(()=>{
+setTimeout(()=>{
 
     overlay.classList.remove("show","pulse");
 
@@ -89,58 +89,57 @@ function launchJackpot(){
 },7500);
 
 
+} // <-- IMPORTANT : fermeture launchJackpot
+
+
+
 function animateCasinoTitle(){
 
 
-title.classList.remove("lit");
+    title.classList.remove("lit");
 
-subtitle.classList.remove("lit");
-
-
-
-let letters =
-title.querySelectorAll("span");
+    subtitle.classList.remove("lit");
 
 
-
-letters.forEach((letter,index)=>{
-
-
-setTimeout(()=>{
+    let letters =
+    title.querySelectorAll("span");
 
 
-letter.style.opacity="1";
+    letters.forEach((letter,index)=>{
 
 
-letter.style.textShadow=
-`
-0 0 20px #FFD700,
-0 0 60px orange,
-0 0 100px gold
-`;
+        setTimeout(()=>{
 
 
-
-letter.style.transform=
-"scale(1.15)";
+            letter.style.opacity="1";
 
 
+            letter.style.textShadow=
+            `
+            0 0 20px #FFD700,
+            0 0 60px orange,
+            0 0 100px gold
+            `;
 
-},index*150);
+
+            letter.style.transform=
+            "scale(1.15)";
 
 
+        },index*150);
 
-});
+
+    });
 
 
 
-setTimeout(()=>{
+    setTimeout(()=>{
 
 
-subtitle.classList.add("lit");
+        subtitle.classList.add("lit");
 
 
-},1200);
+    },1200);
 
 
 }
