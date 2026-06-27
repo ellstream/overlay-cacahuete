@@ -42,33 +42,25 @@ position:absolute;
 
 #vault{
 
-left:700px;
-top:600px;
+position:absolute;
 
-}
+left:760px;
+top:620px;
 
-width:620px;
 
-height:170px;
-
+width:420px;
+height:130px;
 
 
 background:
 
-rgba(0,0,0,0.88);
+rgba(0,0,0,0.90);
 
 
 
 border:
 
-3px solid rgba(255,255,255,.15);
-
-
-
-box-shadow:
-
-
-inset 0 0 60px rgba(0,0,0,1);
+2px solid rgba(255,255,255,.15);
 
 
 
@@ -79,7 +71,6 @@ transition:1s;
 
 
 }
-
 
 
 
@@ -113,21 +104,15 @@ rgba(255,255,255,.2);
 
 .title{
 
-
 text-align:center;
 
+margin-top:8px;
 
-margin-top:12px;
+font-size:20px;
 
-
-font-size:28px;
-
-
-letter-spacing:5px;
-
+letter-spacing:4px;
 
 color:white;
-
 
 }
 
@@ -173,32 +158,36 @@ opacity:.8;
 position:absolute;
 
 
-left:40px;
+left:35px;
+
+right:35px;
 
 
-right:40px;
-
-
-bottom:55px;
+bottom:38px;
 
 
 
-height:25px;
+height:18px;
+
 
 
 background:
 
-rgba(0,0,0,.9);
+rgba(255,255,255,.08);
 
 
 
 border:
 
-1px solid rgba(255,255,255,.25);
+1px solid rgba(255,255,255,.4);
 
+
+
+overflow:hidden;
 
 
 }
+
 
 
 
@@ -212,26 +201,34 @@ height:100%;
 width:0%;
 
 
+background:
+
+
+linear-gradient(
+
+90deg,
+
+#00ff66,
+
+#00ffaa
+
+);
+
+
+
+box-shadow:
+
+
+0 0 20px #00ff66;
+
+
 
 transition:
 
 width 1s ease;
 
 
-
-background:
-
-#00ff66;
-
-
-
-box-shadow:
-
-0 0 25px #00ff66;
-
-
 }
-
 
 
 
@@ -247,7 +244,7 @@ box-shadow:
 position:absolute;
 
 
-bottom:10px;
+bottom:5px;
 
 
 width:100%;
@@ -256,17 +253,16 @@ width:100%;
 text-align:center;
 
 
-font-size:35px;
+font-size:26px;
 
 
-letter-spacing:8px;
+letter-spacing:5px;
 
 
 color:white;
 
 
 }
-
 
 
 
@@ -313,7 +309,7 @@ text-shadow:
 
 
 /* =========================
-   INTERDIT
+   SALLE INTERDITE
 ========================= */
 
 
@@ -327,14 +323,16 @@ border-color:#ff0033!important;
 box-shadow:
 
 
-0 0 25px red,
+0 0 25px #ff0033,
 
 0 0 100px rgba(255,0,0,.6),
 
 inset 0 0 60px rgba(255,0,0,.2);
 
 
+
 }
+
 
 
 
@@ -349,7 +347,7 @@ linear-gradient(
 
 #ff0033,
 
-#ff5500
+#ff6600
 
 );
 
@@ -357,10 +355,16 @@ linear-gradient(
 
 box-shadow:
 
-0 0 30px red;
+
+0 0 35px #ff0033,
+
+0 0 60px rgba(255,0,0,.8);
+
 
 
 }
+
+
 
 
 
@@ -370,15 +374,39 @@ box-shadow:
 
 text-shadow:
 
-0 0 25px red;
 
+0 0 25px #ff0033,
+
+0 0 50px rgba(255,0,0,.8);
+
+
+
+}
+
+.interdit{
+
+animation:
+
+redPulse 2s infinite;
 
 }
 
 
 
+@keyframes redPulse{
 
 
+50%{
+
+
+filter:brightness(1.25);
+
+
+}
+
+
+}
+   
 /* =========================
    JACKPOT
 ========================= */
@@ -396,7 +424,7 @@ box-shadow:
 
 0 0 35px gold,
 
-0 0 140px orange,
+0 0 120px orange,
 
 inset 0 0 80px rgba(255,215,0,.3);
 
@@ -404,10 +432,12 @@ inset 0 0 80px rgba(255,215,0,.3);
 
 animation:
 
-goldPulse .5s infinite;
+jackpotPulse 0.8s infinite;
 
 
 }
+
+
 
 
 
@@ -420,11 +450,11 @@ linear-gradient(
 
 90deg,
 
-gold,
+#ffd700,
 
-yellow,
+#fff200,
 
-orange
+#ff9900
 
 );
 
@@ -432,10 +462,23 @@ orange
 
 box-shadow:
 
-0 0 40px gold;
+
+0 0 35px #ffd700,
+
+0 0 70px orange,
+
+0 0 100px rgba(255,215,0,.8);
+
+
+
+animation:
+
+goldBarPulse 1s infinite;
 
 
 }
+
+
 
 
 
@@ -446,7 +489,9 @@ box-shadow:
 text-shadow:
 
 
-0 0 35px gold;
+0 0 30px gold,
+
+0 0 60px orange;
 
 
 }
@@ -455,14 +500,15 @@ text-shadow:
 
 
 
-@keyframes goldPulse{
+@keyframes jackpotPulse{
 
 
 50%{
 
+
 filter:
 
-brightness(1.8);
+brightness(1.4);
 
 
 }
@@ -471,6 +517,24 @@ brightness(1.8);
 }
 
 
+
+
+
+@keyframes goldBarPulse{
+
+
+50%{
+
+
+filter:
+
+brightness(1.5);
+
+
+}
+
+
+}
 
 
 
