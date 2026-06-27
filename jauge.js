@@ -1,15 +1,14 @@
 let jetonsActuels = -1;
 
-
 const jauge = document.getElementById("jauge");
 const barre = document.getElementById("barre");
 const compteur = document.getElementById("compteur");
 
 
+// GOOGLE SHEET CSV
+
 const sheetURL =
 "https://docs.google.com/spreadsheets/d/e/2PACX-1vRzMx8EveEFg84HJSOU5IempyqWc4sshrrzocmTAKNf5yNY8ihEqCnJ4vtyyujEsvRPNN3Uv_uUTzAF/pub?output=csv";
-
-
 
 
 
@@ -43,7 +42,6 @@ function changerJauge(valeur){
     }
 
 
-
     else if(valeur < 5){
 
         jauge.classList.add("interdit");
@@ -51,14 +49,14 @@ function changerJauge(valeur){
     }
 
 
-
-    else{
+    else {
 
 
         jauge.classList.add("jackpot");
 
 
         setTimeout(()=>{
+
 
             jauge.classList.remove("jackpot");
 
@@ -70,9 +68,7 @@ function changerJauge(valeur){
 
     }
 
-
 }
-
 
 
 
@@ -80,56 +76,62 @@ function changerJauge(valeur){
 async function lireGoogleSheet(){
 
 
-try{
+    try{
 
 
-    const response =
-    await fetch(sheetURL + "&cache=" + Date.now());
+        const response =
+        await fetch(
+            sheetURL + "&cache=" + Date.now()
+        );
 
 
-    const data =
-    await response.text();
-
-
-
-    const match =
-    data.match(/\d+/);
+        const data =
+        await response.text();
 
 
 
-    if(!match){
+        const resultat =
+        data.match(/\d+/);
 
-        console.log("Aucun nombre trouvé");
 
-        return;
+
+        if(!resultat){
+
+            console.log(
+            "Pas de valeur trouvée"
+            );
+
+            return;
+
+        }
+
+
+
+        const valeur =
+        parseInt(resultat[0]);
+
+
+
+        if(valeur !== jetonsActuels){
+
+            changerJauge(valeur);
+
+        }
+
 
     }
 
 
-
-    const valeur =
-    parseInt(match[0]);
+    catch(error){
 
 
+        console.error(
+        "Erreur Google Sheet",
+        error
+        );
 
-    if(valeur !== jetonsActuels){
-
-        changerJauge(valeur);
 
     }
-
-
-}
-
-
-catch(error){
-
-console.error(
-"Erreur Google Sheet :",
-error
-);
-
-}
 
 
 }
@@ -138,9 +140,10 @@ error
 
 
 setInterval(
-lireGoogleSheet,
-3000
+    lireGoogleSheet,
+    3000
 );
+
 
 
 lireGoogleSheet();
