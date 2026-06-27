@@ -22,6 +22,7 @@ function updateVault(value){
     jetonsActuels = value;
 
 
+
     compteur.textContent =
     value + " / 5";
 
@@ -32,11 +33,18 @@ function updateVault(value){
 
 
 
+
     vault.classList.remove(
+
         "casino",
+
         "interdit",
+
         "jackpot"
+
     );
+
+
 
 
 
@@ -45,10 +53,13 @@ function updateVault(value){
 
         vault.classList.add("casino");
 
-        etat.textContent="CASINO";
+
+        etat.textContent = "CASINO";
 
 
     }
+
+
 
 
     else if(value < 5){
@@ -56,10 +67,13 @@ function updateVault(value){
 
         vault.classList.add("interdit");
 
-        etat.textContent="SALLE INTERDITE";
+
+        etat.textContent = "SALLE INTERDITE";
 
 
     }
+
+
 
 
     else{
@@ -67,7 +81,9 @@ function updateVault(value){
 
         vault.classList.add("jackpot");
 
-        etat.textContent="JACKPOT";
+
+        etat.textContent = "JACKPOT";
+
 
 
         setTimeout(()=>{
@@ -75,9 +91,11 @@ function updateVault(value){
 
             vault.classList.remove("jackpot");
 
+
             vault.classList.add("interdit");
 
-            etat.textContent="SALLE INTERDITE";
+
+            etat.textContent = "SALLE INTERDITE";
 
 
         },5000);
@@ -87,7 +105,10 @@ function updateVault(value){
     }
 
 
+
 }
+
+
 
 
 
@@ -102,49 +123,102 @@ try{
 
 
     const response = await fetch(
+
         sheetURL + "&cache=" + Date.now()
+
     );
+
 
 
     const csv = await response.text();
 
 
 
-    console.log("Google Sheet :",csv);
+    console.log(
+        "Google Sheet :",
+        csv
+    );
+
+
 
 
 
     /*
-       Cherche uniquement une valeur
-       entre 0 et 5
+        Lecture du CSV
+
+        Exemple :
+        Jetons_Casino,3
+
+        On récupère uniquement 3
     */
 
 
-    const valeurs =
-    csv.match(/\b[0-5]\b/g);
+    const colonnes = csv.split(",");
 
 
 
-    if(!valeurs){
+    if(colonnes.length < 2){
 
-        console.log("Aucun jeton trouvé");
+
+        console.log(
+            "Format Google Sheet incorrect"
+        );
+
 
         return;
+
 
     }
 
 
 
+
+
     const value =
-    parseInt(valeurs[0]);
+
+    parseInt(
+
+        colonnes[1].trim()
+
+    );
+
+
+
+
+
+    if(isNaN(value)){
+
+
+        console.log(
+            "Valeur jeton invalide"
+        );
+
+
+        return;
+
+
+    }
+
+
+
 
 
 
     if(value !== jetonsActuels){
 
+
+        console.log(
+            "Nouveau niveau :",
+            value
+        );
+
+
         updateVault(value);
 
+
     }
+
+
 
 
 }
@@ -155,8 +229,11 @@ catch(error){
 
 
 console.error(
+
 "Erreur Google Sheet :",
+
 error
+
 );
 
 
@@ -165,15 +242,22 @@ error
 
 
 }
+
+
 
 
 
 
 
 setInterval(
+
 readSheet,
+
 3000
+
 );
+
+
 
 
 
