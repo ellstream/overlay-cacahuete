@@ -7,7 +7,6 @@ async function loadData() {
         const rows = csv.trim().split("\n");
 
         let jetons = 0;
-
         rows.forEach(row => {
             const cols = row.split(",");
             if (cols.length >= 2) {
@@ -20,25 +19,26 @@ async function loadData() {
 
         jetons = Math.min(jetons, 5);
 
+        // Mise à jour visuelle
         document.getElementById("jetonsCount").textContent = jetons;
-        document.getElementById("barFill").style.width = (jetons / 5 * 100) + "%";
+        document.getElementById("barFill").style.width = `${(jetons / 5) * 100}%`;
 
         const box = document.getElementById("casinoBox");
         const status = document.getElementById("status");
 
         if (jetons >= 3) {
             box.classList.add("red-mode");
-            status.textContent = "🚪 SALLE INTERDITE DÉBLOQUÉE";
+            status.innerHTML = "🚪 SALLE INTERDITE DÉBLOQUÉE";
         } else {
             box.classList.remove("red-mode");
-            status.textContent = "🎰 Collecte en cours...";
+            status.innerHTML = jetons === 0 ? "🎰 Collecte en cours..." : "🚪 En attente...";
         }
 
-    } catch (e) {
-        console.error("Erreur :", e);
+    } catch (err) {
+        console.error("Erreur chargement :", err);
     }
 }
 
-// Premier chargement + rafraîchissement
+// Lancement
 loadData();
-setInterval(loadData, 2500);
+setInterval(loadData, 3000);
