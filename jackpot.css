@@ -57,23 +57,105 @@ z-index:100;
 
 #title{
 
+display:flex;
+
+justify-content:center;
+
+gap:15px;
+
 font-size:120px;
 
-letter-spacing:14px;
+letter-spacing:10px;
 
-color:#fff6b0;
-
-text-transform:uppercase;
-
-text-shadow:
-
-0 0 20px #FFD700,
-0 0 45px #FFD700,
-0 0 90px orange,
-0 0 170px gold;
+color:#fff8c6;
 
 }
 
+
+#title span{
+
+
+opacity:.2;
+
+
+text-shadow:
+
+
+0 0 10px #FFD700;
+
+
+transform:translateY(-20px);
+
+
+}
+
+
+
+#title.lit span{
+
+
+animation:
+
+casinoLight .15s forwards;
+
+
+}
+
+
+
+@keyframes casinoLight{
+
+
+0%{
+
+
+opacity:.2;
+
+
+transform:
+
+translateY(-20px)
+
+scale(.8);
+
+
+}
+
+
+50%{
+
+
+opacity:1;
+
+
+transform:
+
+translateY(5px)
+
+scale(1.15);
+
+
+}
+
+
+
+100%{
+
+
+opacity:1;
+
+
+transform:
+
+translateY(0)
+
+scale(1);
+
+
+}
+
+
+}
 
 /* =========================
    SOUS TITRE
@@ -95,7 +177,78 @@ text-shadow:
 0 0 45px orange;
 
 }
+#subtitle{
 
+
+display:flex;
+
+
+justify-content:center;
+
+
+gap:10px;
+
+
+}
+
+
+#subtitle span{
+
+
+opacity:.2;
+
+
+}
+
+
+
+#subtitle.lit span{
+
+
+animation:
+
+subLight .2s forwards;
+
+
+}
+
+
+
+@keyframes subLight{
+
+
+from{
+
+
+opacity:.2;
+
+
+text-shadow:none;
+
+
+}
+
+
+
+to{
+
+
+opacity:1;
+
+
+text-shadow:
+
+
+0 0 20px gold,
+
+0 0 50px orange;
+
+
+}
+
+
+
+}
 
 /* =========================
    ETOILES
