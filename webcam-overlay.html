@@ -1,75 +1,763 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>Casino Webcam Overlay</title>
+
+
+<style>
+
+/* ===============================
+   CONFIG OBS 1920x1080
+================================ */
+
+html, body {
+
+    margin:0;
+    padding:0;
+
+    width:1920px;
+    height:1080px;
+
+    overflow:hidden;
+
+    background:transparent;
+
+}
+
+
+
+/* ===============================
+   CADRE WEBCAM
+================================ */
+
+
+.webcam-frame {
+
+
+    position:absolute;
+
+
+    left:560px;
+    top:260px;
+
+
+    width:800px;
+    height:450px;
+
+
+    border-radius:0;
+
+
+    pointer-events:none;
+
+
+    overflow:visible;
+
+
+    transition:
+    all 1.5s ease;
+
+
+}
+
+
+
+
+/* ===============================
+   CASINO 0-2
+================================ */
+
+
+.casino {
+
+
+    border:3px solid #00ff66;
+
+
+    box-shadow:
+
+
+    0 0 10px #00ff66,
+
+    0 0 40px rgba(0,255,100,.5),
+
+    inset 0 0 25px rgba(0,255,100,.2);
+
+
+    animation:
+
+    casinoPulse 3s infinite;
+
+
+}
+
+
+
+@keyframes casinoPulse {
+
+
+    50% {
+
+
+        box-shadow:
+
+
+        0 0 25px #00ff66,
+
+        0 0 80px rgba(0,255,100,.7),
+
+        inset 0 0 40px rgba(0,255,100,.3);
+
+
+    }
+
+
+}
+
+
+
+
+/* ===============================
+   SALLE INTERDITE 3-4
+================================ */
+
+
+.interdit {
+
+
+    border:3px solid #ff0033;
+
+
+    box-shadow:
+
+
+    0 0 20px red,
+
+    0 0 70px rgba(255,0,0,.7),
+
+    inset 0 0 40px rgba(255,0,0,.3);
+
+
+    animation:
+
+
+    interditPulse 2s infinite;
+
+
+}
+
+
+
+@keyframes interditPulse {
+
+
+50% {
+
+
+    box-shadow:
+
+
+    0 0 40px red,
+
+    0 0 120px crimson,
+
+    inset 0 0 70px rgba(255,0,0,.4);
+
+
+}
+
+}
+
+
+
+
+
+/* ===============================
+   FUMEE
+================================ */
+
+
+.smoke {
+
+
+    position:absolute;
+
+
+    inset:-120px;
+
+
+    background:
+
+
+    radial-gradient(
+
+    circle,
+
+    rgba(255,0,0,.4),
+
+    transparent 65%
+
+    );
+
+
+    filter:blur(45px);
+
+
+    opacity:0;
+
+
+    animation:
+
+    smokeMove 8s infinite;
+
+
+}
+
+
+
+.interdit .smoke {
+
+
+    opacity:1;
+
+
+}
+
+
+
+@keyframes smokeMove {
+
+
+0% {
+
+transform:scale(1);
+
+}
+
+
+50% {
+
+
+transform:
+
+scale(1.4)
+
+rotate(10deg);
+
+
+}
+
+
+100% {
+
+
+transform:scale(1);
+
+
+}
+
+
+}
+
+
+
+
+/* ===============================
+   CARTES FLOTTANTES
+================================ */
+
+
+.particle {
+
+
+position:absolute;
+
+
+font-size:40px;
+
+
+color:#ff0033;
+
+
+opacity:.12;
+
+
+animation:
+
+cardsMove 10s infinite;
+
+
+}
+
+
+
+@keyframes cardsMove {
+
+
+from {
+
+
+transform:
+
+translateY(500px)
+
+rotate(0);
+
+
+}
+
+
+to {
+
+
+transform:
+
+translateY(-500px)
+
+rotate(180deg);
+
+
+}
+
+
+}
+
+
+
+
+
+/* ===============================
+   BRAISES
+================================ */
+
+
+.spark {
+
+
+position:absolute;
+
+
+width:5px;
+
+height:5px;
+
+
+background:#ff5500;
+
+
+border-radius:50%;
+
+
+box-shadow:
+
+0 0 10px orange;
+
+
+animation:
+
+sparkMove 4s infinite;
+
+
+}
+
+
+
+
+@keyframes sparkMove {
+
+
+from {
+
+
+transform:
+
+translateY(500px);
+
+
+opacity:1;
+
+
+}
+
+
+to {
+
+
+transform:
+
+translateY(-400px);
+
+
+opacity:0;
+
+
+}
+
+
+}
+
+
+
+
+
+
+/* ===============================
+   MESSAGE UNLOCK
+================================ */
+
+
+.unlock {
+
+
+position:absolute;
+
+
+top:-120px;
+
+
+width:100%;
+
+
+text-align:center;
+
+
+font-family:Arial Black,sans-serif;
+
+
+font-size:45px;
+
+
+color:white;
+
+
+text-shadow:
+
+
+0 0 20px red,
+
+0 0 40px red;
+
+
+opacity:0;
+
+
+}
+
+
+
+.show {
+
+
+animation:
+
+unlockAnim 4s;
+
+
+}
+
+
+
+@keyframes unlockAnim {
+
+
+0% {
+
+
+opacity:0;
+
+transform:scale(.5);
+
+}
+
+
+20% {
+
+
+opacity:1;
+
+transform:scale(1.2);
+
+
+}
+
+
+70% {
+
+
+opacity:1;
+
+
+}
+
+
+100% {
+
+
+opacity:0;
+
+transform:scale(1);
+
+
+}
+
+
+}
+
+
+
+
+
+/* ===============================
+   JACKPOT
+================================ */
+
+
+.jackpot {
+
+
+border:
+
+4px solid gold !important;
+
+
+box-shadow:
+
+
+0 0 30px gold,
+
+0 0 120px yellow,
+
+inset 0 0 50px gold !important;
+
+
+animation:
+
+
+jackpotFlash .4s infinite;
+
+
+}
+
+
+
+
+@keyframes jackpotFlash {
+
+
+50% {
+
+
+filter:
+
+brightness(2);
+
+
+}
+
+
+}
+
+
+
+
+
+/* ===============================
+   PIECES
+================================ */
+
+
+.coin {
+
+
+position:absolute;
+
+
+top:-150px;
+
+
+font-size:40px;
+
+
+animation:
+
+coinFall 3s linear;
+
+
+}
+
+
+
+
+@keyframes coinFall {
+
+
+from {
+
+
+transform:
+
+translateY(-200px)
+
+rotate(0);
+
+
+}
+
+
+
+to {
+
+
+transform:
+
+translateY(1200px)
+
+rotate(720deg);
+
+
+}
+
+
+}
+
+
+
+</style>
+
+</head>
+
+
+
+
+<body>
+
+
+
+<div id="frame" class="webcam-frame casino">
+
+
+<div class="smoke"></div>
+
+
+<div class="unlock" id="message">
+
+SALLE INTERDITE DÉBLOQUÉE
+
+</div>
+
+
+
+<div class="particle" style="left:10%">♠</div>
+
+<div class="particle" style="left:30%">♥</div>
+
+<div class="particle" style="left:70%">♣</div>
+
+<div class="particle" style="left:90%">♦</div>
+
+
+
+</div>
+
+
+
+
+
 <script>
 
+
 let niveau = 0;
-let jackpotEnCours = false;
-let premiereActivationInterdite = false;
 
-const frame = document.getElementById("frame");
-const message = document.getElementById("message");
+let jackpotEnCours=false;
+
+let premiereActivationInterdite=false;
+
+
+
+const frame=document.getElementById("frame");
+
+const message=document.getElementById("message");
+
+
 
 
 // ===============================
-// CHANGEMENT DES MODES
+// CHANGEMENT ETATS
 // ===============================
+
 
 function setJetons(value){
 
-    niveau = value;
 
-    frame.className = "webcam-frame";
+niveau=value;
 
 
-    // -----------------------------
-    // 0 à 2 : CASINO
-    // -----------------------------
-
-    if(value <= 2){
-
-        frame.classList.add("casino");
-
-    }
+frame.className="webcam-frame";
 
 
 
-    // -----------------------------
-    // 3 à 4 : SALLE INTERDITE
-    // -----------------------------
-
-    if(value >= 3 && value < 5){
-
-        frame.classList.add("interdit");
 
 
-        // Animation de déblocage une seule fois
-        if(!premiereActivationInterdite){
-
-            premiereActivationInterdite = true;
-
-            message.classList.remove("show");
-
-            void message.offsetWidth;
-
-            message.classList.add("show");
-
-            createSparks();
-
-        }
-
-    }
+if(value<=2){
 
 
+frame.classList.add("casino");
 
-    // -----------------------------
-    // 5 : JACKPOT
-    // -----------------------------
-
-    if(value >= 5 && !jackpotEnCours){
-
-        jackpot();
-
-    }
 
 }
+
+
+
+
+if(value>=3 && value<5){
+
+
+frame.classList.add("interdit");
+
+
+
+if(!premiereActivationInterdite){
+
+
+premiereActivationInterdite=true;
+
+
+message.classList.remove("show");
+
+
+void message.offsetWidth;
+
+
+message.classList.add("show");
+
+
+createSparks();
+
+
+}
+
+
+}
+
+
+
+
+
+if(value>=5 && !jackpotEnCours){
+
+
+jackpot();
+
+
+}
+
+
+}
+
 
 
 
@@ -77,26 +765,34 @@ function setJetons(value){
 // BRAISES
 // ===============================
 
+
 function createSparks(){
 
-    for(let i=0;i<25;i++){
 
-        let spark=document.createElement("div");
-
-        spark.className="spark";
-
-        spark.style.left =
-        Math.random()*100+"%";
-
-        spark.style.animationDelay =
-        Math.random()*4+"s";
+for(let i=0;i<30;i++){
 
 
-        frame.appendChild(spark);
+let s=document.createElement("div");
 
-    }
+
+s.className="spark";
+
+
+s.style.left=Math.random()*100+"%";
+
+
+s.style.animationDelay=Math.random()*4+"s";
+
+
+frame.appendChild(s);
+
 
 }
+
+
+}
+
+
 
 
 
@@ -104,48 +800,36 @@ function createSparks(){
 // JACKPOT
 // ===============================
 
+
 function jackpot(){
 
-    jackpotEnCours=true;
+
+jackpotEnCours=true;
 
 
-    frame.className =
-    "webcam-frame jackpot";
-
-
-    for(let i=0;i<40;i++){
-
-        let coin=document.createElement("div");
-
-        coin.className="coin";
-
-        coin.innerHTML="🪙";
-
-        coin.style.left =
-        Math.random()*100+"%";
-
-
-        coin.style.animationDelay =
-        Math.random()*2+"s";
-
-
-        frame.appendChild(coin);
-
-    }
+frame.className="webcam-frame jackpot";
 
 
 
-    setTimeout(()=>{
+for(let i=0;i<50;i++){
 
 
-        frame.className =
-        "webcam-frame interdit";
+let c=document.createElement("div");
 
 
-        jackpotEnCours=false;
+c.className="coin";
 
 
-    },5000);
+c.innerHTML="🪙";
+
+
+c.style.left=Math.random()*100+"%";
+
+
+c.style.animationDelay=Math.random()*2+"s";
+
+
+frame.appendChild(c);
 
 
 }
@@ -153,74 +837,100 @@ function jackpot(){
 
 
 
+setTimeout(()=>{
+
+
+frame.className="webcam-frame interdit";
+
+
+jackpotEnCours=false;
+
+
+},5000);
+
+
+
+}
+
+
+
+
+
 // ===============================
-// CONNEXION GOOGLE SHEET
+// GOOGLE SHEET
 // ===============================
 
 
-// REMPLACE CETTE URL PAR TON GOOGLE SHEET CSV
+// TON LIEN CSV
 
 const sheetURL =
 "https://docs.google.com/spreadsheets/d/e/2PACX-1vRzMx8EveEFg84HJSOU5IempyqWc4sshrrzocmTAKNf5yNY8ihEqCnJ4vtyyujEsvRPNN3Uv_uUTzAF/pub?output=csv";
 
 
 
+
+
 async function lireJetons(){
 
 
-    try{
+try{
 
 
-        const response =
-        await fetch(sheetURL);
+const response=await fetch(sheetURL);
 
 
-        const data =
-        await response.text();
-
-
-
-        // récupère le premier nombre trouvé
-
-        const valeur =
-        parseInt(data.match(/\d+/)[0]);
+const data=await response.text();
 
 
 
-        if(!isNaN(valeur) && valeur !== niveau){
-
-            setJetons(valeur);
-
-        }
+const valeur=parseInt(data.match(/\d+/)[0]);
 
 
-    }
 
-    catch(error){
+if(!isNaN(valeur) && valeur!==niveau){
 
-        console.log(
-        "Erreur lecture Google Sheet",
-        error
-        );
 
-    }
+setJetons(valeur);
+
+
+}
+
+
+}
+
+catch(error){
+
+
+console.log(
+"Erreur Google Sheet",
+error
+);
 
 
 }
 
 
 
-// Vérification toutes les 3 secondes
-
-setInterval(
-    lireJetons,
-    3000
-);
+}
 
 
-// Lecture immédiate au lancement
+
+
+// lecture toutes les 3 secondes
+
+setInterval(lireJetons,3000);
+
+
+// lancement
 
 lireJetons();
 
 
+
 </script>
+
+
+
+</body>
+
+</html>
