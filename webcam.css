@@ -1,0 +1,578 @@
+html,body{
+
+margin:0;
+padding:0;
+
+width:1920px;
+height:1080px;
+
+overflow:hidden;
+
+background:transparent;
+
+}
+
+
+/* =========================
+ CADRE
+========================= */
+
+
+#webcam-frame{
+
+
+position:absolute;
+
+
+left:660px;
+top:300px;
+
+
+width:600px;
+height:340px;
+
+
+border:
+
+3px solid #00ff66;
+
+
+background:
+
+rgba(0,0,0,.15);
+
+
+overflow:hidden;
+
+
+
+transition:
+
+1s;
+
+
+
+box-shadow:
+
+
+0 0 20px #00ff66,
+
+0 0 70px rgba(0,255,102,.6),
+
+inset 0 0 60px rgba(0,255,102,.2);
+
+
+
+}
+
+
+
+/* =========================
+ CASINO
+========================= */
+
+
+.casino{
+
+
+border-color:#00ff66;
+
+
+animation:
+
+greenPulse 3s infinite;
+
+
+}
+
+
+@keyframes greenPulse{
+
+
+50%{
+
+filter:brightness(1.2);
+
+}
+
+
+}
+
+
+
+/* =========================
+ INTERDIT
+========================= */
+
+
+.interdit{
+
+
+border-color:#ff0033;
+
+
+box-shadow:
+
+
+0 0 30px #ff0033,
+
+0 0 100px rgba(255,0,51,.7),
+
+inset 0 0 80px rgba(255,0,51,.25);
+
+
+
+animation:
+
+redPulse 2s infinite;
+
+
+}
+
+
+@keyframes redPulse{
+
+
+50%{
+
+filter:
+
+brightness(1.3);
+
+
+}
+
+
+}
+
+
+
+/* =========================
+ JACKPOT
+========================= */
+
+
+.jackpot{
+
+
+border-color:#FFD700;
+
+
+box-shadow:
+
+
+0 0 40px gold,
+
+0 0 120px orange,
+
+inset 0 0 100px rgba(255,215,0,.4);
+
+
+
+animation:
+
+jackpotPulse .5s infinite;
+
+
+}
+
+
+@keyframes jackpotPulse{
+
+
+50%{
+
+filter:
+
+brightness(1.6);
+
+
+}
+
+
+}
+
+
+
+/* =========================
+ SYMBOLS
+========================= */
+
+
+.cards-symbols span{
+
+
+position:absolute;
+
+
+font-size:90px;
+
+
+color:
+
+rgba(255,0,51,.15);
+
+
+}
+
+
+
+.cards-symbols span:nth-child(1){
+
+top:20px;
+left:20px;
+
+}
+
+
+.cards-symbols span:nth-child(2){
+
+top:20px;
+right:20px;
+
+}
+
+
+.cards-symbols span:nth-child(3){
+
+bottom:20px;
+left:20px;
+
+}
+
+
+.cards-symbols span:nth-child(4){
+
+bottom:20px;
+right:20px;
+
+}
+
+
+
+
+
+/* =========================
+ FUMEE
+========================= */
+
+
+.smoke{
+
+
+position:absolute;
+
+width:100%;
+height:100%;
+
+
+background:
+
+
+radial-gradient(
+
+circle,
+
+rgba(255,0,0,.25),
+
+transparent 60%
+
+);
+
+
+
+opacity:0;
+
+
+}
+
+
+
+.interdit .smoke{
+
+
+opacity:1;
+
+
+animation:
+
+smokeMove 6s infinite;
+
+
+}
+
+
+
+@keyframes smokeMove{
+
+
+50%{
+
+transform:
+
+scale(1.4);
+
+opacity:.5;
+
+
+}
+
+
+}
+
+
+
+
+/* =========================
+ BRAISES
+========================= */
+
+
+.ember{
+
+
+position:absolute;
+
+bottom:-20px;
+
+
+width:6px;
+height:6px;
+
+
+background:#ff9900;
+
+
+border-radius:50%;
+
+
+box-shadow:
+
+0 0 15px orange;
+
+
+animation:
+
+rise 4s linear;
+
+
+}
+
+
+@keyframes rise{
+
+
+to{
+
+transform:
+
+translateY(-400px);
+
+
+opacity:0;
+
+
+}
+
+
+}
+
+
+
+
+/* =========================
+ MESSAGE
+========================= */
+
+
+#message{
+
+
+position:absolute;
+
+
+width:100%;
+
+
+top:140px;
+
+
+text-align:center;
+
+
+font-family:Arial Black;
+
+
+font-size:28px;
+
+
+color:white;
+
+
+opacity:0;
+
+
+text-shadow:
+
+0 0 20px red;
+
+
+
+}
+
+
+
+.showMessage{
+
+
+animation:
+
+messageShow 4s forwards;
+
+
+}
+
+
+
+@keyframes messageShow{
+
+
+0%{
+
+opacity:0;
+
+transform:scale(.5);
+
+}
+
+
+20%{
+
+opacity:1;
+
+}
+
+
+80%{
+
+opacity:1;
+
+}
+
+
+100%{
+
+opacity:0;
+
+}
+
+
+}
+
+
+
+/* =========================
+ REFLET
+========================= */
+
+
+.shine{
+
+
+position:absolute;
+
+
+top:0;
+
+left:-200px;
+
+
+width:100px;
+
+height:100%;
+
+
+background:
+
+rgba(255,255,255,.15);
+
+
+transform:
+
+skewX(-25deg);
+
+
+}
+
+
+.jackpot .shine{
+
+
+animation:
+
+shineMove 1s;
+
+
+}
+
+
+
+@keyframes shineMove{
+
+
+to{
+
+left:900px;
+
+}
+
+
+}
+
+
+/* =========================
+ PIECES
+========================= */
+
+
+.coin{
+
+
+position:absolute;
+
+
+top:-50px;
+
+
+font-size:40px;
+
+
+animation:
+
+fall 3s linear;
+
+
+}
+
+
+
+@keyframes fall{
+
+
+to{
+
+
+transform:
+
+translateY(500px)
+
+rotate(720deg);
+
+
+opacity:0;
+
+
+}
+
+
+}
