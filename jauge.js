@@ -11,20 +11,24 @@ async function loadData() {
         rows.forEach(row => {
             const cols = row.split(",");
             if (cols.length >= 2) {
-                const key = cols[0].replace(/"/g, "").trim();
-                if (key === "Jetons_Casino") {
+                const key = cols[0].replace(/"/g, "").trim().toLowerCase();
+                if (key === "jetons_casino" || key === "jetons_casino ") {
                     jetons = parseInt(cols[1].replace(/"/g, "").trim()) || 0;
                 }
             }
         });
-    } catch (e) {
-        console.error("Erreur Google Sheet:", e);
+
+        console.log("Jetons lus :", jetons); // Pour debug
+
+    } catch (err) {
+        console.error("Erreur lors de la lecture du Sheet :", err);
     }
 
-    jetons = Math.min(jetons, 5);
+    jetons = Math.min(Math.max(0, jetons), 5);
 
+    // Mise à jour de l'affichage
     document.getElementById("jetonsCount").textContent = jetons;
-    document.getElementById("barFill").style.width = (jetons / 5 * 100) + "%";
+    document.getElementById("barFill").style.width = `${(jetons / 5) * 100}%`;
 
     const box = document.getElementById("casinoBox");
     const status = document.getElementById("status");
@@ -38,5 +42,6 @@ async function loadData() {
     }
 }
 
+// Lancement
 loadData();
-setInterval(loadData, 3000);
+setInterval(loadData, 2500);
