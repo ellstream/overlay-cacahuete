@@ -9,6 +9,11 @@ let jackpotActif = false;
 // ELEMENTS
 // ==========================================
 
+const title =
+document.querySelector("#title");
+
+const subtitle =
+document.querySelector("#subtitle");
 const overlay = document.getElementById("jackpot");
 const flash = document.getElementById("flash");
 const halo = document.getElementById("halo");
@@ -38,6 +43,7 @@ function launchJackpot(){
 
     overlay.classList.remove("hide");
     overlay.classList.add("show","pulse");
+    animateCasinoTitle();
 
     halo.classList.add("haloShow");
 
@@ -79,6 +85,61 @@ function launchJackpot(){
 
 }
 
+function animateCasinoTitle(){
+
+
+title.classList.remove("lit");
+
+subtitle.classList.remove("lit");
+
+
+
+let letters =
+title.querySelectorAll("span");
+
+
+
+letters.forEach((letter,index)=>{
+
+
+setTimeout(()=>{
+
+
+letter.style.opacity="1";
+
+
+letter.style.textShadow=
+`
+0 0 20px #FFD700,
+0 0 60px orange,
+0 0 100px gold
+`;
+
+
+
+letter.style.transform=
+"scale(1.15)";
+
+
+
+},index*150);
+
+
+
+});
+
+
+
+setTimeout(()=>{
+
+
+subtitle.classList.add("lit");
+
+
+},1200);
+
+
+}
 // ==========================================
 // PIECES
 // ==========================================
