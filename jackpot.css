@@ -61,13 +61,28 @@ display:flex;
 
 justify-content:center;
 
-gap:15px;
+gap:18px;
 
-font-size:120px;
+font-size:130px;
 
-letter-spacing:10px;
+font-weight:900;
 
-color:#fff8c6;
+letter-spacing:12px;
+
+color:#fffbd0;
+
+
+filter:none;
+
+
+text-shadow:
+
+0 0 10px #FFD700,
+
+0 0 30px #FFD700,
+
+0 0 70px orange;
+
 
 }
 
@@ -75,20 +90,16 @@ color:#fff8c6;
 #title span{
 
 
-opacity:.2;
+opacity:.25;
 
 
-text-shadow:
+display:inline-block;
 
 
-0 0 10px #FFD700;
-
-
-transform:translateY(-20px);
+transform:scale(.9);
 
 
 }
-
 
 
 #title.lit span{
@@ -96,11 +107,11 @@ transform:translateY(-20px);
 
 animation:
 
-casinoLight .15s forwards;
+casinoLight .25s forwards,
+letterGlow 1.5s infinite alternate;
 
 
 }
-
 
 
 @keyframes casinoLight{
@@ -108,46 +119,32 @@ casinoLight .15s forwards;
 
 0%{
 
-
 opacity:.2;
-
 
 transform:
 
-translateY(-20px)
-
 scale(.8);
-
 
 }
 
 
 50%{
 
-
 opacity:1;
-
 
 transform:
 
-translateY(5px)
-
-scale(1.15);
+scale(1.25);
 
 
 }
 
 
-
 100%{
-
 
 opacity:1;
 
-
 transform:
-
-translateY(0)
 
 scale(1);
 
@@ -157,36 +154,74 @@ scale(1);
 
 }
 
+
+
+@keyframes letterGlow{
+
+
+from{
+
+
+text-shadow:
+
+
+0 0 15px #FFD700,
+
+0 0 40px #FFD700,
+
+0 0 80px orange;
+
+
+}
+
+
+to{
+
+
+text-shadow:
+
+
+0 0 30px #FFF200,
+
+0 0 70px gold,
+
+0 0 140px orange;
+
+
+}
+
+
+}
+
+
 /* =========================
    SOUS TITRE
 ========================= */
 
 #subtitle{
 
-margin-top:-10px;
-
-font-size:55px;
-
-letter-spacing:12px;
-
-color:white;
-
-text-shadow:
-
-0 0 15px gold,
-0 0 45px orange;
-
-}
-#subtitle{
-
 
 display:flex;
 
-
 justify-content:center;
 
+gap:15px;
 
-gap:10px;
+
+font-size:60px;
+
+font-weight:bold;
+
+
+color:white;
+
+
+text-shadow:
+
+
+0 0 20px gold,
+
+0 0 50px orange;
 
 
 }
@@ -195,11 +230,10 @@ gap:10px;
 #subtitle span{
 
 
-opacity:.2;
+opacity:0;
 
 
 }
-
 
 
 #subtitle.lit span{
@@ -246,7 +280,42 @@ text-shadow:
 
 }
 
+#jackpot.show{
 
+
+animation:
+
+jackpotStable 1s infinite alternate;
+
+
+}
+
+
+
+@keyframes jackpotStable{
+
+
+from{
+
+
+filter:
+
+brightness(1);
+
+
+}
+
+
+
+to{
+
+
+filter:
+
+brightness(1.25);
+
+
+}
 
 }
 
