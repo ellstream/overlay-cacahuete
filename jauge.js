@@ -1,19 +1,24 @@
 let jetonsActuels = -1;
 
+
 const jauge =
 document.getElementById("jauge");
 
 
-const barre =
-document.getElementById("barre");
+const niveau =
+document.getElementById("niveau");
 
 
-const compteur =
-document.getElementById("compteur");
+const texte =
+document.getElementById("texte");
+
+
+const lumiere =
+document.querySelectorAll(".light");
 
 
 
-// TON GOOGLE SHEET
+
 
 const sheetURL =
 
@@ -23,20 +28,39 @@ const sheetURL =
 
 
 
-function changerJauge(valeur){
+
+function updateJauge(valeur){
+
 
 
 jetonsActuels = valeur;
 
 
 
-compteur.innerHTML =
+niveau.innerHTML =
 valeur+" / 5";
 
 
 
-barre.style.width =
-(valeur/5*100)+"%";
+lumiere.forEach((l,index)=>{
+
+
+l.classList.remove("active");
+
+
+
+if(index < valeur){
+
+
+l.classList.add("active");
+
+
+}
+
+
+});
+
+
 
 
 
@@ -53,23 +77,36 @@ jauge.classList.remove(
 
 
 
+
 if(valeur <=2){
+
 
 
 jauge.classList.add("casino");
 
 
+texte.innerHTML="CASINO";
+
+
 }
+
+
 
 
 
 else if(valeur <5){
 
 
+
 jauge.classList.add("interdit");
 
 
+texte.innerHTML="SALLE INTERDITE";
+
+
 }
+
+
 
 
 
@@ -77,6 +114,9 @@ else{
 
 
 jauge.classList.add("jackpot");
+
+
+texte.innerHTML="JACKPOT";
 
 
 
@@ -88,50 +128,66 @@ jauge.classList.remove("jackpot");
 jauge.classList.add("interdit");
 
 
+texte.innerHTML="SALLE INTERDITE";
+
+
 },5000);
 
 
-}
-
 
 }
 
 
 
+}
 
-async function lireJetons(){
+
+
+
+
+
+
+async function lireSheet(){
+
 
 
 try{
 
 
 const response =
-await fetch(sheetURL+"?t="+Date.now());
+
+await fetch(
+sheetURL+"?cache="+Date.now()
+);
+
 
 
 const data =
+
 await response.text();
 
 
 
-const nombre =
+const result =
+
 data.match(/\d+/);
 
 
 
-if(!nombre)return;
+if(!result)return;
 
 
 
 const valeur =
-parseInt(nombre[0]);
+
+parseInt(result[0]);
 
 
 
-if(valeur!==jetonsActuels){
+if(valeur !== jetonsActuels){
 
 
-changerJauge(valeur);
+updateJauge(valeur);
 
 
 }
@@ -140,26 +196,29 @@ changerJauge(valeur);
 }
 
 
-catch(error){
+catch(e){
 
 
 console.log(
 "Erreur Google Sheet",
-error
+e
 );
 
 
 }
 
 
+
 }
+
+
 
 
 
 
 setInterval(
 
-lireJetons,
+lireSheet,
 
 3000
 
@@ -167,4 +226,4 @@ lireJetons,
 
 
 
-lireJetons();
+lireSheet();
