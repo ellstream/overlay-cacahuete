@@ -1,36 +1,21 @@
-body {
-    background:red!important;
-}
-
 html,body{
 
-
 margin:0;
-
 padding:0;
 
-
 width:1920px;
-
 height:1080px;
-
 
 overflow:hidden;
 
-
 background:transparent;
 
-
 font-family:
-
 Arial Black,
 Arial,
 sans-serif;
 
-
 }
-
-
 
 
 /* =========================
@@ -55,11 +40,14 @@ background:
 rgba(0,0,0,0.90);
 
 
-
 border:
 
 2px solid rgba(255,255,255,.15);
 
+
+box-shadow:
+
+inset 0 0 60px rgba(0,0,0,1);
 
 
 overflow:hidden;
@@ -73,6 +61,7 @@ transition:1s;
 
 
 
+
 /* =========================
    BANDE HAUTE
 ========================= */
@@ -80,14 +69,11 @@ transition:1s;
 
 .top-line{
 
-
 height:4px;
-
 
 background:
 
-rgba(255,255,255,.2);
-
+rgba(255,255,255,.25);
 
 }
 
@@ -112,29 +98,29 @@ letter-spacing:4px;
 
 color:white;
 
+
 }
 
 
 
 
 
-.state{
+/* =========================
+   ETAT
+========================= */
 
+
+.state{
 
 text-align:center;
 
-
 font-size:15px;
-
 
 letter-spacing:6px;
 
-
 margin-top:4px;
 
-
 color:white;
-
 
 opacity:.8;
 
@@ -146,7 +132,7 @@ opacity:.8;
 
 
 /* =========================
-   BARRE
+   BARRE PROGRESSION
 ========================= */
 
 
@@ -164,20 +150,19 @@ right:35px;
 bottom:38px;
 
 
-
 height:18px;
 
 
 
 background:
 
-rgba(255,255,255,.08);
+rgba(0,0,0,.95);
 
 
 
 border:
 
-1px solid rgba(255,255,255,.4);
+1px solid rgba(255,255,255,.35);
 
 
 
@@ -193,14 +178,17 @@ overflow:hidden;
 #fill{
 
 
+display:block;
+
+
 height:100%;
 
 
 width:0%;
 
 
-background:
 
+background:
 
 linear-gradient(
 
@@ -217,7 +205,9 @@ linear-gradient(
 box-shadow:
 
 
-0 0 20px #00ff66;
+0 0 20px #00ff66,
+
+0 0 40px rgba(0,255,100,.8);
 
 
 
@@ -227,6 +217,7 @@ width 1s ease;
 
 
 }
+
 
 
 
@@ -265,8 +256,9 @@ color:white;
 
 
 
+
 /* =========================
-   CASINO
+   CASINO 0-2
 ========================= */
 
 
@@ -291,11 +283,14 @@ inset 0 0 50px rgba(0,255,100,.15);
 
 
 
+
+
 .casino .title,
 .casino .counter{
 
 
 text-shadow:
+
 
 0 0 20px #00ff66;
 
@@ -306,8 +301,38 @@ text-shadow:
 
 
 
+.casino #fill{
+
+
+background:
+
+
+linear-gradient(
+
+90deg,
+
+#00ff66,
+
+#00ffaa
+
+);
+
+
+
+box-shadow:
+
+
+0 0 25px #00ff66;
+
+
+}
+
+
+
+
+
 /* =========================
-   SALLE INTERDITE
+   SALLE INTERDITE 3-4
 ========================= */
 
 
@@ -329,7 +354,13 @@ inset 0 0 60px rgba(255,0,0,.2);
 
 
 
+animation:
+
+redPulse 2s infinite;
+
+
 }
+
 
 
 
@@ -338,6 +369,7 @@ inset 0 0 60px rgba(255,0,0,.2);
 
 
 background:
+
 
 linear-gradient(
 
@@ -378,16 +410,9 @@ text-shadow:
 0 0 50px rgba(255,0,0,.8);
 
 
-
 }
 
-.interdit{
 
-animation:
-
-redPulse 2s infinite;
-
-}
 
 
 
@@ -397,16 +422,22 @@ redPulse 2s infinite;
 50%{
 
 
-filter:brightness(1.25);
+filter:
+
+brightness(1.25);
 
 
 }
 
 
 }
-   
+
+
+
+
+
 /* =========================
-   JACKPOT
+   JACKPOT 5
 ========================= */
 
 
@@ -430,7 +461,7 @@ inset 0 0 80px rgba(255,215,0,.3);
 
 animation:
 
-jackpotPulse 0.8s infinite;
+jackpotPulse .8s infinite;
 
 
 }
@@ -443,6 +474,7 @@ jackpotPulse 0.8s infinite;
 
 
 background:
+
 
 linear-gradient(
 
@@ -517,7 +549,6 @@ brightness(1.4);
 
 
 
-
 @keyframes goldBarPulse{
 
 
@@ -536,8 +567,10 @@ brightness(1.5);
 
 
 
+
+
 /* =========================
-   REFLET
+   REFLET LUMINEUX
 ========================= */
 
 
@@ -581,12 +614,16 @@ shineMove 5s infinite;
 
 
 
+
+
 @keyframes shineMove{
 
 
 to{
 
+
 left:700px;
+
 
 }
 
@@ -598,7 +635,7 @@ left:700px;
 
 
 /* =========================
-   PARTICULES
+   PARTICULES CARTES
 ========================= */
 
 
@@ -671,96 +708,25 @@ animation-delay:6s;
 
 from{
 
-transform:translateY(0);
+
+transform:
+
+translateY(0);
+
 
 }
+
 
 
 to{
 
-transform:translateY(-250px);
 
-}
+transform:
 
-
-/* =========================
-   CORRECTION VISIBILITE BARRE
-========================= */
-
-
-.progress-box{
-
-position:absolute;
-
-left:35px;
-
-right:35px;
-
-bottom:45px;
-
-
-height:22px;
-
-
-background:
-
-rgba(0,0,0,.95);
-
-
-
-border:
-
-2px solid rgba(255,255,255,.35);
-
-
-
-overflow:hidden;
+translateY(-250px);
 
 
 }
 
 
-
-
-#fill{
-
-
-display:block;
-
-
-height:100%;
-
-
-min-width:0;
-
-
-background:
-
-linear-gradient(
-
-90deg,
-
-#00ff66,
-
-#00ffaa
-
-);
-
-
-
-box-shadow:
-
-
-0 0 20px #00ff66,
-
-0 0 40px rgba(0,255,100,.8);
-
-
-transition:
-
-width 1s ease;
-
-
-}
-   
 }
