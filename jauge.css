@@ -40,10 +40,12 @@ sans-serif;
 position:absolute;
 
 
+#vault{
+
 left:700px;
+top:600px;
 
-top:780px;
-
+}
 
 width:560px;
 
