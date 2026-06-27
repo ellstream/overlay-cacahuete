@@ -19,7 +19,6 @@ async function loadData() {
 
         jetons = Math.min(jetons, 5);
 
-        // Mise à jour visuelle
         document.getElementById("jetonsCount").textContent = jetons;
         document.getElementById("barFill").style.width = `${(jetons / 5) * 100}%`;
 
@@ -28,17 +27,16 @@ async function loadData() {
 
         if (jetons >= 3) {
             box.classList.add("red-mode");
-            status.innerHTML = "🚪 SALLE INTERDITE DÉBLOQUÉE";
+            status.textContent = "🚪 SALLE INTERDITE DÉBLOQUÉE";
         } else {
             box.classList.remove("red-mode");
-            status.innerHTML = jetons === 0 ? "🎰 Collecte en cours..." : "🚪 En attente...";
+            status.textContent = "🎰 Collecte en cours...";
         }
 
     } catch (err) {
-        console.error("Erreur chargement :", err);
+        console.error("Erreur :", err);
     }
 }
 
-// Lancement
 loadData();
 setInterval(loadData, 3000);
