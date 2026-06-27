@@ -1,22 +1,13 @@
 let jetonsActuels = -1;
 
 
-const jauge =
-document.getElementById("jauge");
+const vault = document.getElementById("vault");
 
+const fill = document.getElementById("fill");
 
-const niveau =
-document.getElementById("niveau");
+const compteur = document.getElementById("compteur");
 
-
-const texte =
-document.getElementById("texte");
-
-
-const lumiere =
-document.querySelectorAll(".light");
-
-
+const etat = document.getElementById("etat");
 
 
 
@@ -28,43 +19,26 @@ const sheetURL =
 
 
 
-
-function updateJauge(valeur){
-
+function updateVault(value){
 
 
-jetonsActuels = valeur;
+jetonsActuels=value;
 
 
 
-niveau.innerHTML =
-valeur+" / 5";
+compteur.textContent =
+
+value+" / 5";
 
 
 
-lumiere.forEach((l,index)=>{
+fill.style.width =
 
-
-l.classList.remove("active");
-
-
-
-if(index < valeur){
-
-
-l.classList.add("active");
-
-
-}
-
-
-});
+(value/5*100)+"%";
 
 
 
-
-
-jauge.classList.remove(
+vault.classList.remove(
 
 "casino",
 
@@ -78,14 +52,13 @@ jauge.classList.remove(
 
 
 
-if(valeur <=2){
+if(value <= 2){
 
 
+vault.classList.add("casino");
 
-jauge.classList.add("casino");
 
-
-texte.innerHTML="CASINO";
+etat.textContent="CASINO";
 
 
 }
@@ -94,14 +67,13 @@ texte.innerHTML="CASINO";
 
 
 
-else if(valeur <5){
+else if(value < 5){
 
 
+vault.classList.add("interdit");
 
-jauge.classList.add("interdit");
 
-
-texte.innerHTML="SALLE INTERDITE";
+etat.textContent="SALLE INTERDITE";
 
 
 }
@@ -113,42 +85,38 @@ texte.innerHTML="SALLE INTERDITE";
 else{
 
 
-jauge.classList.add("jackpot");
+vault.classList.add("jackpot");
 
 
-texte.innerHTML="JACKPOT";
+etat.textContent="JACKPOT";
 
 
 
 setTimeout(()=>{
 
 
-jauge.classList.remove("jackpot");
-
-jauge.classList.add("interdit");
+vault.classList.remove("jackpot");
 
 
-texte.innerHTML="SALLE INTERDITE";
+vault.classList.add("interdit");
+
+
+etat.textContent="SALLE INTERDITE";
 
 
 },5000);
 
 
+}
+
 
 }
 
 
 
-}
 
 
-
-
-
-
-
-async function lireSheet(){
-
+async function readSheet(){
 
 
 try{
@@ -157,60 +125,62 @@ try{
 const response =
 
 await fetch(
-sheetURL+"?cache="+Date.now()
+
+sheetURL+"?t="+Date.now()
+
 );
 
 
 
-const data =
+const text =
 
 await response.text();
 
 
 
-const result =
+const match =
 
-data.match(/\d+/);
-
-
-
-if(!result)return;
+text.match(/\d+/);
 
 
 
-const valeur =
-
-parseInt(result[0]);
+if(!match)return;
 
 
 
-if(valeur !== jetonsActuels){
+const value =
+
+parseInt(match[0]);
 
 
-updateJauge(valeur);
+
+if(value !== jetonsActuels){
 
 
-}
+updateVault(value);
 
 
 }
 
 
-catch(e){
+}
+
+catch(error){
 
 
 console.log(
+
 "Erreur Google Sheet",
-e
+
+error
+
 );
 
 
 }
 
 
-
 }
-
 
 
 
@@ -218,7 +188,7 @@ e
 
 setInterval(
 
-lireSheet,
+readSheet,
 
 3000
 
@@ -226,4 +196,4 @@ lireSheet,
 
 
 
-lireSheet();
+readSheet();
