@@ -85,3 +85,16 @@ body {
     margin-top: 8px;
     letter-spacing: 1px;
 }
+
+#casinoBox.red-mode {
+    border-color: #ff2a2a !important;
+    box-shadow: 0 0 20px #ff2a2a, 0 0 40px rgba(255,42,42,0.8) !important;
+}
+
+#casinoBox.red-mode #barFill {
+    background: linear-gradient(90deg, #ff2a2a, #ff6666) !important;
+}
+
+#casinoBox.red-mode #counter {
+    color: #ff2a2a !important;
+}
