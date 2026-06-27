@@ -98,3 +98,34 @@ body {
 #casinoBox.red-mode #counter {
     color: #ff2a2a !important;
 }
+/* Mode Rouge */
+#casinoBox.red-mode {
+    border-color: #ff2a2a !important;
+    box-shadow: 
+        0 0 20px #ff2a2a,
+        0 0 40px rgba(255, 42, 42, 0.7) !important;
+}
+
+#casinoBox.red-mode #barFill {
+    background: linear-gradient(90deg, #ff2a2a, #ff6666) !important;
+}
+
+#casinoBox.red-mode #counter {
+    color: #ff2a2a !important;
+}
+
+/* Mode Vert par défaut */
+#casinoBox {
+    border-color: #53fc18;
+    box-shadow: 
+        0 0 15px #53fc18,
+        0 0 30px rgba(83, 252, 24, 0.5);
+}
+
+#counter {
+    color: #53fc18;
+}
+
+#barFill {
+    background: linear-gradient(90deg, #53fc18, #9dff59);
+}
