@@ -1,12 +1,13 @@
 const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRzMx8EveEFg84HJSOU5IempyqWc4sshrrzocmTAKNf5yNY8ihEqCnJ4vtyyujEsvRPNN3Uv_uUTzAF/pub?output=csv";
 
 async function loadData() {
+    let jetons = 0;
+
     try {
         const response = await fetch(SHEET_URL + "?t=" + Date.now());
         const csv = await response.text();
         const rows = csv.trim().split("\n");
 
-        let jetons = 0;
         rows.forEach(row => {
             const cols = row.split(",");
             if (cols.length >= 2) {
@@ -16,25 +17,30 @@ async function loadData() {
                 }
             }
         });
+    } catch (e) {
+        console.error("Erreur Sheet :", e);
+        // Pour tester : commente la ligne du dessus et décommente celle-ci
+        // jetons = 3; // ← pour tester le mode rouge
+    }
 
-        jetons = Math.min(jetons, 5);
+    jetons = Math.min(jetons, 5);
 
-        document.getElementById("jetonsCount").textContent = jetons;
-        document.getElementById("barFill").style.width = `${(jetons / 5) * 100}%`;
+    // Mise à jour
+    const countEl = document.getElementById("jetonsCount");
+    if (countEl) countEl.textContent = jetons;
 
-        const box = document.getElementById("casinoBox");
-        const status = document.getElementById("status");
+    const bar = document.getElementById("barFill");
+    if (bar) bar.style.width = `${(jetons / 5) * 100}%`;
 
-        if (jetons >= 3) {
-            box.classList.add("red-mode");
-            status.textContent = "🚪 SALLE INTERDITE DÉBLOQUÉE";
-        } else {
-            box.classList.remove("red-mode");
-            status.textContent = "🎰 Collecte en cours...";
-        }
+    const box = document.getElementById("casinoBox");
+    const status = document.getElementById("status");
 
-    } catch (err) {
-        console.error("Erreur :", err);
+    if (jetons >= 3) {
+        box.classList.add("red-mode");
+        if (status) status.textContent = "🚪 SALLE INTERDITE DÉBLOQUÉE";
+    } else {
+        box.classList.remove("red-mode");
+        if (status) status.textContent = "🎰 Collecte en cours...";
     }
 }
 
