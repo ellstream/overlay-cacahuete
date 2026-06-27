@@ -1,26 +1,12 @@
-
-let jetonsActuels = 0;
-
-
-const jauge =
-document.getElementById("jauge");
+let jetonsActuels = -1;
 
 
-const barre =
-document.getElementById("barre");
+const jauge = document.getElementById("jauge");
+const barre = document.getElementById("barre");
+const compteur = document.getElementById("compteur");
 
-
-const compteur =
-document.getElementById("compteur");
-
-
-
-
-
-// TON GOOGLE SHEET CSV
 
 const sheetURL =
-
 "https://docs.google.com/spreadsheets/d/e/2PACX-1vRzMx8EveEFg84HJSOU5IempyqWc4sshrrzocmTAKNf5yNY8ihEqCnJ4vtyyujEsvRPNN3Uv_uUTzAF/pub?output=csv";
 
 
@@ -30,75 +16,62 @@ const sheetURL =
 function changerJauge(valeur){
 
 
-jetonsActuels=valeur;
+    jetonsActuels = valeur;
+
+
+    compteur.textContent =
+    valeur + " / 5";
+
+
+    barre.style.width =
+    ((valeur / 5) * 100) + "%";
 
 
 
-compteur.innerHTML =
-valeur+" / 5";
+    jauge.classList.remove(
+        "casino",
+        "interdit",
+        "jackpot"
+    );
 
 
 
-barre.style.width =
-(valeur/5*100)+"%";
+    if(valeur <= 2){
+
+        jauge.classList.add("casino");
+
+    }
 
 
 
-jauge.className="";
+    else if(valeur < 5){
+
+        jauge.classList.add("interdit");
+
+    }
 
 
 
+    else{
 
 
-if(valeur<=2){
+        jauge.classList.add("jackpot");
 
 
-jauge.classList.add("casino");
+        setTimeout(()=>{
+
+            jauge.classList.remove("jackpot");
+
+            jauge.classList.add("interdit");
 
 
-}
+        },5000);
 
 
-
-
-
-if(valeur>=3 && valeur<5){
-
-
-jauge.classList.add("interdit");
-
-
-}
-
-
-
-
-
-if(valeur>=5){
-
-
-jauge.classList.add("jackpot");
-
-
-
-setTimeout(()=>{
-
-
-jauge.className="interdit";
-
-
-},5000);
+    }
 
 
 }
-
-
-
-
-
-}
-
-
 
 
 
@@ -110,30 +83,40 @@ async function lireGoogleSheet(){
 try{
 
 
-const response =
-await fetch(sheetURL);
+    const response =
+    await fetch(sheetURL + "&cache=" + Date.now());
+
+
+    const data =
+    await response.text();
 
 
 
-const data =
-await response.text();
+    const match =
+    data.match(/\d+/);
 
 
 
-const valeur =
-parseInt(data.match(/\d+/)[0]);
+    if(!match){
+
+        console.log("Aucun nombre trouvé");
+
+        return;
+
+    }
 
 
 
-if(!isNaN(valeur)
-&& valeur!==jetonsActuels){
+    const valeur =
+    parseInt(match[0]);
 
 
-changerJauge(valeur);
 
+    if(valeur !== jetonsActuels){
 
-}
+        changerJauge(valeur);
 
+    }
 
 
 }
@@ -141,12 +124,10 @@ changerJauge(valeur);
 
 catch(error){
 
-
-console.log(
-"Erreur Google Sheet",
+console.error(
+"Erreur Google Sheet :",
 error
 );
-
 
 }
 
@@ -157,80 +138,9 @@ error
 
 
 setInterval(
-
 lireGoogleSheet,
-
 3000
-
 );
 
 
-
 lireGoogleSheet();
-
-
-}catch(err){
-
-console.error(err);
-
-}
-
-jetons=Math.min(Math.max(jetons,0),5);
-
-document.getElementById("jetonsCount").textContent=
-jetons;
-
-document.getElementById("barFill").style.width=
-(jetons/5)*100+"%";
-
-const box=document.getElementById("casinoBox");
-
-const status=document.getElementById("status");
-
-box.classList.remove("red-mode");
-box.classList.remove("jackpot");
-
-/* ========================= */
-/* 0 à 2 */
-/* ========================= */
-
-if(jetons<3){
-
-status.innerHTML=
-"🎰 Collecte des jetons...";
-
-}
-
-/* ========================= */
-/* 3 à 4 */
-/* ========================= */
-
-if(jetons>=3){
-
-box.classList.add("red-mode");
-
-status.innerHTML=
-"🚪 SALLE INTERDITE DÉBLOQUÉE";
-
-}
-
-/* ========================= */
-/* 5 */
-/* ========================= */
-
-if(jetons>=5){
-
-box.classList.remove("red-mode");
-
-box.classList.add("jackpot");
-
-status.innerHTML=
-"👑 SALLE SECRÈTE + JACKPOT";
-
-}
-
-}
-
-loadData();
-
-setInterval(loadData,3000);
