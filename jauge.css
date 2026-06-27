@@ -29,39 +29,37 @@ sans-serif;
 
 
 
+/* =========================
+   CADRE PRINCIPAL
+========================= */
 
-/* ==========================
-   PANNEAU
-========================== */
 
-
-#jauge{
+#vault{
 
 
 position:absolute;
 
 
-left:710px;
+left:700px;
 
-top:760px;
+top:780px;
 
 
+width:560px;
 
-width:500px;
-
-height:170px;
+height:180px;
 
 
 
 background:
 
-rgba(0,0,0,0.85);
+rgba(0,0,0,0.88);
 
 
 
 border:
 
-2px solid rgba(255,255,255,.15);
+3px solid rgba(255,255,255,.15);
 
 
 
@@ -75,9 +73,7 @@ inset 0 0 60px rgba(0,0,0,1);
 overflow:hidden;
 
 
-transition:
-
-1s;
+transition:1s;
 
 
 }
@@ -86,96 +82,20 @@ transition:
 
 
 
-
-/* ==========================
-   TITRE
-========================== */
-
-
-.title{
+/* =========================
+   BANDE HAUTE
+========================= */
 
 
-height:45px;
+.top-line{
 
 
-display:flex;
-
-
-align-items:center;
-
-
-justify-content:center;
-
-
-
-color:white;
-
-
-
-font-size:26px;
-
-
-
-letter-spacing:3px;
-
-
-
-}
-
-
-
-
-
-/* ==========================
-   PASTILLES
-========================== */
-
-
-.lights{
-
-
-display:flex;
-
-
-justify-content:center;
-
-
-gap:25px;
-
-
-margin-top:20px;
-
-
-}
-
-
-
-.light{
-
-
-width:45px;
-
-
-height:45px;
-
-
-border-radius:50%;
-
+height:4px;
 
 
 background:
 
-rgba(255,255,255,.08);
-
-
-
-border:
-
-2px solid rgba(255,255,255,.2);
-
-
-
-transition:.8s;
+rgba(255,255,255,.2);
 
 
 }
@@ -184,12 +104,12 @@ transition:.8s;
 
 
 
-/* ==========================
-   COMPTEUR
-========================== */
+/* =========================
+   TITRE
+========================= */
 
 
-#niveau{
+.title{
 
 
 text-align:center;
@@ -198,13 +118,13 @@ text-align:center;
 margin-top:12px;
 
 
-font-size:38px;
+font-size:28px;
+
+
+letter-spacing:5px;
 
 
 color:white;
-
-
-letter-spacing:8px;
 
 
 }
@@ -212,19 +132,23 @@ letter-spacing:8px;
 
 
 
-.subtitle{
+
+.state{
 
 
 text-align:center;
 
 
+font-size:15px;
+
+
+letter-spacing:6px;
+
+
+margin-top:4px;
+
+
 color:white;
-
-
-font-size:16px;
-
-
-letter-spacing:4px;
 
 
 opacity:.8;
@@ -236,9 +160,118 @@ opacity:.8;
 
 
 
-/* ==========================
-   CASINO VERT
-========================== */
+/* =========================
+   BARRE
+========================= */
+
+
+.progress-box{
+
+
+position:absolute;
+
+
+left:40px;
+
+
+right:40px;
+
+
+bottom:55px;
+
+
+
+height:25px;
+
+
+background:
+
+rgba(0,0,0,.9);
+
+
+
+border:
+
+1px solid rgba(255,255,255,.25);
+
+
+
+}
+
+
+
+
+#fill{
+
+
+height:100%;
+
+
+width:0%;
+
+
+
+transition:
+
+width 1s ease;
+
+
+
+background:
+
+#00ff66;
+
+
+
+box-shadow:
+
+0 0 25px #00ff66;
+
+
+}
+
+
+
+
+
+/* =========================
+   COMPTEUR
+========================= */
+
+
+.counter{
+
+
+position:absolute;
+
+
+bottom:10px;
+
+
+width:100%;
+
+
+text-align:center;
+
+
+font-size:35px;
+
+
+letter-spacing:8px;
+
+
+color:white;
+
+
+}
+
+
+
+
+
+/* =========================
+   CASINO
+========================= */
 
 
 .casino{
@@ -253,41 +286,20 @@ box-shadow:
 
 0 0 20px #00ff66,
 
-0 0 70px rgba(0,255,100,.5),
+0 0 80px rgba(0,255,100,.5),
 
-inset 0 0 60px rgba(0,255,100,.15);
-
-
-
-}
-
-
-
-.casino .light.active{
-
-
-background:#00ff66;
-
-
-
-box-shadow:
-
-
-0 0 25px #00ff66;
+inset 0 0 50px rgba(0,255,100,.15);
 
 
 }
-
-
 
 
 
 .casino .title,
-.casino #niveau{
+.casino .counter{
 
 
 text-shadow:
-
 
 0 0 20px #00ff66;
 
@@ -298,10 +310,9 @@ text-shadow:
 
 
 
-
-/* ==========================
-   SALLE INTERDITE
-========================== */
+/* =========================
+   INTERDIT
+========================= */
 
 
 .interdit{
@@ -316,25 +327,33 @@ box-shadow:
 
 0 0 25px red,
 
-0 0 90px rgba(255,0,0,.6),
+0 0 100px rgba(255,0,0,.6),
 
 inset 0 0 60px rgba(255,0,0,.2);
-
 
 
 }
 
 
 
-.interdit .light.active{
+.interdit #fill{
 
 
-background:#ff0033;
+background:
+
+linear-gradient(
+
+90deg,
+
+#ff0033,
+
+#ff5500
+
+);
 
 
 
 box-shadow:
-
 
 0 0 30px red;
 
@@ -344,7 +363,7 @@ box-shadow:
 
 
 .interdit .title,
-.interdit #niveau{
+.interdit .counter{
 
 
 text-shadow:
@@ -358,10 +377,9 @@ text-shadow:
 
 
 
-
-/* ==========================
+/* =========================
    JACKPOT
-========================== */
+========================= */
 
 
 .jackpot{
@@ -376,7 +394,7 @@ box-shadow:
 
 0 0 35px gold,
 
-0 0 120px orange,
+0 0 140px orange,
 
 inset 0 0 80px rgba(255,215,0,.3);
 
@@ -384,23 +402,33 @@ inset 0 0 80px rgba(255,215,0,.3);
 
 animation:
 
-pulseGold .5s infinite;
-
+goldPulse .5s infinite;
 
 
 }
 
 
 
-.jackpot .light.active{
+.jackpot #fill{
 
 
-background:#ffd700;
+background:
+
+linear-gradient(
+
+90deg,
+
+gold,
+
+yellow,
+
+orange
+
+);
 
 
 
 box-shadow:
-
 
 0 0 40px gold;
 
@@ -410,7 +438,7 @@ box-shadow:
 
 
 .jackpot .title,
-.jackpot #niveau{
+.jackpot .counter{
 
 
 text-shadow:
@@ -424,27 +452,30 @@ text-shadow:
 
 
 
-@keyframes pulseGold{
+
+@keyframes goldPulse{
 
 
 50%{
 
+filter:
 
-filter:brightness(1.8);
-
-
-}
+brightness(1.8);
 
 
 }
 
 
+}
 
 
 
 
 
-/* REFLET */
+/* =========================
+   REFLET
+========================= */
+
 
 .shine{
 
@@ -458,7 +489,7 @@ top:0;
 left:-150px;
 
 
-width:80px;
+width:70px;
 
 
 height:100%;
@@ -479,22 +510,111 @@ skewX(-20deg);
 
 animation:
 
-shine 5s infinite;
-
+shineMove 5s infinite;
 
 
 }
 
 
 
-@keyframes shine{
+@keyframes shineMove{
 
 
 to{
 
-
 left:700px;
 
+}
+
+
+}
+
+
+
+
+
+/* =========================
+   PARTICULES
+========================= */
+
+
+.particles span{
+
+
+position:absolute;
+
+
+bottom:-60px;
+
+
+font-size:45px;
+
+
+opacity:.06;
+
+
+animation:
+
+float 8s infinite;
+
+
+}
+
+
+
+.particles span:nth-child(1){
+
+left:15%;
+
+}
+
+
+
+.particles span:nth-child(2){
+
+left:35%;
+
+animation-delay:2s;
+
+}
+
+
+
+.particles span:nth-child(3){
+
+left:65%;
+
+animation-delay:4s;
+
+}
+
+
+
+.particles span:nth-child(4){
+
+left:85%;
+
+animation-delay:6s;
+
+}
+
+
+
+
+
+@keyframes float{
+
+
+from{
+
+transform:translateY(0);
+
+}
+
+
+to{
+
+transform:translateY(-250px);
 
 }
 
