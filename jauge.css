@@ -13,7 +13,7 @@ padding:15px;
 
 border-radius:18px;
 
-background:rgba(15,15,15,.82);
+background: rgba(15,15,15,.40);
 
 border:4px solid #53fc18;
 
@@ -126,7 +126,9 @@ transition:.5s;
 /* ========================= */
 
 #casinoBox.red-mode{
-
+  
+background: rgba(15,15,15,.40);
+  
 border-color:#ff2b2b;
 
 box-shadow:
