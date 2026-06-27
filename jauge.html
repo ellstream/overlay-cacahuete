@@ -7,7 +7,7 @@
 
 <title>Casino Vault</title>
 
-<link rel="stylesheet" href="jauge.css">
+<link rel="stylesheet" href="./jauge.css?v=3">
 
 </head>
 
@@ -15,42 +15,47 @@
 <body>
 
 
-<div id="jauge" class="casino">
+<div id="vault" class="casino">
+
+
+    <div class="top-line"></div>
 
 
     <div class="title">
 
-        🎰 OBJECTIF CASINO
+        🎰 CASINO VAULT
 
     </div>
 
 
 
-    <div class="lights">
-
-
-        <div class="light"></div>
-        <div class="light"></div>
-        <div class="light"></div>
-        <div class="light"></div>
-        <div class="light"></div>
-
-
-    </div>
-
-
-
-    <div id="niveau">
-
-        0 / 5
-
-    </div>
-
-
-
-    <div class="subtitle" id="texte">
+    <div class="state" id="etat">
 
         CASINO
+
+    </div>
+
+
+
+
+    <div class="progress-box">
+
+
+        <div class="progress-bar">
+
+            <div id="fill"></div>
+
+        </div>
+
+
+    </div>
+
+
+
+
+    <div class="counter" id="compteur">
+
+        0 / 5
 
     </div>
 
@@ -60,11 +65,22 @@
 
 
 
+    <div class="particles">
+
+        <span>♠</span>
+        <span>♦</span>
+        <span>♣</span>
+        <span>♥</span>
+
+    </div>
+
+
 </div>
 
 
 
-<script src="jauge.js"></script>
+
+<script src="./jauge.js?v=3"></script>
 
 
 </body>
