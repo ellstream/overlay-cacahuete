@@ -685,4 +685,82 @@ transform:translateY(-250px);
 }
 
 
+/* =========================
+   CORRECTION VISIBILITE BARRE
+========================= */
+
+
+.progress-box{
+
+position:absolute;
+
+left:35px;
+
+right:35px;
+
+bottom:45px;
+
+
+height:22px;
+
+
+background:
+
+rgba(0,0,0,.95);
+
+
+
+border:
+
+2px solid rgba(255,255,255,.35);
+
+
+
+overflow:hidden;
+
+
+}
+
+
+
+
+#fill{
+
+
+display:block;
+
+
+height:100%;
+
+
+min-width:0;
+
+
+background:
+
+linear-gradient(
+
+90deg,
+
+#00ff66,
+
+#00ffaa
+
+);
+
+
+
+box-shadow:
+
+
+0 0 20px #00ff66,
+
+0 0 40px rgba(0,255,100,.8);
+
+
+transition:
+
+width 1s ease;
+
+
 }
