@@ -2,11 +2,8 @@ let jetonsActuels = -1;
 
 
 const vault = document.getElementById("vault");
-
 const fill = document.getElementById("fill");
-
 const compteur = document.getElementById("compteur");
-
 const etat = document.getElementById("etat");
 
 
@@ -22,95 +19,77 @@ const sheetURL =
 function updateVault(value){
 
 
-jetonsActuels=value;
+    jetonsActuels = value;
+
+
+    compteur.textContent =
+    value + " / 5";
 
 
 
-compteur.textContent =
-
-value+" / 5";
-
-
-
-fill.style.width =
-
-(value/5*100)+"%";
+    fill.style.width =
+    (value * 20) + "%";
 
 
 
-vault.classList.remove(
-
-"casino",
-
-"interdit",
-
-"jackpot"
-
-);
+    vault.classList.remove(
+        "casino",
+        "interdit",
+        "jackpot"
+    );
 
 
 
+    if(value <= 2){
 
 
-if(value <= 2){
+        vault.classList.add("casino");
+
+        etat.textContent="CASINO";
 
 
-vault.classList.add("casino");
+    }
 
 
-etat.textContent="CASINO";
+    else if(value < 5){
 
 
-}
+        vault.classList.add("interdit");
+
+        etat.textContent="SALLE INTERDITE";
+
+
+    }
+
+
+    else{
+
+
+        vault.classList.add("jackpot");
+
+        etat.textContent="JACKPOT";
+
+
+        setTimeout(()=>{
+
+
+            vault.classList.remove("jackpot");
+
+            vault.classList.add("interdit");
+
+            etat.textContent="SALLE INTERDITE";
+
+
+        },5000);
 
 
 
-
-
-else if(value < 5){
-
-
-vault.classList.add("interdit");
-
-
-etat.textContent="SALLE INTERDITE";
-
-
-}
-
-
-
-
-
-else{
-
-
-vault.classList.add("jackpot");
-
-
-etat.textContent="JACKPOT";
-
-
-
-setTimeout(()=>{
-
-
-vault.classList.remove("jackpot");
-
-
-vault.classList.add("interdit");
-
-
-etat.textContent="SALLE INTERDITE";
-
-
-},5000);
+    }
 
 
 }
 
 
-}
 
 
 
@@ -122,62 +101,67 @@ async function readSheet(){
 try{
 
 
-const response =
-
-await fetch(
-
-sheetURL+"?t="+Date.now()
-
-);
+    const response = await fetch(
+        sheetURL + "&cache=" + Date.now()
+    );
 
 
-
-const text =
-
-await response.text();
+    const csv = await response.text();
 
 
 
-const match =
-
-text.match(/\d+/);
+    console.log("Google Sheet :",csv);
 
 
 
-if(!match)return;
+    /*
+       Cherche uniquement une valeur
+       entre 0 et 5
+    */
+
+
+    const valeurs =
+    csv.match(/\b[0-5]\b/g);
 
 
 
-const value =
+    if(!valeurs){
 
-parseInt(match[0]);
+        console.log("Aucun jeton trouvé");
+
+        return;
+
+    }
 
 
 
-if(value !== jetonsActuels){
+    const value =
+    parseInt(valeurs[0]);
 
 
-updateVault(value);
+
+    if(value !== jetonsActuels){
+
+        updateVault(value);
+
+    }
 
 
 }
 
 
-}
 
 catch(error){
 
 
-console.log(
-
-"Erreur Google Sheet",
-
+console.error(
+"Erreur Google Sheet :",
 error
-
 );
 
 
 }
+
 
 
 }
@@ -187,11 +171,8 @@ error
 
 
 setInterval(
-
 readSheet,
-
 3000
-
 );
 
 
