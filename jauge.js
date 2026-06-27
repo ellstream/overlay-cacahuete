@@ -1,41 +1,173 @@
-const SHEET_URL =
+
+let jetonsActuels = 0;
+
+
+const jauge =
+document.getElementById("jauge");
+
+
+const barre =
+document.getElementById("barre");
+
+
+const compteur =
+document.getElementById("compteur");
+
+
+
+
+
+// TON GOOGLE SHEET CSV
+
+const sheetURL =
+
 "https://docs.google.com/spreadsheets/d/e/2PACX-1vRzMx8EveEFg84HJSOU5IempyqWc4sshrrzocmTAKNf5yNY8ihEqCnJ4vtyyujEsvRPNN3Uv_uUTzAF/pub?output=csv";
 
-async function loadData(){
 
-let jetons = 0;
 
-try{
 
-const response =
-await fetch(SHEET_URL + "&t=" + Date.now());
 
-const csv =
-await response.text();
+function changerJauge(valeur){
 
-const rows =
-csv.trim().split("\n");
 
-rows.forEach(row=>{
+jetonsActuels=valeur;
 
-const parts=row.split(",");
 
-if(parts.length<2) return;
 
-const key=
-parts[0]
-.replace(/"/g,"")
-.trim()
-.toLowerCase();
+compteur.innerHTML =
+valeur+" / 5";
 
-if(key.includes("jeton")){
 
-jetons=
-parseInt(parts[1])||0;
+
+barre.style.width =
+(valeur/5*100)+"%";
+
+
+
+jauge.className="";
+
+
+
+
+
+if(valeur<=2){
+
+
+jauge.classList.add("casino");
+
 
 }
 
-});
+
+
+
+
+if(valeur>=3 && valeur<5){
+
+
+jauge.classList.add("interdit");
+
+
+}
+
+
+
+
+
+if(valeur>=5){
+
+
+jauge.classList.add("jackpot");
+
+
+
+setTimeout(()=>{
+
+
+jauge.className="interdit";
+
+
+},5000);
+
+
+}
+
+
+
+
+
+}
+
+
+
+
+
+
+
+async function lireGoogleSheet(){
+
+
+try{
+
+
+const response =
+await fetch(sheetURL);
+
+
+
+const data =
+await response.text();
+
+
+
+const valeur =
+parseInt(data.match(/\d+/)[0]);
+
+
+
+if(!isNaN(valeur)
+&& valeur!==jetonsActuels){
+
+
+changerJauge(valeur);
+
+
+}
+
+
+
+}
+
+
+catch(error){
+
+
+console.log(
+"Erreur Google Sheet",
+error
+);
+
+
+}
+
+
+}
+
+
+
+
+setInterval(
+
+lireGoogleSheet,
+
+3000
+
+);
+
+
+
+lireGoogleSheet();
+
 
 }catch(err){
 
