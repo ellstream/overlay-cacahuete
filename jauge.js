@@ -1,137 +1,155 @@
 let jetonsActuels = -1;
 
-const jauge = document.getElementById("jauge");
-const barre = document.getElementById("barre");
-const compteur = document.getElementById("compteur");
+const jauge =
+document.getElementById("jauge");
 
 
-// GOOGLE SHEET CSV
+const barre =
+document.getElementById("barre");
+
+
+const compteur =
+document.getElementById("compteur");
+
+
+
+// TON GOOGLE SHEET
 
 const sheetURL =
+
 "https://docs.google.com/spreadsheets/d/e/2PACX-1vRzMx8EveEFg84HJSOU5IempyqWc4sshrrzocmTAKNf5yNY8ihEqCnJ4vtyyujEsvRPNN3Uv_uUTzAF/pub?output=csv";
+
+
 
 
 
 function changerJauge(valeur){
 
 
-    jetonsActuels = valeur;
-
-
-    compteur.textContent =
-    valeur + " / 5";
-
-
-    barre.style.width =
-    ((valeur / 5) * 100) + "%";
+jetonsActuels = valeur;
 
 
 
-    jauge.classList.remove(
-        "casino",
-        "interdit",
-        "jackpot"
-    );
+compteur.innerHTML =
+valeur+" / 5";
 
 
 
-    if(valeur <= 2){
-
-        jauge.classList.add("casino");
-
-    }
+barre.style.width =
+(valeur/5*100)+"%";
 
 
-    else if(valeur < 5){
 
-        jauge.classList.add("interdit");
+jauge.classList.remove(
 
-    }
+"casino",
 
+"interdit",
 
-    else {
+"jackpot"
 
-
-        jauge.classList.add("jackpot");
-
-
-        setTimeout(()=>{
+);
 
 
-            jauge.classList.remove("jackpot");
-
-            jauge.classList.add("interdit");
 
 
-        },5000);
+if(valeur <=2){
 
 
-    }
+jauge.classList.add("casino");
+
+
+}
+
+
+
+else if(valeur <5){
+
+
+jauge.classList.add("interdit");
+
+
+}
+
+
+
+else{
+
+
+jauge.classList.add("jackpot");
+
+
+
+setTimeout(()=>{
+
+
+jauge.classList.remove("jackpot");
+
+jauge.classList.add("interdit");
+
+
+},5000);
+
+
+}
+
 
 }
 
 
 
 
-async function lireGoogleSheet(){
+async function lireJetons(){
 
 
-    try{
+try{
 
 
-        const response =
-        await fetch(
-            sheetURL + "&cache=" + Date.now()
-        );
+const response =
+await fetch(sheetURL+"?t="+Date.now());
 
 
-        const data =
-        await response.text();
-
-
-
-        const resultat =
-        data.match(/\d+/);
+const data =
+await response.text();
 
 
 
-        if(!resultat){
-
-            console.log(
-            "Pas de valeur trouvée"
-            );
-
-            return;
-
-        }
+const nombre =
+data.match(/\d+/);
 
 
 
-        const valeur =
-        parseInt(resultat[0]);
+if(!nombre)return;
 
 
 
-        if(valeur !== jetonsActuels){
-
-            changerJauge(valeur);
-
-        }
+const valeur =
+parseInt(nombre[0]);
 
 
-    }
+
+if(valeur!==jetonsActuels){
 
 
-    catch(error){
+changerJauge(valeur);
 
 
-        console.error(
-        "Erreur Google Sheet",
-        error
-        );
+}
 
 
-    }
+}
+
+
+catch(error){
+
+
+console.log(
+"Erreur Google Sheet",
+error
+);
+
+
+}
 
 
 }
@@ -140,10 +158,13 @@ async function lireGoogleSheet(){
 
 
 setInterval(
-    lireGoogleSheet,
-    3000
+
+lireJetons,
+
+3000
+
 );
 
 
 
-lireGoogleSheet();
+lireJetons();
